@@ -4,6 +4,8 @@
 #include <stdio.h>
 #include <QMainWindow>
 #include <QTimer>
+#include "noobmainwindow.h"
+#include "othermainwindow.h"
 QT_BEGIN_NAMESPACE
 namespace Ui {
 class MainWindow;
@@ -18,11 +20,15 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 public slots:
+    void noobClicked();
+    void masterClicked();
 signals:
 private:
     Ui::MainWindow *ui;
     b2World world;
     b2Body* body;
     QTimer timer;
+    OtherMainWindow master;
+    noobMainWindow noob;
 };
 #endif // MAINWINDOW_H

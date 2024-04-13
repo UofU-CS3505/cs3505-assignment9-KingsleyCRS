@@ -58,6 +58,8 @@ SOURCES += \
     main.cpp \
     mainwindow.cpp \
     model.cpp \
+    noobmainwindow.cpp \
+    othermainwindow.cpp \
     sentencerule.cpp \
     vocabdictionary.cpp
 
@@ -111,11 +113,15 @@ HEADERS += \
     Box2D/Rope/b2Rope.h \
     mainwindow.h \
     model.h \
+    noobmainwindow.h \
+    othermainwindow.h \
     sentencerule.h \
     vocabdictionary.h
 
 FORMS += \
-    mainwindow.ui
+    mainwindow.ui \
+    noobmainwindow.ui \
+    othermainwindow.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
