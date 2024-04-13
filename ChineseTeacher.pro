@@ -58,6 +58,7 @@ SOURCES += \
     main.cpp \
     mainwindow.cpp \
     model.cpp \
+    modelformaster.cpp \
     noobmainwindow.cpp \
     othermainwindow.cpp \
     sentencerule.cpp \
@@ -113,6 +114,7 @@ HEADERS += \
     Box2D/Rope/b2Rope.h \
     mainwindow.h \
     model.h \
+    modelformaster.h \
     noobmainwindow.h \
     othermainwindow.h \
     sentencerule.h \
