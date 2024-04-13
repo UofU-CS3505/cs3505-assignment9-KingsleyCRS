@@ -56,7 +56,10 @@ SOURCES += \
     Box2D/Dynamics/b2WorldCallbacks.cpp \
     Box2D/Rope/b2Rope.cpp \
     main.cpp \
-    mainwindow.cpp
+    mainwindow.cpp \
+    model.cpp \
+    sentencerule.cpp \
+    vocabdictionary.cpp
 
 HEADERS += \
     Box2D/Box2D.h \
@@ -106,7 +109,10 @@ HEADERS += \
     Box2D/Dynamics/b2World.h \
     Box2D/Dynamics/b2WorldCallbacks.h \
     Box2D/Rope/b2Rope.h \
-    mainwindow.h
+    mainwindow.h \
+    model.h \
+    sentencerule.h \
+    vocabdictionary.h
 
 FORMS += \
     mainwindow.ui
