@@ -10,16 +10,10 @@ CONFIG += c++17
 
 SOURCES += \
     main.cpp \
-    mainwindow.cpp \
-    model.cpp \
-    sentencerule.cpp \
-    vocabdictionary.cpp
+    mainwindow.cpp
 
 HEADERS += \
-    mainwindow.h \
-    model.h \
-    sentencerule.h \
-    vocabdictionary.h
+    mainwindow.h
 
 FORMS += \
     mainwindow.ui
