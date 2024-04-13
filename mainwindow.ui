@@ -13,7 +13,66 @@
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
-  <widget class="QWidget" name="centralwidget"/>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QLabel" name="label">
+    <property name="geometry">
+     <rect>
+      <x>190</x>
+      <y>190</y>
+      <width>101</width>
+      <height>101</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">border-image: url(:/WechatIMG114.jpg);</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_2">
+    <property name="geometry">
+     <rect>
+      <x>470</x>
+      <y>190</y>
+      <width>101</width>
+      <height>101</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">border-image: url(:/WechatIMG115.jpg);</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="noob">
+    <property name="geometry">
+     <rect>
+      <x>190</x>
+      <y>330</y>
+      <width>111</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Novice mode</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="master">
+    <property name="geometry">
+     <rect>
+      <x>470</x>
+      <y>330</y>
+      <width>111</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Master mode</string>
+    </property>
+   </widget>
+  </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
     <rect>
@@ -23,6 +82,12 @@
      <height>24</height>
     </rect>
    </property>
+   <widget class="QMenu" name="menuYour_Chinese_Teacher">
+    <property name="title">
+     <string>Your Chinese Teacher</string>
+    </property>
+   </widget>
+   <addaction name="menuYour_Chinese_Teacher"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
  </widget>

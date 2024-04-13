@@ -21,7 +21,6 @@ public slots:
 signals:
 private:
     Ui::MainWindow *ui;
-    Ui::MainWindow *ui;
     b2World world;
     b2Body* body;
     QTimer timer;
