@@ -6,6 +6,7 @@
 #include <QTimer>
 #include "noobmainwindow.h"
 #include "othermainwindow.h"
+
 QT_BEGIN_NAMESPACE
 namespace Ui {
 class MainWindow;
