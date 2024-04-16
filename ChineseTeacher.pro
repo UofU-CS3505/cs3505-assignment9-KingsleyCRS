@@ -55,12 +55,14 @@ SOURCES += \
     Box2D/Dynamics/b2World.cpp \
     Box2D/Dynamics/b2WorldCallbacks.cpp \
     Box2D/Rope/b2Rope.cpp \
+    block.cpp \
     main.cpp \
     mainwindow.cpp \
+    map.cpp \
+    mastergameboard.cpp \
+    mastermainwindow.cpp \
     model.cpp \
-    modelformaster.cpp \
     noobmainwindow.cpp \
-    othermainwindow.cpp \
     sentencerule.cpp \
     vocabdictionary.cpp
 
@@ -112,18 +114,20 @@ HEADERS += \
     Box2D/Dynamics/b2World.h \
     Box2D/Dynamics/b2WorldCallbacks.h \
     Box2D/Rope/b2Rope.h \
+    block.h \
     mainwindow.h \
+    map.h \
+    mastergameboard.h \
+    mastermainwindow.h \
     model.h \
-    modelformaster.h \
     noobmainwindow.h \
-    othermainwindow.h \
     sentencerule.h \
     vocabdictionary.h
 
 FORMS += \
     mainwindow.ui \
-    noobmainwindow.ui \
-    othermainwindow.ui
+    mastermainwindow.ui \
+    noobmainwindow.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

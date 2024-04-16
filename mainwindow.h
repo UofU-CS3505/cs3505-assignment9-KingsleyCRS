@@ -1,11 +1,10 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 #include <Box2D/Box2D.h>
-#include <stdio.h>
 #include <QMainWindow>
 #include <QTimer>
 #include "noobmainwindow.h"
-#include "othermainwindow.h"
+#include "mastermainwindow.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -29,7 +28,7 @@ private:
     b2World world;
     b2Body* body;
     QTimer timer;
-    OtherMainWindow master;
+    MasterMainWindow master;
     noobMainWindow noob;
 };
 #endif // MAINWINDOW_H

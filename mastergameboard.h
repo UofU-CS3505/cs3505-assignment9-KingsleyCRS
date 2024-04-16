@@ -1,17 +1,18 @@
-#ifndef MODELFORMASTER_H
-#define MODELFORMASTER_H
+#ifndef MASTERGAMEBOARD_H
+#define MASTERGAMEBOARD_H
 #include "block.h"
 #include "map.h"
 #include <QVector>
 #include <QWidget>
+#include <QPainter>
 
-
-class ModelForMaster:public QWidget
+class MasterGameBoard:public QWidget
 {
     Q_OBJECT
 
 public:
-    explicit ModelForMaster(QWidget *parent = nullptr);
+    explicit MasterGameBoard(QWidget *parent);
+    void updateLevel(int level);
 
 protected:
     void paintEvent(QPaintEvent *event) override;
@@ -23,5 +24,4 @@ private:
     int currentLevel;
 
 };
-
-#endif // MODELFORMASTER_H
+#endif // MASTERGAMEBOARD_H
