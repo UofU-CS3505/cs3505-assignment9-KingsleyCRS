@@ -22,6 +22,9 @@ public:
 public slots:
     void noobClicked();
     void masterClicked();
+    void updatePhysics();
+    void destroyBody();
+
 signals:
 private:
     Ui::MainWindow *ui;
@@ -30,5 +33,7 @@ private:
     QTimer timer;
     MasterMainWindow master;
     noobMainWindow noob;
+protected:
+    void paintEvent(QPaintEvent *event) override;
 };
 #endif // MAINWINDOW_H
