@@ -15,7 +15,7 @@ public:
     explicit MasterGameBoard(QWidget *parent);
     void updateLevel(int level);
     void movePlayer(QString direction);
-
+    bool isWall(QString dir,int i, int j);
 
 protected:
     void paintEvent(QPaintEvent *event) override;

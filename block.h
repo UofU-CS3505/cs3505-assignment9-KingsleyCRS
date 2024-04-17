@@ -8,12 +8,11 @@ public:
     Block(QString name);
     const QString getName();
     bool isEmpty;
-
-private:
-    QString name;
     bool canMove;
     bool canPush;
 
+private:
+    QString name;
 
 };
 

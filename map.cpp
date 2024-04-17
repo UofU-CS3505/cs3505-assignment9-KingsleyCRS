@@ -8,6 +8,7 @@ Map::Map(int level):level(level)
         Block* wall = new Block("墙");
         createEmptyMap();
         setBlock(0,0,player);
+        setBlock(1,0,wall);
         for(int i = 5; i< 10; i++)
             setBlock(i,5,wall);
         for(int i = 5; i < 10;i++)

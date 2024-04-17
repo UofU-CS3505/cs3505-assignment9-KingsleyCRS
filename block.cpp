@@ -1,6 +1,6 @@
 #include "block.h"
 
-Block::Block(QString name) : name(name) , canMove(false) , canPush(false), isEmpty(true){}
+Block::Block(QString name) : isEmpty(true) , canMove(true) , canPush(false), name(name){}
 const QString Block::getName()
 {
     return name;
