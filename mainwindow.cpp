@@ -2,7 +2,8 @@
 #include "ui_mainwindow.h"
 #include <QTimer>
 #include "iostream"
-#include <Qpainter>
+#include <QPainter>
+#include <QPoint>
 #include <QPaintEvent>
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -115,8 +116,8 @@ void MainWindow::paintEvent(QPaintEvent *event) {
             float wallBottomY = qt_y + wallHeightPixels;
             painter.drawRect(QRectF(offsetX - 400, wallTopY, 800, wallBottomY - wallTopY));
         } else if (body->GetType() == b2_dynamicBody) {
-            painter.setBrush(QBrush(Qt::blue));
-            painter.drawEllipse(QPointF(qt_x, qt_y), 25.0, 25.0);  // Dynamic objects like circles
+
+            drawRocket(painter,qt_x,qt_y);
         }
     }
 }
@@ -127,4 +128,42 @@ void MainWindow::destroyBody() {
         update();
 
     }
+}
+void MainWindow::drawRocket(QPainter &painter, int x, int y){
+    int rocketCenterX = x;
+    int rocketCenterY = y;
+
+    painter.setBrush(QBrush(Qt::gray));
+    painter.drawRect(rocketCenterX - 10, rocketCenterY - 60, 20, 60);
+
+    painter.setBrush(QBrush(Qt::red));
+    QPoint points[3] = {
+        QPoint(rocketCenterX, rocketCenterY - 70),
+        QPoint(rocketCenterX - 10, rocketCenterY - 60),
+        QPoint(rocketCenterX + 10, rocketCenterY - 60)
+    };
+    painter.drawPolygon(points, 3);
+
+    painter.setBrush(QBrush(Qt::green));
+    QPoint leftFin[3] = {
+        QPoint(rocketCenterX - 10, rocketCenterY - 15),
+        QPoint(rocketCenterX - 20, rocketCenterY),
+        QPoint(rocketCenterX - 10, rocketCenterY)
+    };
+    painter.drawPolygon(leftFin, 3);
+
+    QPoint rightFin[3] = {
+        QPoint(rocketCenterX + 10, rocketCenterY - 15),
+        QPoint(rocketCenterX + 20, rocketCenterY),
+        QPoint(rocketCenterX + 10, rocketCenterY)
+    };
+    painter.drawPolygon(rightFin, 3);
+
+    painter.setBrush(QBrush(Qt::yellow));
+    QPoint flames[3] = {
+        QPoint(rocketCenterX, rocketCenterY + 10),
+        QPoint(rocketCenterX - 5, rocketCenterY + 25),
+        QPoint(rocketCenterX + 5, rocketCenterY + 25)
+    };
+    painter.drawPolygon(flames, 3);
 }

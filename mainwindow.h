@@ -33,6 +33,7 @@ private:
     QTimer timer;
     MasterMainWindow master;
     noobMainWindow noob;
+    void drawRocket(QPainter &painter, int x, int y);
 protected:
     void paintEvent(QPaintEvent *event) override;
 };
