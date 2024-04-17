@@ -15,6 +15,9 @@ public:
     explicit MasterMainWindow(QWidget *parent = nullptr);
     ~MasterMainWindow();
 
+private slots:
+    void on_pushButton_clicked();
+
 private:
     Ui::MasterMainWindow *ui;
 };

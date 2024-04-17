@@ -12,3 +12,9 @@ MasterMainWindow::~MasterMainWindow()
 {
     delete ui;
 }
+
+void MasterMainWindow::on_pushButton_clicked()
+{
+    this->close();
+}
+

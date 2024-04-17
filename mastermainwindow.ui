@@ -36,14 +36,27 @@
     <widget class="QPushButton" name="hindButton">
      <property name="geometry">
       <rect>
-       <x>30</x>
-       <y>20</y>
-       <width>93</width>
-       <height>29</height>
+       <x>0</x>
+       <y>0</y>
+       <width>121</width>
+       <height>51</height>
       </rect>
      </property>
      <property name="text">
       <string>HINT</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pushButton">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>510</y>
+       <width>201</width>
+       <height>61</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>I Quit, Chinese is TOO HARD</string>
      </property>
     </widget>
    </widget>

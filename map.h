@@ -10,6 +10,7 @@ public:
     Block* map[10][10];
     void createEmptyMap();
     void setBlock(int i, int j, Block* block);
+    void removeBlock(int i, int j);
 
 private:
     int level;

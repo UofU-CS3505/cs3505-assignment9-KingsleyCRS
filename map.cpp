@@ -2,7 +2,7 @@
 
 Map::Map(int level):level(level)
 {
-    if(level == 1)
+    if(level == 0)
     {
         Block* player = new Block("我");
         Block* wall = new Block("墙");
@@ -29,6 +29,10 @@ void Map::setBlock(int i, int j, Block* block)
     map[i][j]->isEmpty = false;
 }
 
+void Map::removeBlock(int i, int j)
+{
+    map[i][j] = new Block("");
+}
 Map::~Map() {
     for (int i = 0; i < 10; ++i) {
         for (int j = 0; j < 10; ++j) {

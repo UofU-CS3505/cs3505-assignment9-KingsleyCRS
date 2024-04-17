@@ -5,6 +5,7 @@
 #include <QVector>
 #include <QWidget>
 #include <QPainter>
+#include <QKeyEvent>
 
 class MasterGameBoard:public QWidget
 {
@@ -13,13 +14,14 @@ class MasterGameBoard:public QWidget
 public:
     explicit MasterGameBoard(QWidget *parent);
     void updateLevel(int level);
+    void movePlayer(QString direction);
+
 
 protected:
     void paintEvent(QPaintEvent *event) override;
+    void keyPressEvent(QKeyEvent *event) override;
 
 private:
-    Block* player;
-    Block* wall;
     Map* levels[5];
     int currentLevel;
 
