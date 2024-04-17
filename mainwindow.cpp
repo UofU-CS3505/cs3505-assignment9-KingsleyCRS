@@ -19,16 +19,15 @@ MainWindow::MainWindow(QWidget *parent)
     topWallBodyDef.position.Set(0.0f, 16.0f);  // 位置调整为场景的顶部边缘
     b2Body* topWall = world.CreateBody(&topWallBodyDef);
     b2PolygonShape topWallBox;
-    topWallBox.SetAsBox(8.0f, 0.5f);  // 墙的半宽8米，半高0.5米
+    topWallBox.SetAsBox(8.0f, 0.5f);
     b2FixtureDef wallFixtureDef;
     wallFixtureDef.shape = &topWallBox;
     wallFixtureDef.friction = 0.5f;
     wallFixtureDef.restitution = 0.8f;
     topWall->CreateFixture(&wallFixtureDef);
 
-    // 创建底部的墙
     b2BodyDef bottomWallBodyDef;
-    bottomWallBodyDef.position.Set(0.0f, 0.0f);  // 场景的底部边缘
+    bottomWallBodyDef.position.Set(0.0f, 0.0f);
     b2Body* bottomWall = world.CreateBody(&bottomWallBodyDef);
     b2PolygonShape bottomWallBox;
     bottomWallBox.SetAsBox(8.0f, 1.0f);
@@ -38,9 +37,8 @@ MainWindow::MainWindow(QWidget *parent)
     wallFixtureDef1.restitution = 0.8f;
     bottomWall->CreateFixture(&wallFixtureDef1);
 
-    // 创建左侧的墙
     b2BodyDef leftWallBodyDef;
-    leftWallBodyDef.position.Set(-8.0f, 8.0f);  // 场景左侧中点
+    leftWallBodyDef.position.Set(-8.0f, 8.0f);
     b2Body* leftWall = world.CreateBody(&leftWallBodyDef);
     b2PolygonShape leftWallBox;
     leftWallBox.SetAsBox(0.5f, 8.0f);
