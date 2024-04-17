@@ -8,7 +8,7 @@
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
-    , world(b2Vec2 (0.0f, 3.0f))
+    , world(b2Vec2 (0.0f, 0.0f))
 
 {
     ui->setupUi(this);
@@ -16,35 +16,66 @@ MainWindow::MainWindow(QWidget *parent)
 
     // 创建顶部的墙
     b2BodyDef topWallBodyDef;
-    topWallBodyDef.position.Set(0.0f, 15.5f);
+    topWallBodyDef.position.Set(0.0f, 16.0f);  // 位置调整为场景的顶部边缘
     b2Body* topWall = world.CreateBody(&topWallBodyDef);
-
     b2PolygonShape topWallBox;
     topWallBox.SetAsBox(8.0f, 0.5f);  // 墙的半宽8米，半高0.5米
     b2FixtureDef wallFixtureDef;
     wallFixtureDef.shape = &topWallBox;
     wallFixtureDef.friction = 0.5f;
     wallFixtureDef.restitution = 0.8f;
-
     topWall->CreateFixture(&wallFixtureDef);
+
+    // 创建底部的墙
+    b2BodyDef bottomWallBodyDef;
+    bottomWallBodyDef.position.Set(0.0f, 0.0f);  // 场景的底部边缘
+    b2Body* bottomWall = world.CreateBody(&bottomWallBodyDef);
+    b2PolygonShape bottomWallBox;
+    bottomWallBox.SetAsBox(8.0f, 1.0f);
+    b2FixtureDef wallFixtureDef1;
+    wallFixtureDef1.shape = &bottomWallBox;
+    wallFixtureDef1.friction = 0.5f;
+    wallFixtureDef1.restitution = 0.8f;
+    bottomWall->CreateFixture(&wallFixtureDef1);
+
+    // 创建左侧的墙
+    b2BodyDef leftWallBodyDef;
+    leftWallBodyDef.position.Set(-8.0f, 8.0f);  // 场景左侧中点
+    b2Body* leftWall = world.CreateBody(&leftWallBodyDef);
+    b2PolygonShape leftWallBox;
+    leftWallBox.SetAsBox(0.5f, 8.0f);
+    b2FixtureDef wallFixtureDef2;
+    wallFixtureDef2.shape = &leftWallBox;
+    wallFixtureDef2.friction = 0.5f;
+    wallFixtureDef2.restitution = 0.8f;
+    leftWall->CreateFixture(&wallFixtureDef2);
+
+    // 创建右侧的墙
+    b2BodyDef rightWallBodyDef;
+    rightWallBodyDef.position.Set(8.0f, 8.0f);  // 场景右侧中点
+    b2Body* rightWall = world.CreateBody(&rightWallBodyDef);
+    b2PolygonShape rightWallBox;
+    rightWallBox.SetAsBox(0.5f, 8.0f);
+    b2FixtureDef wallFixtureDef3;
+    wallFixtureDef3.shape = &rightWallBox;
+    wallFixtureDef3.friction = 0.5f;
+    wallFixtureDef3.restitution = 0.8f;
+    rightWall->CreateFixture(&wallFixtureDef3);
 
     // 创建动态的球体
     b2BodyDef bodyDef;
     bodyDef.type = b2_dynamicBody;
-    bodyDef.position.Set(0.0f, 0.0f);  // 初始位置在窗口底部中央
+    bodyDef.position.Set(0.0f, 1.0f);  // 初始位置在窗口底部中央
     b2Body* body = world.CreateBody(&bodyDef);
-
-
     b2CircleShape circleShape;
     circleShape.m_radius = 0.5f;  // 球体半径1米
-
     b2FixtureDef fixtureDef;
     fixtureDef.shape = &circleShape;
     fixtureDef.density = 1.0f;
     fixtureDef.friction = 0.3f;
     fixtureDef.restitution = 0.8f;
-
     body->CreateFixture(&fixtureDef);
+    body->SetLinearVelocity(b2Vec2(-2.0f, 0.0f));
     float32 timeStep = 1.0f / 60.0f;
     int32 velocityIterations = 6;
     int32 positionIterations = 2;
@@ -100,23 +131,13 @@ void MainWindow::updatePhysics() {
 void MainWindow::paintEvent(QPaintEvent *event) {
     QPainter painter(this);
     painter.setRenderHint(QPainter::Antialiasing);
-
     const float scaleFactor = 50;  // 50 pixels per meter
     const float offsetX = 800 / 2;  // Centering in width
     const float offsetY = 800;  // Aligning from the bottom
-
     for (b2Body* body = world.GetBodyList(); body != nullptr; body = body->GetNext()) {
         float qt_x = body->GetPosition().x * scaleFactor + offsetX;
         float qt_y = offsetY - body->GetPosition().y * scaleFactor;  // Flipping Y coordinate for graphical display
-
-        if (body->GetType() == b2_staticBody) {
-            painter.setBrush(QBrush(Qt::gray));
-            float wallHeightPixels = 0.5 * scaleFactor;
-            float wallTopY = qt_y - wallHeightPixels;
-            float wallBottomY = qt_y + wallHeightPixels;
-            painter.drawRect(QRectF(offsetX - 400, wallTopY, 800, wallBottomY - wallTopY));
-        } else if (body->GetType() == b2_dynamicBody) {
-
+        if (body->GetType() == b2_dynamicBody) {
             drawRocket(painter,qt_x,qt_y);
         }
     }
@@ -131,7 +152,7 @@ void MainWindow::paintEvent(QPaintEvent *event) {
 // }
 void MainWindow::drawRocket(QPainter &painter, int x, int y){
     int rocketCenterX = x;
-    int rocketCenterY = y;
+    int rocketCenterY = y+45;
 
     painter.setBrush(QBrush(Qt::gray));
     painter.drawRect(rocketCenterX - 10, rocketCenterY - 60, 20, 60);
