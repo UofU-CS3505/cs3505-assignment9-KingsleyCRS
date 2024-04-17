@@ -23,7 +23,7 @@ public slots:
     void noobClicked();
     void masterClicked();
     void updatePhysics();
-    void destroyBody();
+    //void destroyBody();
 
 signals:
 private:

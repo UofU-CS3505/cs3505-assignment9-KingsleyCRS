@@ -71,10 +71,10 @@ MainWindow::MainWindow(QWidget *parent)
     timer->start(1000 / 60);
 
 
-    QTimer* timer2 = new QTimer(this);
-    connect(timer2, &QTimer::timeout, this, &MainWindow::destroyBody);
-    timer2->setSingleShot(true);
-    timer2->start(5000); // 5000毫秒后触发
+    // QTimer* timer2 = new QTimer(this);
+    // connect(timer2, &QTimer::timeout, this, &MainWindow::destroyBody);
+    // timer2->setSingleShot(true);
+    // timer2->start(5000); // 5000毫秒后触发
 }
 MainWindow::~MainWindow()
 {
@@ -121,14 +121,14 @@ void MainWindow::paintEvent(QPaintEvent *event) {
         }
     }
 }
-void MainWindow::destroyBody() {
-    if (body) {
-        world.DestroyBody(body);
-        body = nullptr;
-        update();
+// void MainWindow::destroyBody() {
+//     if (body) {
+//         world.DestroyBody(body);
+//         body = nullptr;
+//         update();
 
-    }
-}
+//     }
+// }
 void MainWindow::drawRocket(QPainter &painter, int x, int y){
     int rocketCenterX = x;
     int rocketCenterY = y;
