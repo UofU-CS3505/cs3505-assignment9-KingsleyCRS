@@ -34,6 +34,7 @@ private:
     MasterMainWindow master;
     noobMainWindow noob;
     void drawRocket(QPainter &painter, int x, int y);
+    void drawTextExample(QPainter &painter, int x, int y);
 protected:
     void paintEvent(QPaintEvent *event) override;
 };

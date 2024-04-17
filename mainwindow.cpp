@@ -8,7 +8,7 @@
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
-    , world(b2Vec2 (0.0f, 0.0f))
+    , world(b2Vec2 (0.0f, 3.0f))
 
 {
     ui->setupUi(this);
@@ -63,7 +63,7 @@ MainWindow::MainWindow(QWidget *parent)
     // 创建动态的球体
     b2BodyDef bodyDef;
     bodyDef.type = b2_dynamicBody;
-    bodyDef.position.Set(0.0f, 1.0f);  // 初始位置在窗口底部中央
+    bodyDef.position.Set(6.0f, 8.0f);  // 初始位置在窗口底部中央
     b2Body* body = world.CreateBody(&bodyDef);
     b2CircleShape circleShape;
     circleShape.m_radius = 0.5f;  // 球体半径1米
@@ -73,7 +73,7 @@ MainWindow::MainWindow(QWidget *parent)
     fixtureDef.friction = 0.3f;
     fixtureDef.restitution = 0.8f;
     body->CreateFixture(&fixtureDef);
-    body->SetLinearVelocity(b2Vec2(-2.0f, 0.0f));
+    body->SetLinearVelocity(b2Vec2(-5.0f, 25.0f));
     float32 timeStep = 1.0f / 60.0f;
     int32 velocityIterations = 6;
     int32 positionIterations = 2;
@@ -136,7 +136,7 @@ void MainWindow::paintEvent(QPaintEvent *event) {
         float qt_x = body->GetPosition().x * scaleFactor + offsetX;
         float qt_y = offsetY - body->GetPosition().y * scaleFactor;  // Flipping Y coordinate for graphical display
         if (body->GetType() == b2_dynamicBody) {
-            drawRocket(painter,qt_x,qt_y);
+            drawTextExample(painter,qt_x,qt_y);
         }
     }
 }
@@ -148,6 +148,13 @@ void MainWindow::paintEvent(QPaintEvent *event) {
 
 //     }
 // }
+void MainWindow::drawTextExample(QPainter &painter, int x, int y){
+    QFont font("Garamond", 60, QFont::Bold);
+    font.setPointSize(50);
+    painter.setFont(font);
+    painter.setPen(Qt::blue);
+    painter.drawText(x, y, "Welcomes");
+}
 void MainWindow::drawRocket(QPainter &painter, int x, int y){
     int rocketCenterX = x;
     int rocketCenterY = y+45;
