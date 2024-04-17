@@ -72,25 +72,25 @@ void MasterGameBoard::movePlayer(QString direction)
             {
                 switch (dir) {
                 case LEFT:
-                    if(j > 1){
+                    if(i > 0){
                         currentMap->setBlock(i-1,j,currentMap->map[i][j]);
                         currentMap->removeBlock(i,j);
                     }
                     break;
                 case RIGHT:
-                    if(j < 9){
+                    if(i < 10){
                         currentMap->setBlock(i+1,j,currentMap->map[i][j]);
                         currentMap->removeBlock(i,j);
                     }
                     break;
                 case UP:
-                    if(i < 9){
+                    if(j > 0){
                         currentMap->setBlock(i,j-1,currentMap->map[i][j]);
                         currentMap->removeBlock(i,j);
                     }
                     break;
                 case DOWN:
-                    if(i > 1){
+                    if(j < 10){
                         currentMap->setBlock(i,j+1,currentMap->map[i][j]);
                         currentMap->removeBlock(i,j);
                     }
