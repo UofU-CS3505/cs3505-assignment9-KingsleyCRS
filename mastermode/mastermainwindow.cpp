@@ -1,5 +1,5 @@
 #include "mastermainwindow.h"
-
+#include "ui_mastermainwindow.h"
 
 MasterMainWindow::MasterMainWindow(QWidget *parent)
     : QMainWindow(parent)

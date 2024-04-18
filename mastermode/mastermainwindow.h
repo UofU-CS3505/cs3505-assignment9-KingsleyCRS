@@ -1,6 +1,6 @@
 #ifndef MASTERMAINWINDOW_H
 #define MASTERMAINWINDOW_H
-#include "ui_mastermainwindow.h"
+
 #include <QMainWindow>
 
 namespace Ui {
