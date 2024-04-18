@@ -138,11 +138,9 @@ void MainWindow::updatePhysics() {
     float32 timeStep = 1.0f / 60.0f;
     int32 velocityIterations = 6;
     int32 positionIterations = 2;
-    std::cout<<"a"<<std::endl;
     world.Step(timeStep, velocityIterations, positionIterations);
     update();
 }
-
 void MainWindow::paintEvent(QPaintEvent *event) {
     QPainter painter(this);
     painter.setRenderHint(QPainter::Antialiasing);
