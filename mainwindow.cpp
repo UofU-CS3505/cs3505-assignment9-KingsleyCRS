@@ -5,6 +5,7 @@
 #include <QPainter>
 #include <QPoint>
 #include <QPaintEvent>
+#include <string>
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
@@ -12,8 +13,7 @@ MainWindow::MainWindow(QWidget *parent)
 
 {
     ui->setupUi(this);
-    this->resize(800, 800);  // 设置窗口大小为800x600
-
+    this->resize(800, 800);  // 设置窗口大小为800x800
     // 创建顶部的墙
     b2BodyDef topWallBodyDef;
     topWallBodyDef.position.Set(0.0f, 16.0f);  // 位置调整为场景的顶部边缘
@@ -53,7 +53,7 @@ MainWindow::MainWindow(QWidget *parent)
     rightWallBodyDef.position.Set(8.0f, 8.0f);  // 场景右侧中点
     b2Body* rightWall = world.CreateBody(&rightWallBodyDef);
     b2PolygonShape rightWallBox;
-    rightWallBox.SetAsBox(0.5f, 8.0f);
+    rightWallBox.SetAsBox(1.0f, 8.0f);
     b2FixtureDef wallFixtureDef3;
     wallFixtureDef3.shape = &rightWallBox;
     wallFixtureDef3.friction = 0.5f;
@@ -63,17 +63,34 @@ MainWindow::MainWindow(QWidget *parent)
     // 创建动态的球体
     b2BodyDef bodyDef;
     bodyDef.type = b2_dynamicBody;
-    bodyDef.position.Set(7.0f, 8.0f);  // 初始位置在窗口底部中央
-    b2Body* body = world.CreateBody(&bodyDef);
+    bodyDef.position.Set(7.0f, 8.0f);
+    b2Body* circleBody = world.CreateBody(&bodyDef);
     b2CircleShape circleShape;
-    circleShape.m_radius = 1.0f;  // 球体半径1米
+    circleShape.m_radius = 1.0f;
     b2FixtureDef fixtureDef;
     fixtureDef.shape = &circleShape;
     fixtureDef.density = 1.0f;
     fixtureDef.friction = 0.3f;
     fixtureDef.restitution = 0.8f;
-    body->CreateFixture(&fixtureDef);
-    body->SetLinearVelocity(b2Vec2(-15.0f, 25.0f));
+    circleBody->CreateFixture(&fixtureDef);
+    circleBody->SetUserData(new std::string("Circle"));
+    circleBody->SetLinearVelocity(b2Vec2(2.0f,25.0f));
+
+    b2BodyDef bodyDef2;
+    bodyDef2.type = b2_dynamicBody;
+    bodyDef2.position.Set(7.0f, 2.0f);
+    b2Body* boxBody = world.CreateBody(&bodyDef2);
+    b2PolygonShape polygonShape;
+    polygonShape.SetAsBox(1.0f, 0.5f);
+    b2FixtureDef fixtureDef2;
+    fixtureDef2.shape = &polygonShape;
+    fixtureDef2.density = 1.0f;
+    fixtureDef2.friction = 0.3f;
+    fixtureDef2.restitution = 0.8f;
+    boxBody->CreateFixture(&fixtureDef2);
+    boxBody->SetUserData(new std::string("Box"));
+    boxBody->SetLinearVelocity(b2Vec2(2.0f,25.0f));
+
     float32 timeStep = 1.0f / 60.0f;
     int32 velocityIterations = 6;
     int32 positionIterations = 2;
@@ -121,7 +138,7 @@ void MainWindow::updatePhysics() {
     float32 timeStep = 1.0f / 60.0f;
     int32 velocityIterations = 6;
     int32 positionIterations = 2;
-
+    std::cout<<"a"<<std::endl;
     world.Step(timeStep, velocityIterations, positionIterations);
     update();
 }
@@ -133,11 +150,16 @@ void MainWindow::paintEvent(QPaintEvent *event) {
     const float offsetX = 800 / 2;  // Centering in width
     const float offsetY = 800;  // Aligning from the bottom
     for (b2Body* body = world.GetBodyList(); body != nullptr; body = body->GetNext()) {
-        float qt_x = body->GetPosition().x * scaleFactor + offsetX;
-        float qt_y = offsetY - body->GetPosition().y * scaleFactor;  // Flipping Y coordinate for graphical display
-        if (body->GetType() == b2_dynamicBody) {
-            drawTextExample(painter,qt_x,qt_y);
-        }
+        float x = body->GetPosition().x * scaleFactor + offsetX;
+        float y = offsetY - body->GetPosition().y * scaleFactor;  // Flipping Y coordinate for graphical display
+        std::string* name = static_cast<std::string*>(body->GetUserData());
+        if (name) {
+            if (*name == "Circle") {
+                drawTextExample(painter,x,y);
+            } else if (*name == "Box") {
+                drawRocket(painter,x,y);
+            }
+            }
     }
 }
 // void MainWindow::destroyBody() {
@@ -158,10 +180,8 @@ void MainWindow::drawTextExample(QPainter &painter, int x, int y){
 void MainWindow::drawRocket(QPainter &painter, int x, int y){
     int rocketCenterX = x;
     int rocketCenterY = y+45;
-
     painter.setBrush(QBrush(Qt::gray));
     painter.drawRect(rocketCenterX - 10, rocketCenterY - 60, 20, 60);
-
     painter.setBrush(QBrush(Qt::red));
     QPoint points[3] = {
         QPoint(rocketCenterX, rocketCenterY - 70),
@@ -169,7 +189,6 @@ void MainWindow::drawRocket(QPainter &painter, int x, int y){
         QPoint(rocketCenterX + 10, rocketCenterY - 60)
     };
     painter.drawPolygon(points, 3);
-
     painter.setBrush(QBrush(Qt::green));
     QPoint leftFin[3] = {
         QPoint(rocketCenterX - 10, rocketCenterY - 15),
@@ -177,14 +196,12 @@ void MainWindow::drawRocket(QPainter &painter, int x, int y){
         QPoint(rocketCenterX - 10, rocketCenterY)
     };
     painter.drawPolygon(leftFin, 3);
-
     QPoint rightFin[3] = {
         QPoint(rocketCenterX + 10, rocketCenterY - 15),
         QPoint(rocketCenterX + 20, rocketCenterY),
         QPoint(rocketCenterX + 10, rocketCenterY)
     };
     painter.drawPolygon(rightFin, 3);
-
     painter.setBrush(QBrush(Qt::yellow));
     QPoint flames[3] = {
         QPoint(rocketCenterX, rocketCenterY + 10),
