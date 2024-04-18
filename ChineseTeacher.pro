@@ -59,10 +59,20 @@ SOURCES += \
     main.cpp \
     mainwindow.cpp \
     map.cpp \
+    masterMode/block.cpp \
     mastergameboard.cpp \
     mastermainwindow.cpp \
+    mastermode/map.cpp \
+    mastermode/mastergameboard.cpp \
+    mastermode/mastermainwindow.cpp \
+    mastermode/modelformaster.cpp \
     model.cpp \
+    modelformaster.cpp \
     noobmainwindow.cpp \
+    noobmode/noobmainwindow.cpp \
+    noobmode/othermainwindow.cpp \
+    noobmode/sentencerule.cpp \
+    noobmode/vocabdictionary.cpp \
     sentencerule.cpp \
     vocabdictionary.cpp
 
@@ -117,17 +127,30 @@ HEADERS += \
     block.h \
     mainwindow.h \
     map.h \
+    masterMode/block.h \
     mastergameboard.h \
     mastermainwindow.h \
+    mastermode/map.h \
+    mastermode/mastergameboard.h \
+    mastermode/mastermainwindow.h \
+    mastermode/modelformaster.h \
     model.h \
+    modelformaster.h \
     noobmainwindow.h \
+    noobmode/noobmainwindow.h \
+    noobmode/othermainwindow.h \
+    noobmode/sentencerule.h \
+    noobmode/vocabdictionary.h \
     sentencerule.h \
     vocabdictionary.h
 
 FORMS += \
     mainwindow.ui \
     mastermainwindow.ui \
-    noobmainwindow.ui
+    mastermode/mastermainwindow.ui \
+    noobmainwindow.ui \
+    noobmode/noobmainwindow.ui \
+    noobmode/othermainwindow.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
@@ -139,4 +162,5 @@ DISTFILES += \
     Box2D/CMakeLists.txt
 
 RESOURCES += \
+    noobmode/pic.qrc \
     pic.qrc
