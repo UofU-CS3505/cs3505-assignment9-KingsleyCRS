@@ -1,4 +1,5 @@
 #include "mastermainwindow.h"
+
 #include "ui_mastermainwindow.h"
 
 MasterMainWindow::MasterMainWindow(QWidget *parent)
@@ -17,4 +18,3 @@ void MasterMainWindow::on_pushButton_clicked()
 {
     this->close();
 }
-

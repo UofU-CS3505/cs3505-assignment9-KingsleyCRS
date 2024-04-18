@@ -3,8 +3,8 @@
 
 #include <QMainWindow>
 
-namespace Ui {
-class MasterMainWindow;
+    namespace Ui {
+    class MasterMainWindow;
 }
 
 class MasterMainWindow : public QMainWindow

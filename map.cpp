@@ -1,9 +1,11 @@
 #include "map.h"
 
-Map::Map(int level):level(level)
+Map::Map(int level):level(level),size(10)
 {
     if(level == 0)
     {
+
+        Block* map[size][size];
         Block* player = new Block("我");
         Block* wall = new Block("墙");
         createEmptyMap();
@@ -16,6 +18,10 @@ Map::Map(int level):level(level)
     }
 }
 
+int Map::getSize()
+{
+    return size;
+}
 void Map::createEmptyMap()
 {
     for (int i = 0; i < 10; ++i) {

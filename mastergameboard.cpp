@@ -72,7 +72,7 @@ void MasterGameBoard::movePlayer(QString direction)
             {
                 switch (dir) {
                 case LEFT:
-                    if(isWall("left",i,j)){
+                    if(canPush("left",i,j)){
                         if(currentMap->map[i][j]->canMove && i > 1 && currentMap->map[i-2][j]->isEmpty){
                                 currentMap->setBlock(i-2,j,currentMap->map[i-1][j]);
                                 currentMap->setBlock(i-1,j,currentMap->map[i][j]);
@@ -86,7 +86,7 @@ void MasterGameBoard::movePlayer(QString direction)
                     }
                     break;
                 case RIGHT:
-                    if(isWall("right",i,j)){
+                    if(canPush("right",i,j)){
                         if(currentMap->map[i][j]->canMove && i < 8 && currentMap->map[i+2][j]->isEmpty){
                             currentMap->setBlock(i+2,j,currentMap->map[i+1][j]);
                             currentMap->setBlock(i+1,j,currentMap->map[i][j]);
@@ -100,7 +100,7 @@ void MasterGameBoard::movePlayer(QString direction)
                     }
                     break;
                 case UP:
-                    if(isWall("up",i,j)){
+                    if(canPush("up",i,j)){
                         if(currentMap->map[i][j]->canMove && j > 1 && currentMap->map[i][j-2]->isEmpty){
                             currentMap->setBlock(i,j-2,currentMap->map[i][j-1]);
                             currentMap->setBlock(i,j-1,currentMap->map[i][j]);
@@ -114,7 +114,7 @@ void MasterGameBoard::movePlayer(QString direction)
                     }
                     break;
                 case DOWN:
-                    if(isWall("down",i,j)){
+                    if(canPush("down",i,j)){
                         if(currentMap->map[i][j]->canMove && j < 8 && currentMap->map[i][j+2]->isEmpty){
                             currentMap->setBlock(i,j+2,currentMap->map[i][j+1]);
                             currentMap->setBlock(i,j+1,currentMap->map[i][j]);
@@ -134,14 +134,15 @@ void MasterGameBoard::movePlayer(QString direction)
     }
 }
 
-bool MasterGameBoard::isWall(QString direction, int i, int j)
+bool MasterGameBoard::canPush(QString direction, int i, int j)
 {
     Direction dir = getDirection(direction);
     Map *currentMap = levels[currentLevel];
     switch(dir)
     {
+
         case LEFT:
-            return currentMap->map[i-1][j]->getName().startsWith("墙");
+            return currentMap->map[i-1][j]->canPush;
         case RIGHT:
             return currentMap->map[i+1][j]->getName().startsWith("墙");
         case UP:
@@ -149,4 +150,12 @@ bool MasterGameBoard::isWall(QString direction, int i, int j)
         case DOWN:
             return currentMap->map[i][j+1]->getName().startsWith("墙");
     }
+}
+
+bool MasterGameBoard::helpCanPush(Block* line[], int dir , int iterator)
+{
+    for(;!(iterator < 0) && !(iterator == 1);iterator += dir){
+        if(!line[iterator]->isEmpty&&line[iterator]->canPush) return true;
+    }
+    return false;
 }

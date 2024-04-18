@@ -1,6 +1,6 @@
 #include "modelformaster.h"
 
-ModelForMaster::ModelForMaster() {
+ModelForMaster::ModelForMaster(QObject *parent): QObject(parent) {
     currentLevel = 1;
     player = new Block("Player");
     wall = new Block("Wall");

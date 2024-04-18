@@ -3,18 +3,18 @@
 #include "block.h"
 #include "map.h"
 #include <QVector>
-#include <QWidget>
+#include <QObject>
 
 
-class ModelForMaster:public QWidget
+class ModelForMaster:public QObject
 {
     Q_OBJECT
 
 public:
-    explicit ModelForMaster(QWidget *parent = nullptr);
+    explicit ModelForMaster(QObject *parent = nullptr);
 
 protected:
-    void paintEvent(QPaintEvent *event) override;
+
 
 private:
     Block* player;

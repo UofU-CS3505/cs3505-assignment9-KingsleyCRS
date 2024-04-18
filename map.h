@@ -11,9 +11,11 @@ public:
     void createEmptyMap();
     void setBlock(int i, int j, Block* block);
     void removeBlock(int i, int j);
+    int getSize();
 
 private:
     int level;
+    int size;
 
 };
 

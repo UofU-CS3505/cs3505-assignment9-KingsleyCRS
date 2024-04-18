@@ -62,6 +62,7 @@ SOURCES += \
     mastergameboard.cpp \
     mastermainwindow.cpp \
     model.cpp \
+    modelformaster.cpp \
     noobmainwindow.cpp \
     sentencerule.cpp \
     vocabdictionary.cpp
@@ -120,6 +121,7 @@ HEADERS += \
     mastergameboard.h \
     mastermainwindow.h \
     model.h \
+    modelformaster.h \
     noobmainwindow.h \
     sentencerule.h \
     vocabdictionary.h

@@ -15,7 +15,7 @@ public:
     explicit MasterGameBoard(QWidget *parent);
     void updateLevel(int level);
     void movePlayer(QString direction);
-    bool isWall(QString dir,int i, int j);
+    bool canPush(QString dir,int i, int j);
 
 protected:
     void paintEvent(QPaintEvent *event) override;
@@ -24,6 +24,6 @@ protected:
 private:
     Map* levels[5];
     int currentLevel;
-
+    bool helpCanPush(Block* line[], int dir , int iterator);
 };
 #endif // MASTERGAMEBOARD_H
