@@ -3,8 +3,8 @@
 #include <Box2D/Box2D.h>
 #include <QMainWindow>
 #include <QTimer>
-#include "noobmode/noobmainwindow.h"
-#include "mastermode/mastermainwindow.h"
+#include "noobmainwindow.h"
+#include "mastermainwindow.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
