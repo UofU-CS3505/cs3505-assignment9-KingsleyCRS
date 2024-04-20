@@ -30,7 +30,7 @@
       <x>600</x>
       <y>0</y>
       <width>200</width>
-      <height>600</height>
+      <height>800</height>
      </rect>
     </property>
     <widget class="QPushButton" name="hindButton">
@@ -50,13 +50,78 @@
      <property name="geometry">
       <rect>
        <x>0</x>
-       <y>510</y>
+       <y>520</y>
        <width>201</width>
        <height>61</height>
       </rect>
      </property>
      <property name="text">
       <string>I Quit, Chinese is TOO HARD</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="Level1Button">
+     <property name="geometry">
+      <rect>
+       <x>30</x>
+       <y>110</y>
+       <width>80</width>
+       <height>18</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Level1</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="Level2Button">
+     <property name="geometry">
+      <rect>
+       <x>30</x>
+       <y>140</y>
+       <width>80</width>
+       <height>18</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Level2</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="Level3Button">
+     <property name="geometry">
+      <rect>
+       <x>30</x>
+       <y>170</y>
+       <width>80</width>
+       <height>18</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Level3</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="Level4Button">
+     <property name="geometry">
+      <rect>
+       <x>30</x>
+       <y>200</y>
+       <width>80</width>
+       <height>18</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Level4</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="Level5Button">
+     <property name="geometry">
+      <rect>
+       <x>30</x>
+       <y>230</y>
+       <width>80</width>
+       <height>18</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Level5</string>
      </property>
     </widget>
    </widget>

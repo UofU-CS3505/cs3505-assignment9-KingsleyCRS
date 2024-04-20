@@ -5,7 +5,9 @@
 class Block
 {
 public:
+    Block();
     Block(QString name);
+    Block(QString name,bool canPush);
     const QString getName();
     bool isEmpty;
     bool canMove;
