@@ -1,4 +1,5 @@
 #include "mastermainwindow.h"
+#include "qtimer.h"
 #include "ui_mastermainwindow.h"
 
 MasterMainWindow::MasterMainWindow(QWidget *parent)
@@ -6,7 +7,10 @@ MasterMainWindow::MasterMainWindow(QWidget *parent)
     , ui(new Ui::MasterMainWindow)
 {
     ui->setupUi(this);
-    setFixedSize(800, 700);
+    setFixedSize(850, 700);
+    QTimer* timer = new QTimer(this);
+    connect(timer,&QTimer::timeout,this,&MasterMainWindow::levelWin);
+    timer->start(1000/60);
 }
 
 MasterMainWindow::~MasterMainWindow()
@@ -14,7 +18,7 @@ MasterMainWindow::~MasterMainWindow()
     delete ui;
 }
 
-void MasterMainWindow::on_pushButton_clicked()
+void MasterMainWindow::on_quitButton_clicked()
 {
     this->close();
 }
@@ -25,6 +29,7 @@ void MasterMainWindow::on_Level1Button_clicked()
     ui->gameMap->currentLevel = 0;
     ui->gameMap->update();
     ui->gameMap->setFocus();
+    ui->Goal->setText("Goal: Save the dog");
 }
 
 
@@ -33,6 +38,7 @@ void MasterMainWindow::on_Level2Button_clicked()
     ui->gameMap->currentLevel = 1;
     ui->gameMap->update();
     ui->gameMap->setFocus();
+    ui->Goal->setText("Goal: Feed your dog");
 }
 
 
@@ -55,6 +61,46 @@ void MasterMainWindow::on_Level4Button_clicked()
 void MasterMainWindow::on_Level5Button_clicked()
 {
     ui->gameMap->currentLevel = 4;
+    ui->gameMap->update();
+    ui->gameMap->setFocus();
+}
+
+
+void MasterMainWindow::levelWin()
+{
+    for(int i = 0;i < 5;i++)
+        if(ui->gameMap->getMapWin(i)) {
+            if(i == 0 && !ui->gameMap->levels[i]->passed)
+            {
+                ui->gameMap->levels[i]->passed = 1;
+                on_Level2Button_clicked();
+                ui->Level2Button->setEnabled(true);
+            }
+            else if(i == 1 && !ui->gameMap->levels[i]->passed)
+            {
+                ui->gameMap->levels[i]->passed = 1;
+                on_Level3Button_clicked();
+                ui->Level3Button->setEnabled(true);
+            }
+            else if(i == 2 && !ui->gameMap->levels[i]->passed)
+            {
+                ui->gameMap->levels[i]->passed = 1;
+                on_Level4Button_clicked();
+                ui->Level4Button->setEnabled(true);
+            }
+            else if(i == 3 && !ui->gameMap->levels[i]->passed)
+            {
+                ui->gameMap->levels[i]->passed = 1;
+                on_Level5Button_clicked();
+                ui->Level5Button->setEnabled(true);
+            }
+        }
+
+}
+
+void MasterMainWindow::on_resetButton_clicked()
+{
+    ui->gameMap->levels[ui->gameMap->currentLevel]->createMap();
     ui->gameMap->update();
     ui->gameMap->setFocus();
 }

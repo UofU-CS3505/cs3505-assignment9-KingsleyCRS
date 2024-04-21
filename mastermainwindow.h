@@ -1,7 +1,5 @@
 #ifndef MASTERMAINWINDOW_H
 #define MASTERMAINWINDOW_H
-
-#include "mastergameboard.h"
 #include <QMainWindow>
 
 namespace Ui {
@@ -17,7 +15,7 @@ public:
     ~MasterMainWindow();
 
 public slots:
-    void on_pushButton_clicked();
+    void on_quitButton_clicked();
 
     void on_Level1Button_clicked();
 
@@ -28,6 +26,11 @@ public slots:
     void on_Level4Button_clicked();
 
     void on_Level5Button_clicked();
+
+    void levelWin();
+
+private slots:
+    void on_resetButton_clicked();
 
 private:
     Ui::MasterMainWindow *ui;

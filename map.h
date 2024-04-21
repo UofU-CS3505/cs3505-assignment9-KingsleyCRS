@@ -2,6 +2,8 @@
 #define MAP_H
 #include "block.h"
 #include <QVector>
+#include <QObject>
+
 class Map
 {
 public:
@@ -13,6 +15,10 @@ public:
     void removeBlock(int i, int j);
     void movePlayer(QString direction);
     bool isWall(QString dir,int i, int j);
+    bool win;
+    bool passed;
+    void createMap();
+    void createWords();
 
 private:
     QVector<Block*> noun;
@@ -20,7 +26,21 @@ private:
     QVector<Block*> adj;
     int level;
     void checkRules();
-    void gameWin(int i);
+    Block* player;
+    Block* wall;
+    Block* dog;
+    Block* get;
+    Block* help;
+    Block* eat;
+    Block* meat;
+    Block* can;
+    Block* push;
+    Block* move;
+    Block* find1;
+    Block* find2;
+    Block* treasure1;
+    Block* treasure2;
+
 
 };
 
