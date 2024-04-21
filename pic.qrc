@@ -2,5 +2,6 @@
     <qresource prefix="/">
         <file>WechatIMG115.jpg</file>
         <file>WechatIMG114.jpg</file>
+        <file>heart.jpg</file>
     </qresource>
 </RCC>
