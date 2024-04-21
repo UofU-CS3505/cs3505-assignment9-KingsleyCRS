@@ -14,6 +14,7 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
     this->resize(800, 800);  // 设置窗口大小为800x800
+
     // 创建顶部的墙
     b2BodyDef topWallBodyDef;
     topWallBodyDef.position.Set(0.0f, 16.0f);  // 位置调整为场景的顶部边缘
@@ -101,14 +102,7 @@ MainWindow::MainWindow(QWidget *parent)
         std::cout << "Step " << i << ": x = " << position.x << ", y = " << position.y << ", angle = " << angle << std::endl;
     }
 
-    QString blue = "QPushButton{border-radius: 10px;background-color: rgb(14 , 150 , 254); color:white;}"
-                   "QPushButton:hover{background-color: rgb(44 , 137 , 255); }"
-                   "QPushButton:pressed{background-color:rgb(14 , 135 , 228);padding-left:3px; padding-top:3px; }";
-    ui->noobButton->setStyleSheet(blue);
-    QString red = "QPushButton{border-radius: 10px;background-color: rgb(255, 90, 32);; color:white;}"
-                  "QPushButton:hover{background-color: rgb(255, 50, 22); }"
-                  "QPushButton:pressed{background-color:rgb(255, 120, 25); padding-left:3px; padding-top:3px;}";
-    ui->masterButton->setStyleSheet(red);
+
     connect(ui->noobButton,&QPushButton::clicked,this,&MainWindow::noobClicked);
     connect(ui->masterButton,&QPushButton::clicked,this,&MainWindow::masterClicked);
 
@@ -144,8 +138,14 @@ void MainWindow::updatePhysics() {
 }
 
 void MainWindow::paintEvent(QPaintEvent *event) {
+
     QPainter painter(this);
+
+
+    QPixmap pix(":/BG.jpg");
     painter.setRenderHint(QPainter::Antialiasing);
+
+    painter.fillRect(event->rect(), pix);
     const float scaleFactor = 50;  // 50 pixels per meter
     const float offsetX = 800 / 2;  // Centering in width
     const float offsetY = 800;  // Aligning from the bottom
@@ -157,10 +157,11 @@ void MainWindow::paintEvent(QPaintEvent *event) {
             if (*name == "Circle") {
                 drawTextExample(painter,x,y);
             } else if (*name == "Box") {
-                drawRocket(painter,x,y);
+                drawWelcome(painter,x,y);
             }
         }
     }
+
 }
 // void MainWindow::destroyBody() {
 //     if (body) {
@@ -177,36 +178,9 @@ void MainWindow::drawTextExample(QPainter &painter, int x, int y){
     painter.setPen(Qt::blue);
     painter.drawText(x, y, "👋你好");
 }
-void MainWindow::drawRocket(QPainter &painter, int x, int y){
-    int rocketCenterX = x;
-    int rocketCenterY = y+45;
-    painter.setBrush(QBrush(Qt::gray));
-    painter.drawRect(rocketCenterX - 10, rocketCenterY - 60, 20, 60);
-    painter.setBrush(QBrush(Qt::red));
-    QPoint points[3] = {
-        QPoint(rocketCenterX, rocketCenterY - 70),
-        QPoint(rocketCenterX - 10, rocketCenterY - 60),
-        QPoint(rocketCenterX + 10, rocketCenterY - 60)
-    };
-    painter.drawPolygon(points, 3);
-    painter.setBrush(QBrush(Qt::green));
-    QPoint leftFin[3] = {
-        QPoint(rocketCenterX - 10, rocketCenterY - 15),
-        QPoint(rocketCenterX - 20, rocketCenterY),
-        QPoint(rocketCenterX - 10, rocketCenterY)
-    };
-    painter.drawPolygon(leftFin, 3);
-    QPoint rightFin[3] = {
-        QPoint(rocketCenterX + 10, rocketCenterY - 15),
-        QPoint(rocketCenterX + 20, rocketCenterY),
-        QPoint(rocketCenterX + 10, rocketCenterY)
-    };
-    painter.drawPolygon(rightFin, 3);
-    painter.setBrush(QBrush(Qt::yellow));
-    QPoint flames[3] = {
-        QPoint(rocketCenterX, rocketCenterY + 10),
-        QPoint(rocketCenterX - 5, rocketCenterY + 25),
-        QPoint(rocketCenterX + 5, rocketCenterY + 25)
-    };
-    painter.drawPolygon(flames, 3);
+
+
+void MainWindow::drawWelcome(QPainter &painter, int x, int y){
+    QPixmap welCome(":/welcome.png");
+    painter.drawPixmap(x,y,welCome);
 }
