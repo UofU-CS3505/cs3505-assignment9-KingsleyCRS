@@ -20,6 +20,7 @@ private:
     QVector<Block*> adj;
     int level;
     void checkRules();
+    void gameWin(int i);
 
 };
 

@@ -1,6 +1,7 @@
 #ifndef MASTERMAINWINDOW_H
 #define MASTERMAINWINDOW_H
 
+#include "mastergameboard.h"
 #include <QMainWindow>
 
 namespace Ui {
@@ -15,7 +16,7 @@ public:
     explicit MasterMainWindow(QWidget *parent = nullptr);
     ~MasterMainWindow();
 
-private slots:
+public slots:
     void on_pushButton_clicked();
 
     void on_Level1Button_clicked();

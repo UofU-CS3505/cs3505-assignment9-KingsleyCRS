@@ -8,7 +8,7 @@ MasterGameBoard::MasterGameBoard(QWidget *parent) : QWidget(parent), currentLeve
     pal.setColor(QPalette::Window, Qt::black);
     setAutoFillBackground(true);
     setPalette(pal);
-    setFocusPolicy(Qt::StrongFocus);
+    setFocus();
 }
 void MasterGameBoard::keyPressEvent(QKeyEvent *event) {
     switch (event->key()) {
@@ -29,11 +29,6 @@ void MasterGameBoard::keyPressEvent(QKeyEvent *event) {
         return;
     }
     update();
-}
-
-void MasterGameBoard::updateLevel(int level)
-{
-
 }
 
 void MasterGameBoard::paintEvent(QPaintEvent *event) {
