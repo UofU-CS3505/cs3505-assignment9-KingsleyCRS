@@ -19,6 +19,8 @@ public:
     bool passed;
     void createMap();
     void createWords();
+    QString getHint();
+    int hintPressed;
 
 private:
     QVector<Block*> noun;

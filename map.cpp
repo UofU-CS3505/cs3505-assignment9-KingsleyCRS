@@ -218,3 +218,27 @@ void Map::createMap(){
     }
 }
 
+QString Map::getHint()
+{
+    if(level == 0)
+    {
+        return "狗:dog 得:get 救:save";
+    }
+    else if(level == 1)
+    {
+        if(hintPressed == 0){
+            hintPressed++;
+            return "墙:wall 能:can 推:push";
+        }
+        else
+            return "Make wall pushable, then get the meat";
+    }
+    else if(level == 2)
+    {
+
+    }
+    else if(level == 3)
+    {
+
+    }
+}

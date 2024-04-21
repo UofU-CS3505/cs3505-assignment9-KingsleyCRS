@@ -33,7 +33,7 @@
       <height>800</height>
      </rect>
     </property>
-    <widget class="QPushButton" name="hindButton">
+    <widget class="QPushButton" name="hintButton">
      <property name="geometry">
       <rect>
        <x>90</x>
@@ -155,7 +155,7 @@
       <string>Goal: Save the Dog.</string>
      </property>
     </widget>
-    <widget class="QLabel" name="label">
+    <widget class="QLabel" name="tutorial">
      <property name="geometry">
       <rect>
        <x>9</x>
@@ -186,7 +186,7 @@
       <string>Reset Current Level</string>
      </property>
     </widget>
-    <widget class="QLabel" name="label_2">
+    <widget class="QLabel" name="Hint">
      <property name="geometry">
       <rect>
        <x>0</x>

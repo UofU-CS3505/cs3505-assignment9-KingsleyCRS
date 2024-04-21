@@ -27,24 +27,32 @@ void MasterMainWindow::on_quitButton_clicked()
 void MasterMainWindow::on_Level1Button_clicked()
 {
     ui->gameMap->currentLevel = 0;
+    ui->Goal->setText("Goal: Save the dog");
+    ui->Hint->setText("Hint:");
+    ui->gameMap->levels[ui->gameMap->currentLevel]->hintPressed = 0;
     ui->gameMap->update();
     ui->gameMap->setFocus();
-    ui->Goal->setText("Goal: Save the dog");
 }
 
 
 void MasterMainWindow::on_Level2Button_clicked()
 {
     ui->gameMap->currentLevel = 1;
+    ui->Goal->setText("Goal: Feed your dog");
+    ui->Hint->setText("Hint:");
+    ui->gameMap->levels[ui->gameMap->currentLevel]->hintPressed = 0;
     ui->gameMap->update();
     ui->gameMap->setFocus();
-    ui->Goal->setText("Goal: Feed your dog");
+
 }
 
 
 void MasterMainWindow::on_Level3Button_clicked()
 {
     ui->gameMap->currentLevel = 2;
+    ui->Goal->setText("Goal: Feed your dog");
+    ui->Hint->setText("Hint:");
+    ui->gameMap->levels[ui->gameMap->currentLevel]->hintPressed = 0;
     ui->gameMap->update();
     ui->gameMap->setFocus();
 }
@@ -53,6 +61,9 @@ void MasterMainWindow::on_Level3Button_clicked()
 void MasterMainWindow::on_Level4Button_clicked()
 {
     ui->gameMap->currentLevel = 3;
+    ui->Goal->setText("Goal: Feed your dog");
+    ui->Hint->setText("Hint:");
+    ui->gameMap->levels[ui->gameMap->currentLevel]->hintPressed = 0;
     ui->gameMap->update();
     ui->gameMap->setFocus();
 }
@@ -61,6 +72,9 @@ void MasterMainWindow::on_Level4Button_clicked()
 void MasterMainWindow::on_Level5Button_clicked()
 {
     ui->gameMap->currentLevel = 4;
+    ui->Goal->setText("Goal: Feed your dog");
+    ui->Hint->setText("Hint:");
+    ui->gameMap->levels[ui->gameMap->currentLevel]->hintPressed = 0;
     ui->gameMap->update();
     ui->gameMap->setFocus();
 }
@@ -95,12 +109,22 @@ void MasterMainWindow::levelWin()
                 ui->Level5Button->setEnabled(true);
             }
         }
-
 }
 
 void MasterMainWindow::on_resetButton_clicked()
 {
     ui->gameMap->levels[ui->gameMap->currentLevel]->createMap();
+    ui->Hint->setText("Hint:");
+    ui->gameMap->levels[ui->gameMap->currentLevel]->hintPressed = 0;
+    ui->gameMap->update();
+    ui->gameMap->setFocus();
+}
+
+
+void MasterMainWindow::on_hintButton_clicked()
+{
+    QString hint = ui->gameMap->levels[ui->gameMap->currentLevel]->getHint();
+    ui->Hint->setText(hint);
     ui->gameMap->update();
     ui->gameMap->setFocus();
 }

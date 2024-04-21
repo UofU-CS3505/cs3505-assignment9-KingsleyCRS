@@ -32,6 +32,8 @@ public slots:
 private slots:
     void on_resetButton_clicked();
 
+    void on_hintButton_clicked();
+
 private:
     Ui::MasterMainWindow *ui;
 };
