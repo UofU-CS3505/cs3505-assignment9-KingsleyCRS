@@ -2,6 +2,7 @@
 
 Map::Map(int level):win(0),level(level)
 {
+    createWords();
     createMap();
 }
 
@@ -46,8 +47,8 @@ void Map::movePlayer(QString direction)
     for(int i=0;i<noun.size();i++){
         noun[i]->hasMoved=false;
     }
-    for (int i = 0; i < 20; ++i) {
-        for (int j = 0; j < 20; ++j) {
+    for (int i = 0; i < 20; i++) {
+        for (int j = 0; j < 20; j++) {
             if(noun.contains(map[i][j])&&map[i][j]->canMove&&!map[i][j]->hasMoved)
             {
                 map[i][j]->hasMoved=true;
@@ -142,24 +143,28 @@ void Map::checkRules(){
     }
 }
 
-void Map::createMap(){
-    Block* player = new Block("我");
+void Map::createWords()
+{
+    player = new Block("我");
     noun.push_back(player);
-    Block* wall = new Block("墙",false);
+    wall = new Block("墙",false);
     noun.push_back(wall);
-    Block* dog = new Block("狗",true);
+    dog = new Block("狗",true);
     noun.push_back(dog);
-    Block* get = new Block("得",true);
-    Block* help = new Block("救",true);
-    Block* eat = new Block("吃",true);
-    Block* meat = new Block("肉",true);
-    Block* can = new Block("能",true);
-    Block* push = new Block("推",true);
-    Block* move = new Block("动",true);
-    Block* find1 = new Block("找",true);
-    Block* find2 = new Block("到",true);
-    Block* treasure1 = new Block("宝",true);
-    Block* treasure2 = new Block("藏",true);
+    get = new Block("得",true);
+    help = new Block("救",true);
+    eat = new Block("吃",true);
+    meat = new Block("肉",true);
+    can = new Block("能",true);
+    push = new Block("推",true);
+    move = new Block("动",true);
+    find1 = new Block("找",true);
+    find2 = new Block("到",true);
+    treasure1 = new Block("宝",true);
+    treasure2 = new Block("藏",true);
+}
+void Map::createMap(){
+
     if(level == 0)
     {
         createEmptyMap();
@@ -210,3 +215,4 @@ void Map::createMap(){
 
     }
 }
+

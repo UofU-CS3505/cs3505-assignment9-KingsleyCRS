@@ -1,7 +1,6 @@
 #include "mastermainwindow.h"
 #include "qtimer.h"
 #include "ui_mastermainwindow.h"
-#include <iostream>
 
 MasterMainWindow::MasterMainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -81,3 +80,11 @@ void MasterMainWindow::levelWin()
         }
 
 }
+
+void MasterMainWindow::on_resetButton_clicked()
+{
+    ui->gameMap->levels[ui->gameMap->currentLevel]->createMap();
+    ui->gameMap->update();
+    ui->gameMap->setFocus();
+}
+

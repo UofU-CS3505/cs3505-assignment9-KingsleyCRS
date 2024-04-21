@@ -29,6 +29,9 @@ public slots:
 
     void levelWin();
 
+private slots:
+    void on_resetButton_clicked();
+
 private:
     Ui::MasterMainWindow *ui;
 };

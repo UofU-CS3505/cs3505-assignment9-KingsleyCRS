@@ -16,6 +16,8 @@ public:
     void movePlayer(QString direction);
     bool isWall(QString dir,int i, int j);
     bool win;
+    void createMap();
+    void createWords();
 
 private:
     QVector<Block*> noun;
@@ -23,7 +25,21 @@ private:
     QVector<Block*> adj;
     int level;
     void checkRules();
-    void createMap();
+    Block* player;
+    Block* wall;
+    Block* dog;
+    Block* get;
+    Block* help;
+    Block* eat;
+    Block* meat;
+    Block* can;
+    Block* push;
+    Block* move;
+    Block* find1;
+    Block* find2;
+    Block* treasure1;
+    Block* treasure2;
+
 
 };
 
