@@ -124,8 +124,8 @@ void Map::checkRules(){
     for(int i=1;i<noun.size();i++){
         noun[i]->canMove=false;
     }
-    for (int i = 0; i < 20; ++i) {
-        for (int j = 0; j < 20; ++j) {
+    for (int i = 0; i < 19; ++i) {
+        for (int j = 0; j < 19; ++j) {
             if(map[i][j]->isEmpty || !noun.contains(map[i][j]))continue;
             if(noun.contains(map[i][j])){
                 if((map[i+1][j]->getName()=="能"&&map[i+2][j]->getName()=="动") || (map[i][j+1]->getName()=="能"&&map[i][j+2]->getName()=="动"))
