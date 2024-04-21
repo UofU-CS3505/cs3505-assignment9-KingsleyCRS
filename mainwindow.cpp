@@ -7,10 +7,11 @@
 #include <QPoint>
 #include <QPaintEvent>
 #include <string>
+#include <QPixmap>
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
-    , world(b2Vec2 (0.0f, 3.0f))
+    , world(b2Vec2 (0.0f, -1.0f))
 
 {
     ui->setupUi(this);
@@ -42,7 +43,7 @@ MainWindow::MainWindow(QWidget *parent)
     leftWallBodyDef.position.Set(-8.0f, 8.0f);
     b2Body* leftWall = world.CreateBody(&leftWallBodyDef);
     b2PolygonShape leftWallBox;
-    leftWallBox.SetAsBox(0.5f, 8.0f);
+    leftWallBox.SetAsBox(0.2f, 8.0f);
     b2FixtureDef wallFixtureDef2;
     wallFixtureDef2.shape = &leftWallBox;
     wallFixtureDef2.friction = 0.5f;
@@ -64,7 +65,7 @@ MainWindow::MainWindow(QWidget *parent)
     // 创建动态的球体
     b2BodyDef bodyDef;
     bodyDef.type = b2_dynamicBody;
-    bodyDef.position.Set(7.0f, 8.0f);
+    bodyDef.position.Set(5.0f, 8.0f);
     b2Body* circleBody = world.CreateBody(&bodyDef);
     b2CircleShape circleShape;
     circleShape.m_radius = 1.0f;
@@ -75,11 +76,13 @@ MainWindow::MainWindow(QWidget *parent)
     fixtureDef.restitution = 0.8f;
     circleBody->CreateFixture(&fixtureDef);
     circleBody->SetUserData(new std::string("Circle"));
-    circleBody->SetLinearVelocity(b2Vec2(2.0f,25.0f));
+    circleBody->SetLinearVelocity(b2Vec2(-3.0f,0.0f));
+    float timeStep = 1.0f / 60.0f;
+
 
     b2BodyDef bodyDef2;
     bodyDef2.type = b2_dynamicBody;
-    bodyDef2.position.Set(7.0f, 2.0f);
+    bodyDef2.position.Set(-8.0f, 2.0f);
     b2Body* boxBody = world.CreateBody(&bodyDef2);
     b2PolygonShape polygonShape;
     polygonShape.SetAsBox(1.0f, 0.5f);
@@ -90,9 +93,11 @@ MainWindow::MainWindow(QWidget *parent)
     fixtureDef2.restitution = 0.8f;
     boxBody->CreateFixture(&fixtureDef2);
     boxBody->SetUserData(new std::string("Box"));
-    boxBody->SetLinearVelocity(b2Vec2(2.0f,25.0f));
+    boxBody->SetLinearVelocity(b2Vec2(0.0f,0.0f));
+    b2Vec2 force = b2Vec2(0, 90.0f);
+    boxBody->ApplyForce(force, boxBody->GetWorldCenter(), true);
 
-    float32 timeStep = 1.0f / 60.0f;
+
     int32 velocityIterations = 6;
     int32 positionIterations = 2;
     for (int32 i = 0; i < 60; ++i) {
@@ -101,7 +106,6 @@ MainWindow::MainWindow(QWidget *parent)
         float32 angle = body->GetAngle();
         std::cout << "Step " << i << ": x = " << position.x << ", y = " << position.y << ", angle = " << angle << std::endl;
     }
-
     QString blue = "QPushButton{border-radius: 10px;background-color: rgb(14 , 150 , 254); color:white;}"
                    "QPushButton:hover{background-color: rgb(44 , 137 , 255); }"
                    "QPushButton:pressed{background-color:rgb(14 , 135 , 228);padding-left:3px; padding-top:3px; }";
@@ -117,11 +121,6 @@ MainWindow::MainWindow(QWidget *parent)
     connect(timer, &QTimer::timeout, this, &MainWindow::updatePhysics);
     timer->start(1000 / 60);
 
-
-    // QTimer* timer2 = new QTimer(this);
-    // connect(timer2, &QTimer::timeout, this, &MainWindow::destroyBody);
-    // timer2->setSingleShot(true);
-    // timer2->start(5000); // 5000毫秒后触发
 }
 MainWindow::~MainWindow()
 {
@@ -162,14 +161,7 @@ void MainWindow::paintEvent(QPaintEvent *event) {
         }
     }
 }
-// void MainWindow::destroyBody() {
-//     if (body) {
-//         world.DestroyBody(body);
-//         body = nullptr;
-//         update();
 
-//     }
-// }
 void MainWindow::drawTextExample(QPainter &painter, int x, int y){
     QFont font("STSong", 60, QFont::Bold);
     font.setPointSize(50);
@@ -178,35 +170,7 @@ void MainWindow::drawTextExample(QPainter &painter, int x, int y){
     painter.drawText(x, y, "👋你好");
 }
 void MainWindow::drawRocket(QPainter &painter, int x, int y){
-    int rocketCenterX = x;
-    int rocketCenterY = y+45;
-    painter.setBrush(QBrush(Qt::gray));
-    painter.drawRect(rocketCenterX - 10, rocketCenterY - 60, 20, 60);
-    painter.setBrush(QBrush(Qt::red));
-    QPoint points[3] = {
-        QPoint(rocketCenterX, rocketCenterY - 70),
-        QPoint(rocketCenterX - 10, rocketCenterY - 60),
-        QPoint(rocketCenterX + 10, rocketCenterY - 60)
-    };
-    painter.drawPolygon(points, 3);
-    painter.setBrush(QBrush(Qt::green));
-    QPoint leftFin[3] = {
-        QPoint(rocketCenterX - 10, rocketCenterY - 15),
-        QPoint(rocketCenterX - 20, rocketCenterY),
-        QPoint(rocketCenterX - 10, rocketCenterY)
-    };
-    painter.drawPolygon(leftFin, 3);
-    QPoint rightFin[3] = {
-        QPoint(rocketCenterX + 10, rocketCenterY - 15),
-        QPoint(rocketCenterX + 20, rocketCenterY),
-        QPoint(rocketCenterX + 10, rocketCenterY)
-    };
-    painter.drawPolygon(rightFin, 3);
-    painter.setBrush(QBrush(Qt::yellow));
-    QPoint flames[3] = {
-        QPoint(rocketCenterX, rocketCenterY + 10),
-        QPoint(rocketCenterX - 5, rocketCenterY + 25),
-        QPoint(rocketCenterX + 5, rocketCenterY + 25)
-    };
-    painter.drawPolygon(flames, 3);
+    QPixmap pixmap("/Users/liang/Projects/cs3505-assignment9-KingsleyCRS/rocket.png");
+    QPixmap scalePixmap = pixmap.scaled(150, 150, Qt::KeepAspectRatio, Qt::SmoothTransformation);
+    painter.drawPixmap(x, y, scalePixmap);
 }
