@@ -1,4 +1,4 @@
-#include "mastergameboard.h"
+ #include "mastergameboard.h"
 
 MasterGameBoard::MasterGameBoard(QWidget *parent) : QWidget(parent), currentLevel(0)
 {

@@ -5,6 +5,7 @@
 #include <QTimer>
 #include "noobmainwindow.h"
 #include "mastermainwindow.h"
+#include <Qpixmap>
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -18,6 +19,7 @@ class MainWindow : public QMainWindow
 
 public:
     MainWindow(QWidget *parent = nullptr);
+
     ~MainWindow();
 public slots:
     void noobClicked();
@@ -33,8 +35,9 @@ private:
     QTimer timer;
     MasterMainWindow master;
     noobMainWindow noob;
-    void drawRocket(QPainter &painter, int x, int y);
+    void drawWelcome(QPainter &painter, int x, int y);
     void drawTextExample(QPainter &painter, int x, int y);
+
 protected:
     void paintEvent(QPaintEvent *event) override;
 };

@@ -14,49 +14,21 @@
    <string>MainWindow</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">background-color: rgb(241, 237, 255);</string>
+   <string notr="true">
+</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QLabel" name="label">
-    <property name="geometry">
-     <rect>
-      <x>190</x>
-      <y>190</y>
-      <width>101</width>
-      <height>101</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">border-image: url(:/WechatIMG114.jpg);</string>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_2">
-    <property name="geometry">
-     <rect>
-      <x>470</x>
-      <y>190</y>
-      <width>101</width>
-      <height>101</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">border-image: url(:/WechatIMG115.jpg);</string>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-   </widget>
    <widget class="QPushButton" name="noobButton">
     <property name="geometry">
      <rect>
-      <x>190</x>
-      <y>330</y>
-      <width>111</width>
-      <height>51</height>
+      <x>320</x>
+      <y>460</y>
+      <width>171</width>
+      <height>71</height>
      </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">border-image: url(:/Screenshot 2024-04-20 190618.png);</string>
     </property>
     <property name="text">
      <string>Novice mode</string>
@@ -65,11 +37,14 @@
    <widget class="QPushButton" name="masterButton">
     <property name="geometry">
      <rect>
-      <x>470</x>
-      <y>330</y>
-      <width>111</width>
-      <height>51</height>
+      <x>320</x>
+      <y>540</y>
+      <width>171</width>
+      <height>71</height>
      </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">border-image: url(:/Screenshot 2024-04-20 190618.png);</string>
     </property>
     <property name="text">
      <string>Master mode</string>
@@ -82,7 +57,7 @@
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>24</height>
+     <height>26</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuYour_Chinese_Teacher">
