@@ -14,14 +14,14 @@ public:
     explicit MasterGameBoard(QWidget *parent);
     void updateLevel(int level);
     int currentLevel;
+    Map* levels[5];
 
 
 protected:
     void paintEvent(QPaintEvent *event) override;
     void keyPressEvent(QKeyEvent *event) override;
-
-private:
-    Map* levels[5];
+signals:
+    void gameWon(int level);
 
 };
 #endif // MASTERGAMEBOARD_H

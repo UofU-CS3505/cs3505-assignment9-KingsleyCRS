@@ -6,7 +6,7 @@ MasterMainWindow::MasterMainWindow(QWidget *parent)
     , ui(new Ui::MasterMainWindow)
 {
     ui->setupUi(this);
-    setFixedSize(800, 700);
+    setFixedSize(850, 700);
 }
 
 MasterMainWindow::~MasterMainWindow()
@@ -25,6 +25,7 @@ void MasterMainWindow::on_Level1Button_clicked()
     ui->gameMap->currentLevel = 0;
     ui->gameMap->update();
     ui->gameMap->setFocus();
+    ui->Goal->setText("Goal: ");
 }
 
 
@@ -57,5 +58,16 @@ void MasterMainWindow::on_Level5Button_clicked()
     ui->gameMap->currentLevel = 4;
     ui->gameMap->update();
     ui->gameMap->setFocus();
+}
+
+void MasterMainWindow::enableLevelButton(int level) {
+    switch (level) {
+    case 1:
+        ui->Level2Button->setEnabled(true);
+        break;
+    case 2:
+        ui->Level3Button->setEnabled(true);
+        break;
+    }
 }
 

@@ -1,9 +1,11 @@
 #include "block.h"
 
-Block::Block() : isEmpty(true) , canMove(false) , canPush(false), name(""){
+Block::Block() : isEmpty(true) , canMove(false) , canPush(false), name(""),hasMoved(false){
 }
 
+Block::~Block(){
 
+}
 Block::Block(QString name) : isEmpty(false) , canMove(false) , canPush(false), name(name){
     if(name=="我")canMove = true;
 }

@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>800</width>
-    <height>600</height>
+    <width>820</width>
+    <height>619</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -29,7 +29,7 @@
      <rect>
       <x>600</x>
       <y>0</y>
-      <width>200</width>
+      <width>250</width>
       <height>800</height>
      </rect>
     </property>
@@ -37,7 +37,7 @@
      <property name="geometry">
       <rect>
        <x>0</x>
-       <y>0</y>
+       <y>50</y>
        <width>121</width>
        <height>51</height>
       </rect>
@@ -46,7 +46,7 @@
       <string>HINT</string>
      </property>
     </widget>
-    <widget class="QPushButton" name="pushButton">
+    <widget class="QPushButton" name="quitButton">
      <property name="geometry">
       <rect>
        <x>0</x>
@@ -73,6 +73,9 @@
      </property>
     </widget>
     <widget class="QPushButton" name="Level2Button">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
      <property name="geometry">
       <rect>
        <x>30</x>
@@ -86,6 +89,9 @@
      </property>
     </widget>
     <widget class="QPushButton" name="Level3Button">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
      <property name="geometry">
       <rect>
        <x>30</x>
@@ -99,6 +105,9 @@
      </property>
     </widget>
     <widget class="QPushButton" name="Level4Button">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
      <property name="geometry">
       <rect>
        <x>30</x>
@@ -112,6 +121,9 @@
      </property>
     </widget>
     <widget class="QPushButton" name="Level5Button">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
      <property name="geometry">
       <rect>
        <x>30</x>
@@ -122,6 +134,43 @@
      </property>
      <property name="text">
       <string>Level5</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="Goal">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>260</y>
+       <width>211</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>14</pointsize>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="text">
+      <string>Goal: Save the Dog.</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label">
+     <property name="geometry">
+      <rect>
+       <x>9</x>
+       <y>0</y>
+       <width>241</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>9</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>Use &quot;WASD&quot; to control the yourself: &quot;我&quot;</string>
      </property>
     </widget>
    </widget>

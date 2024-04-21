@@ -2,6 +2,8 @@
 #define MAP_H
 #include "block.h"
 #include <QVector>
+#include <QObject>
+
 class Map
 {
 public:
@@ -20,7 +22,8 @@ private:
     QVector<Block*> adj;
     int level;
     void checkRules();
-    void gameWin(int i);
+    void gameWin(int level);
+    void createMap();
 
 };
 

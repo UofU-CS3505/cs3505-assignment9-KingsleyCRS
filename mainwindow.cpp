@@ -2,6 +2,7 @@
 #include "ui_mainwindow.h"
 #include <QTimer>
 #include "iostream"
+#include "ui_mastermainwindow.h"
 #include <QPainter>
 #include <QPoint>
 #include <QPaintEvent>
@@ -138,7 +139,6 @@ void MainWindow::updatePhysics() {
     float32 timeStep = 1.0f / 60.0f;
     int32 velocityIterations = 6;
     int32 positionIterations = 2;
-    std::cout<<"a"<<std::endl;
     world.Step(timeStep, velocityIterations, positionIterations);
     update();
 }

@@ -29,6 +29,8 @@ public slots:
 
     void on_Level5Button_clicked();
 
+    void enableLevelButton(int level);
+
 private:
     Ui::MasterMainWindow *ui;
 };
