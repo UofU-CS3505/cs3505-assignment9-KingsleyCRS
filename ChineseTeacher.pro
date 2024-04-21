@@ -56,6 +56,7 @@ SOURCES += \
     Box2D/Dynamics/b2WorldCallbacks.cpp \
     Box2D/Rope/b2Rope.cpp \
     block.cpp \
+    levelmainwindow.cpp \
     main.cpp \
     mainwindow.cpp \
     map.cpp \
@@ -115,6 +116,7 @@ HEADERS += \
     Box2D/Dynamics/b2WorldCallbacks.h \
     Box2D/Rope/b2Rope.h \
     block.h \
+    levelmainwindow.h \
     mainwindow.h \
     map.h \
     mastergameboard.h \
@@ -125,6 +127,7 @@ HEADERS += \
     vocabdictionary.h
 
 FORMS += \
+    levelmainwindow.ui \
     mainwindow.ui \
     mastermainwindow.ui \
     noobmainwindow.ui

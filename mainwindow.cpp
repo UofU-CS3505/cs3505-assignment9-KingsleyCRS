@@ -6,6 +6,7 @@
 #include <QPoint>
 #include <QPaintEvent>
 #include <string>
+#include "levelmainwindow.h"
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
@@ -126,7 +127,9 @@ void MainWindow::masterClicked(){
     master.show();
 }
 void MainWindow::noobClicked(){
-    noob.show();
+    LevelMainWindow *levelWindow = new LevelMainWindow();  // Create an instance of LevelMainWsindow
+    levelWindow->setAttribute(Qt::WA_DeleteOnClose);        // Ensure it will be deleted on close
+    levelWindow->show();
 }
 void MainWindow::updatePhysics() {
     if (!body) return;  // Skip physics update if the body has been destroyed
@@ -178,7 +181,7 @@ void MainWindow::scheduleForDestruction(b2Body* body) {
         bodiesToDestroy.push_back(body);
     }
 
-     // 添加到删除队列中
+    // 添加到删除队列中
     someGameLogicFunction();
 }
 void MainWindow::someGameLogicFunction() {
