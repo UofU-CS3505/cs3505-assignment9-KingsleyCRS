@@ -25,7 +25,8 @@ public slots:
     void noobClicked();
     void masterClicked();
     void updatePhysics();
-    //void destroyBody();
+    void scheduleForDestruction(b2Body* body);
+    void destroyScheduledBodies();
 
 signals:
 private:
@@ -36,7 +37,11 @@ private:
     MasterMainWindow master;
     noobMainWindow noob;
     void drawWelcome(QPainter &painter, int x, int y);
-    void drawTextExample(QPainter &painter, int x, int y);
+    void drawHello(QPainter &painter, int x, int y);
+    std::vector<b2Body*> bodiesToDestroy;
+    void someGameLogicFunction();
+
+
 
 protected:
     void paintEvent(QPaintEvent *event) override;

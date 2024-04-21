@@ -111,10 +111,12 @@ MainWindow::MainWindow(QWidget *parent)
     timer->start(1000 / 60);
 
 
-    // QTimer* timer2 = new QTimer(this);
-    // connect(timer2, &QTimer::timeout, this, &MainWindow::destroyBody);
-    // timer2->setSingleShot(true);
-    // timer2->start(5000); // 5000毫秒后触发
+    QTimer* timer2 = new QTimer(this);
+    connect(timer2, &QTimer::timeout, [=]() {
+        scheduleForDestruction(body);
+    });
+    timer2->setSingleShot(true);
+    timer2->start(5000); // 5000毫秒后触发
 }
 MainWindow::~MainWindow()
 {
@@ -132,7 +134,6 @@ void MainWindow::updatePhysics() {
     float32 timeStep = 1.0f / 60.0f;
     int32 velocityIterations = 6;
     int32 positionIterations = 2;
-    std::cout<<"a"<<std::endl;
     world.Step(timeStep, velocityIterations, positionIterations);
     update();
 }
@@ -155,7 +156,7 @@ void MainWindow::paintEvent(QPaintEvent *event) {
         std::string* name = static_cast<std::string*>(body->GetUserData());
         if (name) {
             if (*name == "Circle") {
-                drawTextExample(painter,x,y);
+                drawHello(painter,x,y);
             } else if (*name == "Box") {
                 drawWelcome(painter,x,y);
             }
@@ -163,20 +164,39 @@ void MainWindow::paintEvent(QPaintEvent *event) {
     }
 
 }
-// void MainWindow::destroyBody() {
-//     if (body) {
-//         world.DestroyBody(body);
-//         body = nullptr;
-//         update();
+void MainWindow::scheduleForDestruction(b2Body* body) {
+    for (b2Body* body = world.GetBodyList(); body != nullptr; body = body->GetNext()) {
+        // std::string* name = static_cast<std::string*>(body->GetUserData());
+        // if (name) {
+        //     if (*name == "Circle") {
+        //        bodiesToDestroy.push_back(body);
+        //     } else if (*name == "Box") {
+        //         bodiesToDestroy.push_back(body);
 
-//     }
-// }
-void MainWindow::drawTextExample(QPainter &painter, int x, int y){
-    QFont font("STSong", 60, QFont::Bold);
-    font.setPointSize(50);
-    painter.setFont(font);
-    painter.setPen(Qt::blue);
-    painter.drawText(x, y, "👋你好");
+        //     }
+        // }
+        bodiesToDestroy.push_back(body);
+    }
+
+     // 添加到删除队列中
+    someGameLogicFunction();
+}
+void MainWindow::someGameLogicFunction() {
+    // When you want to schedule a body for destruction
+    QTimer* timer = new QTimer(this);
+    timer->setSingleShot(true);
+    connect(timer, &QTimer::timeout, this, &MainWindow::destroyScheduledBodies);
+    timer->start(5000); // 5 seconds
+}
+void MainWindow::destroyScheduledBodies() {
+    for (b2Body* body : bodiesToDestroy) {
+        world.DestroyBody(body);
+    }
+    bodiesToDestroy.clear(); // Clear the list after destruction
+}
+void MainWindow::drawHello(QPainter &painter, int x, int y){
+    QPixmap nihao(":/nihao.png");
+    painter.drawPixmap(x,y,nihao);
 }
 
 
