@@ -1,5 +1,7 @@
 #include "mastermainwindow.h"
+#include "qtimer.h"
 #include "ui_mastermainwindow.h"
+#include <iostream>
 
 MasterMainWindow::MasterMainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -7,6 +9,9 @@ MasterMainWindow::MasterMainWindow(QWidget *parent)
 {
     ui->setupUi(this);
     setFixedSize(850, 700);
+    QTimer* timer = new QTimer(this);
+    connect(timer,&QTimer::timeout,this,&MasterMainWindow::levelWin);
+    timer->start(1000/60);
 }
 
 MasterMainWindow::~MasterMainWindow()
@@ -14,7 +19,7 @@ MasterMainWindow::~MasterMainWindow()
     delete ui;
 }
 
-void MasterMainWindow::on_pushButton_clicked()
+void MasterMainWindow::on_quitButton_clicked()
 {
     this->close();
 }
@@ -60,14 +65,19 @@ void MasterMainWindow::on_Level5Button_clicked()
     ui->gameMap->setFocus();
 }
 
-void MasterMainWindow::enableLevelButton(int level) {
-    switch (level) {
-    case 1:
-        ui->Level2Button->setEnabled(true);
-        break;
-    case 2:
-        ui->Level3Button->setEnabled(true);
-        break;
-    }
-}
 
+void MasterMainWindow::levelWin()
+{
+    for(int i = 0;i < 5;i++)
+        if(ui->gameMap->getMapWin(i)) {
+            if(i == 0)
+                ui->Level2Button->setEnabled(true);
+            else if(i == 1)
+                ui->Level3Button->setEnabled(true);
+            else if(i == 2)
+                ui->Level4Button->setEnabled(true);
+            else if(i == 3)
+                ui->Level5Button->setEnabled(true);
+        }
+
+}

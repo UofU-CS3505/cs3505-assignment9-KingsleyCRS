@@ -50,3 +50,7 @@ void MasterGameBoard::paintEvent(QPaintEvent *event) {
     }
 }
 
+bool MasterGameBoard::getMapWin(int level)
+{
+    return levels[level]->win;
+}

@@ -156,7 +156,7 @@ void MainWindow::paintEvent(QPaintEvent *event) {
             if (*name == "Circle") {
                 drawTextExample(painter,x,y);
             } else if (*name == "Box") {
-                drawRocket(painter,x,y);
+                //drawRocket(painter,x,y);
             }
         }
     }
@@ -169,8 +169,8 @@ void MainWindow::drawTextExample(QPainter &painter, int x, int y){
     painter.setPen(Qt::blue);
     painter.drawText(x, y, "👋你好");
 }
-void MainWindow::drawRocket(QPainter &painter, int x, int y){
-    QPixmap pixmap("/Users/liang/Projects/cs3505-assignment9-KingsleyCRS/rocket.png");
-    QPixmap scalePixmap = pixmap.scaled(150, 150, Qt::KeepAspectRatio, Qt::SmoothTransformation);
-    painter.drawPixmap(x, y, scalePixmap);
-}
+// void MainWindow::drawRocket(QPainter &painter, int x, int y){
+//     QPixmap pixmap("/Users/liang/Projects/cs3505-assignment9-KingsleyCRS/rocket.png");
+//     QPixmap scalePixmap = pixmap.scaled(150, 150, Qt::KeepAspectRatio, Qt::SmoothTransformation);
+//     painter.drawPixmap(x, y, scalePixmap);
+// }

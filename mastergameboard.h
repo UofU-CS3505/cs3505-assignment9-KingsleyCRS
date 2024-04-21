@@ -15,13 +15,11 @@ public:
     void updateLevel(int level);
     int currentLevel;
     Map* levels[5];
-
+    bool getMapWin(int level);
 
 protected:
     void paintEvent(QPaintEvent *event) override;
     void keyPressEvent(QKeyEvent *event) override;
-signals:
-    void gameWon(int level);
 
 };
 #endif // MASTERGAMEBOARD_H

@@ -1,7 +1,7 @@
 #include "map.h"
 #include "iostream"
 
-Map::Map(int level):level(level)
+Map::Map(int level):win(0),level(level)
 {
     createMap();
 }
@@ -137,15 +137,10 @@ void Map::checkRules(){
                     noun[1]->canPush=true;
             if(level == 0)
                 if((map[i][j]->getName()=="狗"&&map[i+1][j]->getName()=="得"&&map[i+2][j]->getName()=="救") || (map[i][j]->getName()=="狗"&&map[i][j+1]->getName()=="得"&&map[i][j+2]->getName()=="救"))
-                    gameWin(1);
+                    win = 1;
             else if(level == 1);
         }
     }
-}
-
-void Map::gameWin(int i)
-{
-    std::cout << "WIN!!" <<std::endl;
 }
 
 void Map::createMap(){

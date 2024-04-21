@@ -15,6 +15,7 @@ public:
     void removeBlock(int i, int j);
     void movePlayer(QString direction);
     bool isWall(QString dir,int i, int j);
+    bool win;
 
 private:
     QVector<Block*> noun;
@@ -22,7 +23,6 @@ private:
     QVector<Block*> adj;
     int level;
     void checkRules();
-    void gameWin(int level);
     void createMap();
 
 };

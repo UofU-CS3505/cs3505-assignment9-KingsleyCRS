@@ -1,6 +1,6 @@
 #include "block.h"
 
-Block::Block() : isEmpty(true) , canMove(false) , canPush(false), name(""),hasMoved(false){
+Block::Block() : isEmpty(true) , canMove(false) , canPush(false), hasMoved(false),name(""){
 }
 
 Block::~Block(){
