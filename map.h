@@ -16,6 +16,7 @@ public:
     void movePlayer(QString direction);
     bool isWall(QString dir,int i, int j);
     bool win;
+    bool passed;
     void createMap();
     void createWords();
 

@@ -29,7 +29,7 @@ void MasterMainWindow::on_Level1Button_clicked()
     ui->gameMap->currentLevel = 0;
     ui->gameMap->update();
     ui->gameMap->setFocus();
-    ui->Goal->setText("Goal: ");
+    ui->Goal->setText("Goal: Save the dog");
 }
 
 
@@ -38,6 +38,7 @@ void MasterMainWindow::on_Level2Button_clicked()
     ui->gameMap->currentLevel = 1;
     ui->gameMap->update();
     ui->gameMap->setFocus();
+    ui->Goal->setText("Goal: Feed your dog");
 }
 
 
@@ -69,14 +70,30 @@ void MasterMainWindow::levelWin()
 {
     for(int i = 0;i < 5;i++)
         if(ui->gameMap->getMapWin(i)) {
-            if(i == 0)
+            if(i == 0 && !ui->gameMap->levels[i]->passed)
+            {
+                ui->gameMap->levels[i]->passed = 1;
+                on_Level2Button_clicked();
                 ui->Level2Button->setEnabled(true);
-            else if(i == 1)
+            }
+            else if(i == 1 && !ui->gameMap->levels[i]->passed)
+            {
+                ui->gameMap->levels[i]->passed = 1;
+                on_Level3Button_clicked();
                 ui->Level3Button->setEnabled(true);
-            else if(i == 2)
+            }
+            else if(i == 2 && !ui->gameMap->levels[i]->passed)
+            {
+                ui->gameMap->levels[i]->passed = 1;
+                on_Level4Button_clicked();
                 ui->Level4Button->setEnabled(true);
-            else if(i == 3)
+            }
+            else if(i == 3 && !ui->gameMap->levels[i]->passed)
+            {
+                ui->gameMap->levels[i]->passed = 1;
+                on_Level5Button_clicked();
                 ui->Level5Button->setEnabled(true);
+            }
         }
 
 }

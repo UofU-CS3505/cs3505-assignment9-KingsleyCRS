@@ -1,6 +1,6 @@
 #include "map.h"
 
-Map::Map(int level):win(0),level(level)
+Map::Map(int level):win(0),passed(0),level(level)
 {
     createWords();
     createMap();
@@ -121,24 +121,25 @@ void Map::movePlayer(QString direction)
 
 void Map::checkRules(){
     noun[1]->canPush=false;
-    for(int i=1;i<noun.size();i++){
+    for(int i=1;i<noun.size();i++)
         noun[i]->canMove=false;
-    }
-    for (int i = 0; i < 19; ++i) {
-        for (int j = 0; j < 19; ++j) {
+    for (int i = 0; i < 19; i++) {
+        for (int j = 0; j < 19; j++) {
             if(map[i][j]->isEmpty || !noun.contains(map[i][j]))continue;
             if(noun.contains(map[i][j])){
                 if((map[i+1][j]->getName()=="能"&&map[i+2][j]->getName()=="动") || (map[i][j+1]->getName()=="能"&&map[i][j+2]->getName()=="动"))
                     map[i][j]->canMove=true;
             }
-
-
             if((map[i][j]->getName()=="墙"&&map[i+1][j]->getName()=="能"&&map[i+2][j]->getName()=="推") || (map[i][j]->getName()=="墙"&&map[i][j+1]->getName()=="能"&&map[i][j+2]->getName()=="推"))
                     noun[1]->canPush=true;
-            if(level == 0)
+            if(level == 0){
                 if((map[i][j]->getName()=="狗"&&map[i+1][j]->getName()=="得"&&map[i+2][j]->getName()=="救") || (map[i][j]->getName()=="狗"&&map[i][j+1]->getName()=="得"&&map[i][j+2]->getName()=="救"))
                     win = 1;
-            else if(level == 1);
+            }
+            else if(level == 1){
+                    if((map[i][j]->getName()=="狗"&&map[i+1][j]->getName()=="吃"&&map[i+2][j]->getName()=="肉") || (map[i][j]->getName()=="狗"&&map[i][j+1]->getName()=="吃"&&map[i][j+2]->getName()=="肉"))
+                        win = 1;
+            }
         }
     }
 }
@@ -183,7 +184,8 @@ void Map::createMap(){
         setBlock(0,0,player);
         setBlock(3,3,dog);
         setBlock(7,2,eat);
-        setBlock(8,8,meat);
+        //meat set to 8,8
+        setBlock(1,3,meat);
         setBlock(11,11,can);
         setBlock(15,12,push);
         for(int i = 5; i< 10; i++)
