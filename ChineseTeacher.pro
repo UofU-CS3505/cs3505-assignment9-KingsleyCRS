@@ -66,7 +66,8 @@ SOURCES += \
     model.cpp \
     noobmainwindow.cpp \
     sentencerule.cpp \
-    vocabdictionary.cpp
+    vocabdictionary.cpp \
+    world.cpp
 
 HEADERS += \
     Box2D/Box2D.h \
@@ -126,7 +127,8 @@ HEADERS += \
     model.h \
     noobmainwindow.h \
     sentencerule.h \
-    vocabdictionary.h
+    vocabdictionary.h \
+    world.h
 
 FORMS += \
     gamelosedialog.ui \
