@@ -50,7 +50,7 @@ void MasterMainWindow::on_Level2Button_clicked()
 void MasterMainWindow::on_Level3Button_clicked()
 {
     ui->gameMap->currentLevel = 2;
-    ui->Goal->setText("Goal: Feed your dog");
+    ui->Goal->setText("Goal: Find the Treasure");
     ui->Hint->setText("Hint:");
     ui->gameMap->levels[ui->gameMap->currentLevel]->hintPressed = 0;
     ui->gameMap->update();
@@ -61,7 +61,7 @@ void MasterMainWindow::on_Level3Button_clicked()
 void MasterMainWindow::on_Level4Button_clicked()
 {
     ui->gameMap->currentLevel = 3;
-    ui->Goal->setText("Goal: Feed your dog");
+    ui->Goal->setText("Goal: Save the princess");
     ui->Hint->setText("Hint:");
     ui->gameMap->levels[ui->gameMap->currentLevel]->hintPressed = 0;
     ui->gameMap->update();
@@ -84,11 +84,17 @@ void MasterMainWindow::levelWin()
 {
     for(int i = 0;i < 5;i++)
         if(ui->gameMap->getMapWin(i)) {
-            if(i == 0 && !ui->gameMap->levels[i]->passed)
-            {
-                ui->gameMap->levels[i]->passed = 1;
-                on_Level2Button_clicked();
-                ui->Level2Button->setEnabled(true);
+            if(i == 0){
+                if(!ui->gameMap->levels[i]->passed)
+                {
+                    ui->gameMap->levels[i]->passed = 1;
+                    on_Level2Button_clicked();
+                    ui->Level2Button->setEnabled(true);
+                }
+                else if(ui->gameMap->levels[i]->playerDied)
+                {
+                    /*todo*/
+                }
             }
             else if(i == 1 && !ui->gameMap->levels[i]->passed)
             {

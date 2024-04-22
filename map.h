@@ -16,6 +16,7 @@ public:
     void movePlayer(QString direction);
     bool isWall(QString dir,int i, int j);
     bool win;
+    bool playerDied;
     bool passed;
     void createMap();
     void createWords();
@@ -28,6 +29,7 @@ private:
     QVector<Block*> adj;
     int level;
     void checkRules();
+    void checkCollision(int i, int j,int dir);
     Block* player;
     Block* wall;
     Block* dog;
@@ -42,8 +44,13 @@ private:
     Block* find2;
     Block* treasure1;
     Block* treasure2;
-
-
+    Block* water;
+    Block* fire;
+    Block* princess1;
+    Block* princess2;
+    Block* monster1;
+    Block* monster2;
+    Block* sword;
 };
 
 #endif // MAP_H

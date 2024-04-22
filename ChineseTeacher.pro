@@ -56,6 +56,7 @@ SOURCES += \
     Box2D/Dynamics/b2WorldCallbacks.cpp \
     Box2D/Rope/b2Rope.cpp \
     block.cpp \
+    gamelosedialog.cpp \
     levelmainwindow.cpp \
     main.cpp \
     mainwindow.cpp \
@@ -116,6 +117,7 @@ HEADERS += \
     Box2D/Dynamics/b2WorldCallbacks.h \
     Box2D/Rope/b2Rope.h \
     block.h \
+    gamelosedialog.h \
     levelmainwindow.h \
     mainwindow.h \
     map.h \
@@ -127,6 +129,7 @@ HEADERS += \
     vocabdictionary.h
 
 FORMS += \
+    gamelosedialog.ui \
     levelmainwindow.ui \
     mainwindow.ui \
     mastermainwindow.ui \

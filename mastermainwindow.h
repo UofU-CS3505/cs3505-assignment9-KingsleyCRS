@@ -27,7 +27,7 @@ public slots:
 
     void on_Level5Button_clicked();
 
-    void levelWin();
+    void levelWin(); 
 
 private slots:
     void on_resetButton_clicked();
