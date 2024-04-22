@@ -30,6 +30,7 @@ void MasterMainWindow::on_Level1Button_clicked()
     ui->Goal->setText("Goal: Save the dog");
     ui->Hint->setText("Hint:");
     ui->gameMap->levels[ui->gameMap->currentLevel]->hintPressed = 0;
+    ui->gameMap->levels[ui->gameMap->currentLevel]->roundCount = 0;
     ui->gameMap->update();
     ui->gameMap->setFocus();
 }
@@ -41,6 +42,7 @@ void MasterMainWindow::on_Level2Button_clicked()
     ui->Goal->setText("Goal: Feed your dog");
     ui->Hint->setText("Hint:");
     ui->gameMap->levels[ui->gameMap->currentLevel]->hintPressed = 0;
+    ui->gameMap->levels[ui->gameMap->currentLevel]->roundCount = 0;
     ui->gameMap->update();
     ui->gameMap->setFocus();
 
@@ -53,6 +55,7 @@ void MasterMainWindow::on_Level3Button_clicked()
     ui->Goal->setText("Goal: Find the Treasure");
     ui->Hint->setText("Hint:");
     ui->gameMap->levels[ui->gameMap->currentLevel]->hintPressed = 0;
+    ui->gameMap->levels[ui->gameMap->currentLevel]->roundCount = 0;
     ui->gameMap->update();
     ui->gameMap->setFocus();
 }
@@ -64,6 +67,7 @@ void MasterMainWindow::on_Level4Button_clicked()
     ui->Goal->setText("Goal: Save the princess");
     ui->Hint->setText("Hint:");
     ui->gameMap->levels[ui->gameMap->currentLevel]->hintPressed = 0;
+    ui->gameMap->levels[ui->gameMap->currentLevel]->roundCount = 0;
     ui->gameMap->update();
     ui->gameMap->setFocus();
 }
@@ -75,6 +79,7 @@ void MasterMainWindow::on_Level5Button_clicked()
     ui->Goal->setText("Goal: Feed your dog");
     ui->Hint->setText("Hint:");
     ui->gameMap->levels[ui->gameMap->currentLevel]->hintPressed = 0;
+    ui->gameMap->levels[ui->gameMap->currentLevel]->roundCount = 0;
     ui->gameMap->update();
     ui->gameMap->setFocus();
 }
@@ -144,6 +149,7 @@ void MasterMainWindow::on_resetButton_clicked()
     ui->gameMap->levels[ui->gameMap->currentLevel]->createMap();
     ui->Hint->setText("Hint:");
     ui->gameMap->levels[ui->gameMap->currentLevel]->hintPressed = 0;
+    ui->gameMap->levels[ui->gameMap->currentLevel]->roundCount = 0;
     ui->gameMap->update();
     ui->gameMap->setFocus();
 }

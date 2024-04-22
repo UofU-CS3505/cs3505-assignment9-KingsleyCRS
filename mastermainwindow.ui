@@ -74,7 +74,7 @@
     </widget>
     <widget class="QPushButton" name="Level2Button">
      <property name="enabled">
-      <bool>true</bool>
+      <bool>false</bool>
      </property>
      <property name="geometry">
       <rect>
@@ -122,7 +122,7 @@
     </widget>
     <widget class="QPushButton" name="Level5Button">
      <property name="enabled">
-      <bool>true</bool>
+      <bool>false</bool>
      </property>
      <property name="geometry">
       <rect>
