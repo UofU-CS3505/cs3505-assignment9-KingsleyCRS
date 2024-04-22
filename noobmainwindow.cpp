@@ -10,7 +10,7 @@ noobMainWindow::noobMainWindow(QWidget *parent)
     , ui(new Ui::noobMainWindow)
     ,life(5)
     ,barValue(10)
-    ,levelCount(1)
+    ,levelCount(2)
     ,correctCount(0)
 {
     incorrectAnswers = {"天气", "朋友", "学校", "工作", "家庭",
@@ -44,6 +44,7 @@ void noobMainWindow::startClicked(){
     ui->NextWidgets->setVisible(false);
     ui->NiceTry->setVisible(false);
     ui->WellDone->setVisible(false);
+    barValue = 10;
     ui->progressBar->setValue(barValue);
     ui->A->setVisible(true);
     ui->B->setVisible(true);
@@ -53,11 +54,15 @@ void noobMainWindow::startClicked(){
     ui->B->setChecked(false);
     ui->C->setChecked(false);
     ui->D->setChecked(false);
-
+    ui->backButton->setVisible(true);
+    ui->CheckButton->setVisible(true);
+    ui->CheckButton->setCheckable(false);
+    ui->CheckButton->setDisabled(true);
     // Initialize random number generation
     std::random_device rd;
     std::mt19937 gen(rd()); // Seed the generator
     std::uniform_int_distribution<> dist(0, 3); // Range 0 to 3
+    levelCount = 1;
 
     // Create a list of numbers from 0 to 29
     std::vector<int> numbers(30);
@@ -86,6 +91,7 @@ void noobMainWindow::startClicked(){
     QPushButton* buttons[] = {ui->A, ui->B, ui->C, ui->D};
 
     for (int i = 0; i < 4; ++i) {
+        buttons[i]->setCheckable(true);
         if (i == answer) {
             buttons[i]->setText(questionWord.first);
         } else {
@@ -95,31 +101,31 @@ void noobMainWindow::startClicked(){
 }
 
 void noobMainWindow::AClicked(){
-    ui->A->setCheckable(true);
     ui->B->setChecked(false);
     ui->C->setChecked(false);
     ui->D->setChecked(false);
+    ui->CheckButton->setDisabled(false);
 }
 
 void noobMainWindow::BClicked(){
     ui->A->setChecked(false);
-    ui->B->setCheckable(true);
     ui->C->setChecked(false);
     ui->D->setChecked(false);
+    ui->CheckButton->setDisabled(false);
 }
 
 void noobMainWindow::CClicked(){
     ui->A->setChecked(false);
     ui->B->setChecked(false);
-    ui->C->setCheckable(true);
     ui->D->setChecked(false);
+    ui->CheckButton->setDisabled(false);
 }
 
 void noobMainWindow::DClicked(){
     ui->A->setChecked(false);
     ui->B->setChecked(false);
     ui->C->setChecked(false);
-    ui->D->setCheckable(true);
+    ui->CheckButton->setDisabled(false);
 }
 
 void noobMainWindow::checkClicked(){
@@ -136,7 +142,6 @@ void noobMainWindow::checkClicked(){
     ui->B->setVisible(false);
     ui->C->setVisible(false);
     ui->D->setVisible(false);
-
     // Show the next button
     ui->nextbutton->setVisible(true);
 
@@ -155,16 +160,20 @@ void noobMainWindow::checkClicked(){
     } else {
         ui->NextWidgets->setVisible(true);
         ui->NiceTry->setVisible(true);
-        if(life > 0){
+        if(life > 1){
             life--;
             ui->lifeLabel->setText(QString::number(life));
+        } else {
+            this->complete();
         }
     }
 }
 
 
 void noobMainWindow::nextClicked(){
-    if(levelCount < 1) {
+    barValue += 10;
+    ui->progressBar->setValue(barValue);
+    if(levelCount < 10) {
         levelCount++;
         ui->backButton->setVisible(true);
         ui->CheckButton->setVisible(true);
@@ -172,8 +181,6 @@ void noobMainWindow::nextClicked(){
         ui->B->setChecked(false);
         ui->C->setChecked(false);
         ui->D->setChecked(false);
-        barValue += 10;
-        ui->progressBar->setValue(barValue);
         ui->nextbutton->setVisible(false);
         ui->NextWidgets->setVisible(false);
         ui->NiceTry->setVisible(false);
@@ -238,7 +245,11 @@ void noobMainWindow::complete() {
     font.setPointSize(22);
     font.setBold(true);
     ui->congrat->setFont(font);
-    ui->congrat->setText("Congratulation!!! You have learned "+ QString::number(correctCount) +" of ten words");
+    if(life == 1) {
+        ui->congrat->setText("             You ran out of heart!!! Try one more time!!!");
+    } else {
+        ui->congrat->setText("Congratulation!!! You have learned "+ QString::number(correctCount) +" of ten words");
+    }
 }
 
 void noobMainWindow::closeClicked() {

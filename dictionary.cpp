@@ -5,9 +5,9 @@
 Dictionary::Dictionary() {
     // three level in total
     allWords = {
-        {"學生","Student"},{"哈囉","Hello"},{"名字", "Name"},{"我", "Me or I"}, {"你", "You"}, {"他","He"}, {"狗","dog"},{"人","human"},{"他們","They"},{"我們","We"},
-        {"第二关","level two"},{"墙","wall"},{"我","me"},{"三","three"},{"四","four"}, {"第三关","level three"},{"狗","dog"},{"人","human"},{"五","five"},{"六","six"},
-        {"第三关","level three"},{"狗","dog"},{"人","human"},{"五","five"},{"六","six"}, {"第三关","level three"},{"狗","dog"},{"人","human"},{"五","five"},{"六","six"}
+        {"學生","Student"},{"哈囉","Hello"},{"名字", "Name"},{"我", "Me or I"}, {"你", "You"}, {"他","He"}, {"狗","dog"},{"人","human"},{"他們","They"},{"我們","We"}, {"老師","Teacher"},
+        {"第二关","level two"},{"墙","wall"},{"我","me"},{"三","three"},{"四","four"}, {"第三关","level three"},{"狗","dog"},{"人","human"},{"五","five"},{"六","six"}, {"六","six"},
+        {"第三关","level three"},{"狗","dog"},{"人","human"},{"五","five"},{"六","six"}, {"第三关","level three"},{"狗","dog"},{"人","human"},{"五","five"},{"六","six"}, {"六","six"}
     };
 
     // make sure all level have same words number
