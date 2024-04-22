@@ -46,11 +46,12 @@ constexpr auto qt_meta_stringdata_CLASSnoobMainWindowENDCLASS = QtMocHelpers::st
     "CClicked",
     "DClicked",
     "checkClicked",
-    "nextClicked"
+    "nextClicked",
+    "closeClicked"
 );
 #else  // !QT_MOC_HAS_STRING_DATA
 struct qt_meta_stringdata_CLASSnoobMainWindowENDCLASS_t {
-    uint offsetsAndSizes[18];
+    uint offsetsAndSizes[20];
     char stringdata0[15];
     char stringdata1[13];
     char stringdata2[1];
@@ -60,6 +61,7 @@ struct qt_meta_stringdata_CLASSnoobMainWindowENDCLASS_t {
     char stringdata6[9];
     char stringdata7[13];
     char stringdata8[12];
+    char stringdata9[13];
 };
 #define QT_MOC_LITERAL(ofs, len) \
     uint(sizeof(qt_meta_stringdata_CLASSnoobMainWindowENDCLASS_t::offsetsAndSizes) + ofs), len 
@@ -73,7 +75,8 @@ Q_CONSTINIT static const qt_meta_stringdata_CLASSnoobMainWindowENDCLASS_t qt_met
         QT_MOC_LITERAL(47, 8),  // "CClicked"
         QT_MOC_LITERAL(56, 8),  // "DClicked"
         QT_MOC_LITERAL(65, 12),  // "checkClicked"
-        QT_MOC_LITERAL(78, 11)   // "nextClicked"
+        QT_MOC_LITERAL(78, 11),  // "nextClicked"
+        QT_MOC_LITERAL(90, 12)   // "closeClicked"
     },
     "noobMainWindow",
     "startClicked",
@@ -83,7 +86,8 @@ Q_CONSTINIT static const qt_meta_stringdata_CLASSnoobMainWindowENDCLASS_t qt_met
     "CClicked",
     "DClicked",
     "checkClicked",
-    "nextClicked"
+    "nextClicked",
+    "closeClicked"
 };
 #undef QT_MOC_LITERAL
 #endif // !QT_MOC_HAS_STRING_DATA
@@ -95,7 +99,7 @@ Q_CONSTINIT static const uint qt_meta_data_CLASSnoobMainWindowENDCLASS[] = {
       12,       // revision
        0,       // classname
        0,    0, // classinfo
-       7,   14, // methods
+       8,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -103,15 +107,17 @@ Q_CONSTINIT static const uint qt_meta_data_CLASSnoobMainWindowENDCLASS[] = {
        0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags, initial metatype offsets
-       1,    0,   56,    2, 0x0a,    1 /* Public */,
-       3,    0,   57,    2, 0x0a,    2 /* Public */,
-       4,    0,   58,    2, 0x0a,    3 /* Public */,
-       5,    0,   59,    2, 0x0a,    4 /* Public */,
-       6,    0,   60,    2, 0x0a,    5 /* Public */,
-       7,    0,   61,    2, 0x0a,    6 /* Public */,
-       8,    0,   62,    2, 0x0a,    7 /* Public */,
+       1,    0,   62,    2, 0x0a,    1 /* Public */,
+       3,    0,   63,    2, 0x0a,    2 /* Public */,
+       4,    0,   64,    2, 0x0a,    3 /* Public */,
+       5,    0,   65,    2, 0x0a,    4 /* Public */,
+       6,    0,   66,    2, 0x0a,    5 /* Public */,
+       7,    0,   67,    2, 0x0a,    6 /* Public */,
+       8,    0,   68,    2, 0x0a,    7 /* Public */,
+       9,    0,   69,    2, 0x0a,    8 /* Public */,
 
  // slots: parameters
+    QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
@@ -145,6 +151,8 @@ Q_CONSTINIT const QMetaObject noobMainWindow::staticMetaObject = { {
         // method 'checkClicked'
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
         // method 'nextClicked'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        // method 'closeClicked'
         QtPrivate::TypeAndForceComplete<void, std::false_type>
     >,
     nullptr
@@ -163,6 +171,7 @@ void noobMainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _
         case 4: _t->DClicked(); break;
         case 5: _t->checkClicked(); break;
         case 6: _t->nextClicked(); break;
+        case 7: _t->closeClicked(); break;
         default: ;
         }
     }
@@ -188,13 +197,13 @@ int noobMainWindow::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 7)
+        if (_id < 8)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 7;
+        _id -= 8;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 7)
+        if (_id < 8)
             *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType();
-        _id -= 7;
+        _id -= 8;
     }
     return _id;
 }

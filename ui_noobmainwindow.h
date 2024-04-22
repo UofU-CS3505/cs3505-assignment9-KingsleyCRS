@@ -11,6 +11,7 @@
 
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
+#include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QMenuBar>
@@ -39,12 +40,18 @@ public:
     QWidget *NextWidgets;
     QLabel *WellDone;
     QLabel *NiceTry;
+    QWidget *end;
+    QLabel *congrat;
     QWidget *widget;
     QVBoxLayout *Choices;
     QPushButton *A;
     QPushButton *B;
     QPushButton *C;
     QPushButton *D;
+    QWidget *widget1;
+    QHBoxLayout *horizontalLayout;
+    QPushButton *Restart;
+    QPushButton *Close;
     QMenuBar *menubar;
     QStatusBar *statusbar;
 
@@ -97,6 +104,13 @@ public:
         NiceTry = new QLabel(NextWidgets);
         NiceTry->setObjectName("NiceTry");
         NiceTry->setGeometry(QRect(100, 60, 141, 111));
+        end = new QWidget(centralwidget);
+        end->setObjectName("end");
+        end->setGeometry(QRect(90, 190, 611, 291));
+        end->setAutoFillBackground(true);
+        congrat = new QLabel(end);
+        congrat->setObjectName("congrat");
+        congrat->setGeometry(QRect(30, 100, 551, 71));
         widget = new QWidget(centralwidget);
         widget->setObjectName("widget");
         widget->setGeometry(QRect(250, 230, 285, 205));
@@ -122,6 +136,22 @@ public:
         D->setObjectName("D");
 
         Choices->addWidget(D);
+
+        widget1 = new QWidget(centralwidget);
+        widget1->setObjectName("widget1");
+        widget1->setGeometry(QRect(243, 490, 261, 32));
+        horizontalLayout = new QHBoxLayout(widget1);
+        horizontalLayout->setObjectName("horizontalLayout");
+        horizontalLayout->setContentsMargins(0, 0, 0, 0);
+        Restart = new QPushButton(widget1);
+        Restart->setObjectName("Restart");
+
+        horizontalLayout->addWidget(Restart);
+
+        Close = new QPushButton(widget1);
+        Close->setObjectName("Close");
+
+        horizontalLayout->addWidget(Close);
 
         noobMainWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(noobMainWindow);
@@ -149,10 +179,13 @@ public:
         question->setText(QCoreApplication::translate("noobMainWindow", "<html><head/><body><p><span style=\" font-size:24pt; font-weight:700;\">word</span></p></body></html>", nullptr));
         WellDone->setText(QCoreApplication::translate("noobMainWindow", "<html><head/><body><p><span style=\" font-size:24pt; font-weight:700;\">Well Done!!!</span></p></body></html>", nullptr));
         NiceTry->setText(QCoreApplication::translate("noobMainWindow", "<html><head/><body><p><span style=\" font-size:24pt; font-weight:700;\">Nice Try!!!</span></p></body></html>", nullptr));
+        congrat->setText(QCoreApplication::translate("noobMainWindow", "Congratulation ", nullptr));
         A->setText(QString());
         B->setText(QString());
         C->setText(QString());
         D->setText(QString());
+        Restart->setText(QCoreApplication::translate("noobMainWindow", "Restart", nullptr));
+        Close->setText(QCoreApplication::translate("noobMainWindow", "Close", nullptr));
     } // retranslateUi
 
 };

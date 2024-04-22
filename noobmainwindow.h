@@ -25,6 +25,7 @@ public slots:
     void DClicked();
     void checkClicked();
     void nextClicked();
+    void closeClicked();
 signals:
 private:
     Ui::noobMainWindow *ui;
@@ -34,6 +35,8 @@ private:
     int barValue;
     QVector<QString> incorrectAnswers;
     int levelCount;
+    void complete();
+    int correctCount;
 };
 
 #endif // NOOBMAINWINDOW_H

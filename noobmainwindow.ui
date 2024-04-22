@@ -155,6 +155,32 @@
      </property>
     </widget>
    </widget>
+   <widget class="QWidget" name="end" native="true">
+    <property name="geometry">
+     <rect>
+      <x>90</x>
+      <y>190</y>
+      <width>611</width>
+      <height>291</height>
+     </rect>
+    </property>
+    <property name="autoFillBackground">
+     <bool>true</bool>
+    </property>
+    <widget class="QLabel" name="congrat">
+     <property name="geometry">
+      <rect>
+       <x>30</x>
+       <y>100</y>
+       <width>551</width>
+       <height>71</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Congratulation </string>
+     </property>
+    </widget>
+   </widget>
    <widget class="QWidget" name="">
     <property name="geometry">
      <rect>
@@ -190,6 +216,32 @@
       <widget class="QPushButton" name="D">
        <property name="text">
         <string/>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QWidget" name="">
+    <property name="geometry">
+     <rect>
+      <x>243</x>
+      <y>490</y>
+      <width>261</width>
+      <height>32</height>
+     </rect>
+    </property>
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <item>
+      <widget class="QPushButton" name="Restart">
+       <property name="text">
+        <string>Restart</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="Close">
+       <property name="text">
+        <string>Close</string>
        </property>
       </widget>
      </item>
