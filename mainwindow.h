@@ -1,6 +1,6 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
-#include <Box2D/Box2D.h>
+
 #include <QMainWindow>
 #include <QTimer>
 #include "mastermainwindow.h"
@@ -29,7 +29,6 @@ public slots:
 signals:
 private:
     Ui::MainWindow *ui;
-    b2Body* body;
     QTimer timer;
     MasterMainWindow master;
     void drawAnimation(QPainter& painter, const QString& imagePath, int x, int y);

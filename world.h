@@ -5,6 +5,7 @@
 #include <QObject>
 #include <QList>
 #include <QString>
+
 class world: public QObject
 {
     Q_OBJECT
@@ -23,7 +24,7 @@ signals:
 public:
     b2World *Box2Dworld; // Box2D 世界
     QTimer *timer; // 用于定期更新物理世界
-    // 销毁计划中的物体
+    b2Body *body;
 
 };
 

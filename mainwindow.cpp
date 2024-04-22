@@ -98,8 +98,8 @@ MainWindow::MainWindow(QWidget *parent)
     int32 positionIterations = 2;
     for (int32 i = 0; i < 60; ++i) {
         world.Box2Dworld->Step(timeStep, velocityIterations, positionIterations);
-        b2Vec2 position = body->GetPosition();
-        float32 angle = body->GetAngle();
+        b2Vec2 position = world.body->GetPosition();
+        float32 angle = world.body->GetAngle();
         std::cout << "Step " << i << ": x = " << position.x << ", y = " << position.y << ", angle = " << angle << std::endl;
     }
 
@@ -133,7 +133,7 @@ void MainWindow::noobClicked(){
     levelWindow->show();
 }
 void MainWindow::updatePhysics() {
-    if (!body) return;  // Skip physics update if the body has been destroyed
+    if (!world.body) return;  // Skip physics update if the body has been destroyed
 
     float32 timeStep = 1.0f / 60.0f;
     int32 velocityIterations = 6;
