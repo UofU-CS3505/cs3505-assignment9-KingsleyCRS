@@ -47,15 +47,18 @@ LevelMainWindow::LevelMainWindow(QWidget *parent)
 }
 
 void LevelMainWindow::level_1Clicked(){
-    noob.show();
+    noob = new noobMainWindow;
+    noob->startClicked();
+    noob->show();
+    noob->setAttribute(Qt::WA_DeleteOnClose);
 }
 
 void LevelMainWindow::level_2Clicked(){
-    noob.show();
+
 }
 
 void LevelMainWindow::level_3Clicked(){
-    noob.show();
+
 }
 
 
