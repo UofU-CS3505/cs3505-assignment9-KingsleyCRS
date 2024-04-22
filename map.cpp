@@ -269,7 +269,7 @@ void Map::checkCollision(int i,int j, int dir)
             removeBlock(i-1,j);
             removeBlock(i-2,j);
         }
-        if(map[i][j]->getName() == "我" && map[i+1][j] -> getName() == "火")
+        if(map[i][j]->getName() == "我" && map[i-1][j] -> getName() == "火")
             playerDied = 1;
     }
     else if(dir == 1)

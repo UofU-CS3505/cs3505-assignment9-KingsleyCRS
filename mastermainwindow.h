@@ -1,5 +1,6 @@
 #ifndef MASTERMAINWINDOW_H
 #define MASTERMAINWINDOW_H
+#include "gamelosedialog.h"
 #include <QMainWindow>
 
 namespace Ui {
@@ -27,7 +28,8 @@ public slots:
 
     void on_Level5Button_clicked();
 
-    void levelWin(); 
+    void levelWin();
+
 
 private slots:
     void on_resetButton_clicked();
@@ -36,6 +38,8 @@ private slots:
 
 private:
     Ui::MasterMainWindow *ui;
+    GameLoseDialog gamelose;
+    void gameLost(int i);
 };
 
 #endif // MASTERMAINWINDOW_H

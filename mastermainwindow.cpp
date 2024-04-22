@@ -82,10 +82,10 @@ void MasterMainWindow::on_Level5Button_clicked()
 
 void MasterMainWindow::levelWin()
 {
-    for(int i = 0;i < 5;i++)
-        if(ui->gameMap->getMapWin(i)) {
+    for(int i = 0;i < 5;i++){
+        bool win = ui->gameMap->getMapWin(i);
             if(i == 0){
-                if(!ui->gameMap->levels[i]->passed)
+                if(win && !ui->gameMap->levels[i]->passed)
                 {
                     ui->gameMap->levels[i]->passed = 1;
                     on_Level2Button_clicked();
@@ -93,28 +93,50 @@ void MasterMainWindow::levelWin()
                 }
                 else if(ui->gameMap->levels[i]->playerDied)
                 {
-                    /*todo*/
+                    gameLost(i);
                 }
             }
-            else if(i == 1 && !ui->gameMap->levels[i]->passed)
+            else if(i == 1)
             {
-                ui->gameMap->levels[i]->passed = 1;
-                on_Level3Button_clicked();
-                ui->Level3Button->setEnabled(true);
+                if(win && !ui->gameMap->levels[i]->passed){
+                    ui->gameMap->levels[i]->passed = 1;
+                    on_Level3Button_clicked();
+                    ui->Level3Button->setEnabled(true);
+                }
+                else if(ui->gameMap->levels[i]->playerDied)
+                {
+                    gameLost(i);
+                }
             }
-            else if(i == 2 && !ui->gameMap->levels[i]->passed)
+            else if(i == 2)
             {
-                ui->gameMap->levels[i]->passed = 1;
-                on_Level4Button_clicked();
-                ui->Level4Button->setEnabled(true);
+                if(win && !ui->gameMap->levels[i]->passed){
+                    ui->gameMap->levels[i]->passed = 1;
+                    on_Level4Button_clicked();
+                    ui->Level4Button->setEnabled(true);
+                }
+                else if(ui->gameMap->levels[i]->playerDied)
+                {
+                    gameLost(i);
+                }
             }
-            else if(i == 3 && !ui->gameMap->levels[i]->passed)
+            else if(i == 3)
             {
-                ui->gameMap->levels[i]->passed = 1;
-                on_Level5Button_clicked();
-                ui->Level5Button->setEnabled(true);
+                if(win && !ui->gameMap->levels[i]->passed){
+                    ui->gameMap->levels[i]->passed = 1;
+                    on_Level5Button_clicked();
+                    ui->Level5Button->setEnabled(true);
+                }
+                else if(ui->gameMap->levels[i]->playerDied)
+                {
+                    gameLost(i);
+                }
             }
-        }
+            else if(i == 4)
+            {
+                /*todo, player win the game*/
+            }
+    }
 }
 
 void MasterMainWindow::on_resetButton_clicked()
@@ -135,3 +157,8 @@ void MasterMainWindow::on_hintButton_clicked()
     ui->gameMap->setFocus();
 }
 
+void MasterMainWindow::gameLost(int i){
+    gamelose.show();
+    on_resetButton_clicked();
+    ui->gameMap->levels[i]->playerDied = 0;
+}
