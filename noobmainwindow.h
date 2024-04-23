@@ -3,7 +3,6 @@
 
 
 #include <QMainWindow>
-#include <QTimer>
 #include "dictionary.h"
 
 namespace Ui {
