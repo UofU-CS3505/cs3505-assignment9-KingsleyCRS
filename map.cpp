@@ -264,7 +264,7 @@ void Map::createMap(){
         setBlock(2,18,water);
         setBlock(4,5,dog);
         setBlock(10,5,door);
-        setBlock(15,18,dog2);
+        setBlock(15,12,dog2);
         setBlock(7,7,can);
         setBlock(5,1,move);
         setBlock(18,18,goInTo);
