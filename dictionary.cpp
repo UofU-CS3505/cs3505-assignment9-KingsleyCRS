@@ -5,9 +5,14 @@
 Dictionary::Dictionary() {
     // three level in total
     allWords = {
-        {"學生","Student"},{"哈囉","Hello"},{"名字", "Name"},{"我", "Me or I"}, {"你", "You"}, {"他","He"}, {"狗","dog"},{"人","human"},{"他們","They"},{"我們","We"}, {"老師","Teacher"},
-        {"第二关","level two"},{"墙","wall"},{"我","me"},{"三","three"},{"四","four"}, {"第三关","level three"},{"狗","dog"},{"人","human"},{"五","five"},{"六","six"}, {"六","six"},
-        {"第三关","level three"},{"狗","dog"},{"人","human"},{"五","five"},{"六","six"}, {"第三关","level three"},{"狗","dog"},{"人","human"},{"五","five"},{"六","six"}, {"六","six"}
+        {"我","I， Me"},{"你好","Hello; Hi"},{"狗", "Dog"},{"得", "Have to; \n Get something"},
+        {"救", "Rescue, Save"}, {"吃","Eat"}, {"肉","Meat"},
+        {"人","Human"},{"他们","They"},{"我们","We"},
+        {"老师","Teacher"},{"能","Can"},{"墙","Wall"},
+        {"推","Push"},{"动","Move"},{"找","Find"},
+        {"找到","Found"},{"宝藏","Precious deposits"},{"水","Water"},
+        {"火","Fire"},{"进","Enter"}, {"门","Door"},
+        {"箭","Arrow"}
     };
     unKnow = allWords;
 

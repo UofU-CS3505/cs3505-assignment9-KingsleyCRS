@@ -6,6 +6,7 @@ LevelMainWindow::LevelMainWindow(QWidget *parent)
     , ui(new Ui::LevelMainWindow)
 {
     ui->setupUi(this);
+    setFixedSize(600,620);
 
     QString bronze = "QPushButton{"
                      "border-radius: 10px;"
@@ -16,8 +17,6 @@ LevelMainWindow::LevelMainWindow(QWidget *parent)
                      "background-color: rgb(184, 115, 51);"
                      "padding-left:3px;"
                      "padding-top:3px; }";
-
-
     ui->level_1->setStyleSheet(bronze);
     connect(ui->level_1,&QPushButton::clicked,this,&LevelMainWindow::level_1Clicked);
     connect(ui->level_3,&QPushButton::clicked,this,&LevelMainWindow::level_3Clicked);

@@ -6,6 +6,7 @@ studyMainWindow::studyMainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::studyMainWindow)
 {
+    setFixedSize(440,620);
     ui->setupUi(this);
     connect(ui->restartBT, &QPushButton::clicked,this, &studyMainWindow::startClicked);
     connect(ui->knowBT, &QPushButton::clicked,this, &studyMainWindow::knowClicked);
