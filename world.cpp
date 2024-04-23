@@ -78,3 +78,9 @@ void world::step() {
 //     }
 //     return nullptr;
 // }
+// void world::drawAnimation(QPainter& painter, const QString& imagePath, int x, int y) {
+//     QPixmap pixmap(imagePath);
+//     if(!pixmap.isNull()) {
+//         painter.drawPixmap(x - pixmap.width()/2, y - pixmap.height()/2, pixmap);
+//     }
+// }

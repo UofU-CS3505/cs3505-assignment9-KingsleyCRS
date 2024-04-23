@@ -139,8 +139,7 @@ FORMS += \
     mainwindow.ui \
     mastermainwindow.ui \
     noobmainwindow.ui \
-    studymainwindow.ui \
-    windialog.ui
+    studymainwindow.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

@@ -1,6 +1,8 @@
 #include "mastermainwindow.h"
 #include "qtimer.h"
 #include "ui_mastermainwindow.h"
+#include "world.h"
+#include <qpainterpath.h>
 
 MasterMainWindow::MasterMainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -12,6 +14,10 @@ MasterMainWindow::MasterMainWindow(QWidget *parent)
     connect(timer,&QTimer::timeout,this,&MasterMainWindow::levelWin);
     connect(&gamelose, &GameLoseDialog::accepted, this, &MasterMainWindow::handleDialog);
     timer->start(1000/60);
+    animation();
+    flipTimer = new QTimer(this);
+    connect(flipTimer, &QTimer::timeout, this, &MasterMainWindow::flipDog);
+    flipTimer->start(1200);  // 设置为50毫秒触发一次
 }
 
 MasterMainWindow::~MasterMainWindow()
@@ -83,6 +89,7 @@ void MasterMainWindow::on_Level5Button_clicked()
     ui->gameMap->levels[ui->gameMap->currentLevel]->roundCount = 0;
     ui->gameMap->update();
     ui->gameMap->setFocus();
+
 }
 
 
@@ -174,3 +181,82 @@ void updateLeveL()
 {
 
 }
+void MasterMainWindow::animation(){
+    world.createWall("left",b2Vec2(-8.0f, 1.0f),b2Vec2(0.5f, 8.0),0.5f,0.8f);
+    world.createWall("bot",b2Vec2(8.0f, 1.0f),b2Vec2(0.5f, 8.0),0.5f,0.8f);
+    world.createWall("right",b2Vec2(0.0f, 1.0f),b2Vec2(8.0f, 0.5f),0.5f,0.8f);
+    world.createBody("dog1",b2Vec2(-7.5f,2.0f),b2Vec2(100.0f, 0.0f),b2Vec2(0.0f, -0.0f),1.0f,0.0f,0.0f,1.0f,true);
+
+}
+void MasterMainWindow::paintEvent(QPaintEvent *event) {
+        QPainter painter(this);
+        world.step();
+        update();
+        painter.setRenderHint(QPainter::Antialiasing);
+        const float scaleFactor = 50;  // 50 pixels per meter
+        const float offsetX = 1050/2;  // Centering in width
+        const float offsetY = 800;  // Aligning from the bottom
+        QPen wallPen(Qt::white);
+        wallPen.setWidth(2);
+        painter.setPen(wallPen);
+        painter.setBrush(Qt::darkGray);
+
+
+        for (b2Body* body = world.box2DWorld->GetBodyList(); body != nullptr; body = body->GetNext()) {
+            qDebug()<<"s";
+            if (body->GetType() == b2_staticBody) { // 检查是否为静态体（墙）
+                b2Fixture* f = body->GetFixtureList();
+                while (f) {
+                    b2PolygonShape* poly = dynamic_cast<b2PolygonShape*>(f->GetShape());
+                    if (poly) {
+                        QPainterPath path;
+                        for (int i = 0; i < poly->GetVertexCount(); ++i) {
+                            b2Vec2 pt = body->GetWorldPoint(poly->GetVertex(i));
+                            float x = pt.x * scaleFactor + offsetX;
+                            float y = offsetY - pt.y * scaleFactor;  // Flipping Y coordinate for graphical display
+                            if (i == 0) {
+                                path.moveTo(x, y);
+                            } else {
+                                path.lineTo(x, y);
+                            }
+                        }
+                        path.closeSubpath();
+                        painter.drawPath(path);
+                    }
+                    f = f->GetNext();
+                }
+            } else {
+                std::string* name = static_cast<std::string*>(body->GetUserData());
+                if (name) {
+                    float x = body->GetPosition().x * scaleFactor + offsetX;
+                    float y = offsetY - body->GetPosition().y * scaleFactor;  // Flipping Y coordinate for graphical display
+                    if (dogFlipped) {
+                        drawFlippedAnimation(painter, ":/dog1.png", x, y);
+                    } else {
+                        drawAnimation(painter, ":/dog1.png", x, y);
+                    }
+                }
+            }
+        }
+    }
+void MasterMainWindow::drawAnimation(QPainter& painter, const QString& imagePath, int x, int y) {
+    QPixmap pixmap(imagePath);
+    if(!pixmap.isNull()) {
+        painter.drawPixmap(x - pixmap.width()/2, y - pixmap.height()/2, pixmap);
+    }
+}
+void MasterMainWindow::flipDog() {
+    dogFlipped = !dogFlipped;  // 改变狗的反转状态
+    update();  // 请求重绘界面以显示最新状态
+}
+void MasterMainWindow::drawFlippedAnimation(QPainter& painter, const QString& imagePath, int x, int y) {
+    QPixmap pixmap(imagePath);
+    if (!pixmap.isNull()) {
+        QTransform transform;
+        transform.translate(x, y);
+        transform.scale(-1, 1);  // 水平翻转图像
+        pixmap = pixmap.transformed(transform);
+        painter.drawPixmap(x - pixmap.width() / 2, y - pixmap.height() / 2, pixmap);
+    }
+}
+

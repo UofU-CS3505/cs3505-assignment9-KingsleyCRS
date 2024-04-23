@@ -15,6 +15,7 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
     this->resize(800, 800);  // 设置窗口大小为800x800
+    this->setFixedSize(800, 800);
 
 
     world.createWall("top",b2Vec2(0.0f, 19.0f),b2Vec2(8.0f, 0.5f),0.5f,0.8f);
@@ -53,7 +54,7 @@ MainWindow::MainWindow(QWidget *parent)
     // boxBody->SetUserData(new std::string("Box"));
     // boxBody->SetLinearVelocity(b2Vec2(2.0f,25.0f));
 
-    world.createBody("Box",b2Vec2(2.0f, 2.0f),b2Vec2(-10.0f, -10.0f),b2Vec2(0.0f, -0.0f),1.0f,1.0f,1.0f,1.0f,true);
+    world.createBody("Box",b2Vec2(0.0f, 8.0f),b2Vec2(-10.0f, -10.0f),b2Vec2(0.0f, -0.0f),1.0f,1.0f,1.0f,1.0f,true);
     world.createBody("Circle",b2Vec2(2.0f, 2.0f),b2Vec2(-10.0f, -10.0f),b2Vec2(0.0f, -0.0f),1.0f,1.0f,1.0f,1.0f,true);
 
     connect(ui->noobButton,&QPushButton::clicked,this,&MainWindow::noobClicked);
@@ -116,6 +117,6 @@ void MainWindow::paintEvent(QPaintEvent *event) {
 void MainWindow::drawAnimation(QPainter& painter, const QString& imagePath, int x, int y) {
     QPixmap pixmap(imagePath);
     if(!pixmap.isNull()) {
-        painter.drawPixmap(x, y, pixmap);
+        painter.drawPixmap(x - pixmap.width()/2, y - pixmap.height()/2, pixmap);
     }
 }

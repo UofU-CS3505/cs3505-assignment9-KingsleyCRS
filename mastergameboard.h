@@ -25,6 +25,7 @@ public:
     void animation();
     void drawAnimation(QPainter& painter, const QString& imagePath, int x, int y);
     bool levelWinTimerStart;
+    void resetCurrentLevel();
 
 public slots:
     void triggerMapUpdate();

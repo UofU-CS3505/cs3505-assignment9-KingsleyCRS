@@ -36,6 +36,7 @@ private:
     int levelCount;
     void complete();
     int correctCount;
+
 };
 
 #endif // NOOBMAINWINDOW_H

@@ -2,7 +2,7 @@
 #define MASTERMAINWINDOW_H
 #include "gamelosedialog.h"
 #include <QMainWindow>
-//#include "world.h"
+#include "world.h"
 #include <Qpixmap>
 namespace Ui {
 class MasterMainWindow;
@@ -46,11 +46,20 @@ private:
     Ui::MasterMainWindow *ui;
     GameLoseDialog gamelose;
     void gameLost();
+    void resetCurrentLevel();
     // void drawAnimation(QPainter& painter, const QString& imagePath, int x, int y);
     // world world;
-
+    void paintEvent(QPaintEvent *event);
+    void animation();
     // protected:
     //     void paintEvent(QPaintEvent *event) override;
+    world world;
+    void drawAnimation(QPainter& painter, const QString& imagePath, int x, int y);
+
+    QTimer *flipTimer;  // 用于触发狗的反转
+    bool dogFlipped = false;  // 跟踪狗是否已反转
+    void flipDog();  // 狗的反转函数
+    void drawFlippedAnimation(QPainter& painter, const QString& imagePath, int x, int y);
 };
 
 #endif // MASTERMAINWINDOW_H

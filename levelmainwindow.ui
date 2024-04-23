@@ -14,42 +14,31 @@
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QSplitter" name="splitter">
+   <widget class="QPushButton" name="level_3">
     <property name="geometry">
      <rect>
-      <x>320</x>
-      <y>150</y>
-      <width>151</width>
-      <height>296</height>
+      <x>340</x>
+      <y>289</y>
+      <width>93</width>
+      <height>29</height>
      </rect>
     </property>
-    <property name="lineWidth">
-     <number>1</number>
+    <property name="text">
+     <string>Level 3</string>
     </property>
-    <property name="midLineWidth">
-     <number>0</number>
+   </widget>
+   <widget class="QPushButton" name="level_2">
+    <property name="geometry">
+     <rect>
+      <x>550</x>
+      <y>360</y>
+      <width>93</width>
+      <height>29</height>
+     </rect>
     </property>
-    <property name="orientation">
-     <enum>Qt::Vertical</enum>
+    <property name="text">
+     <string>Level 2</string>
     </property>
-    <property name="handleWidth">
-     <number>100</number>
-    </property>
-    <widget class="QPushButton" name="level_1">
-     <property name="text">
-      <string>Level 1</string>
-     </property>
-    </widget>
-    <widget class="QPushButton" name="level_2">
-     <property name="text">
-      <string>Level 2</string>
-     </property>
-    </widget>
-    <widget class="QPushButton" name="level_3">
-     <property name="text">
-      <string>Level 3</string>
-     </property>
-    </widget>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
@@ -58,7 +47,7 @@
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>22</height>
+     <height>26</height>
     </rect>
    </property>
   </widget>
