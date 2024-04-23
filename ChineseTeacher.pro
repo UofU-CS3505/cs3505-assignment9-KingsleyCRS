@@ -56,7 +56,9 @@ SOURCES += \
     Box2D/Dynamics/b2WorldCallbacks.cpp \
     Box2D/Rope/b2Rope.cpp \
     block.cpp \
+    dictionary.cpp \
     gamelosedialog.cpp \
+    level2mainwindow.cpp \
     levelmainwindow.cpp \
     main.cpp \
     mainwindow.cpp \
@@ -66,8 +68,6 @@ SOURCES += \
     model.cpp \
     noobmainwindow.cpp \
     sentencerule.cpp \
-    vocabdictionary.cpp \
-    windialog.cpp \
     world.cpp
 
 HEADERS += \
@@ -119,7 +119,9 @@ HEADERS += \
     Box2D/Dynamics/b2WorldCallbacks.h \
     Box2D/Rope/b2Rope.h \
     block.h \
+    dictionary.h \
     gamelosedialog.h \
+    level2mainwindow.h \
     levelmainwindow.h \
     mainwindow.h \
     map.h \
@@ -128,12 +130,11 @@ HEADERS += \
     model.h \
     noobmainwindow.h \
     sentencerule.h \
-    vocabdictionary.h \
-    windialog.h \
     world.h
 
 FORMS += \
     gamelosedialog.ui \
+    level2mainwindow.ui \
     levelmainwindow.ui \
     mainwindow.ui \
     mastermainwindow.ui \

@@ -19,6 +19,8 @@ public:
     bool getMapWin(int level);
 
 public slots:
+    void triggerMapUpdate();
+
 protected:
     void paintEvent(QPaintEvent *event) override;
     void keyPressEvent(QKeyEvent *event) override;

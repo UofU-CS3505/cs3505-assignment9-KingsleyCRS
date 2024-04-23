@@ -32,7 +32,7 @@ LevelMainWindow::LevelMainWindow(QWidget *parent)
                      "padding-top:3px; }";
 
     ui->level_2->setStyleSheet(silver);
-
+    connect(ui->level_2,&QPushButton::clicked,this,&LevelMainWindow::level_2Clicked);
     QString gold = "QPushButton{"
                    "border-radius: 10px;"
                    "background-color: rgb(255, 215, 0);"
@@ -47,15 +47,21 @@ LevelMainWindow::LevelMainWindow(QWidget *parent)
 }
 
 void LevelMainWindow::level_1Clicked(){
-    noob.show();
+    noob = new noobMainWindow;
+    noob->startClicked();
+    noob->show();
+    noob->setAttribute(Qt::WA_DeleteOnClose);
 }
 
 void LevelMainWindow::level_2Clicked(){
-    noob.show();
+    level2 = new Level2MainWindow;
+    level2 ->startClicked();
+    level2 ->show();
+    level2 ->setAttribute(Qt::WA_DeleteOnClose);
 }
 
 void LevelMainWindow::level_3Clicked(){
-    noob.show();
+
 }
 
 

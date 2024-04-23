@@ -2,7 +2,7 @@
 #define LEVELMAINWINDOW_H
 #include "noobmainwindow.h"
 #include <QMainWindow>
-
+#include "level2mainwindow.h"
 class noobMainWindow;
 namespace Ui {
 class LevelMainWindow;
@@ -21,7 +21,8 @@ public slots:
     void level_3Clicked();
 private:
     Ui::LevelMainWindow *ui;
-    noobMainWindow noob;
+    noobMainWindow *noob;
+    Level2MainWindow *level2;
 };
 
 #endif // LEVELMAINWINDOW_H

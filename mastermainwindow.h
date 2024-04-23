@@ -41,6 +41,8 @@ private slots:
 
     void on_hintButton_clicked();
 
+    void handleDialog();
+
 private:
     Ui::MasterMainWindow *ui;
     GameLoseDialog gamelose;

@@ -1,4 +1,5 @@
  #include "mastergameboard.h"
+#include "qtimer.h"
 
 MasterGameBoard::MasterGameBoard(QWidget *parent) : QWidget(parent), currentLevel(0)
 {
@@ -11,8 +12,12 @@ MasterGameBoard::MasterGameBoard(QWidget *parent) : QWidget(parent), currentLeve
     setAutoFillBackground(true);
     setPalette(pal);
     setFocus();
-
-
+    QTimer *timer1 = new QTimer(this);
+    QTimer *timer2 = new QTimer(this);
+    connect(timer1, SIGNAL(timeout()), this, SLOT(update()));
+    connect(timer2, &QTimer::timeout, this, &MasterGameBoard::triggerMapUpdate);
+    timer1->start(1);
+    timer2->start(150);
 }
 void MasterGameBoard::keyPressEvent(QKeyEvent *event) {
     switch (event->key()) {
@@ -32,7 +37,6 @@ void MasterGameBoard::keyPressEvent(QKeyEvent *event) {
         QWidget::keyPressEvent(event);
         return;
     }
-    update();
 }
 
 void MasterGameBoard::paintEvent(QPaintEvent *event) {
@@ -40,10 +44,10 @@ void MasterGameBoard::paintEvent(QPaintEvent *event) {
     QPen textPen(Qt::white);
     painter.setPen(textPen);
     QFont font = painter.font();
-    font.setPointSize(18);
+    font.setPointSize(20);
     painter.setFont(font);
     Map *currentMap = levels[currentLevel];
-    int blockSize = 30;
+    int blockSize = 40;
     for (int i = 0; i < 20; ++i) {
         for (int j = 0; j < 20; ++j) {
             int x = i * blockSize;
@@ -60,7 +64,8 @@ bool MasterGameBoard::getMapWin(int level)
     return levels[level]->win;
 }
 
-
-
-
-
+void MasterGameBoard::triggerMapUpdate(){
+    if(!levels[currentLevel]->playerDied)
+        levels[currentLevel]->updateMap();
+    update();
+}
