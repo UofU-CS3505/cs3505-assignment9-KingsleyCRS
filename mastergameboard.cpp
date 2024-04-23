@@ -2,6 +2,8 @@
 
 MasterGameBoard::MasterGameBoard(QWidget *parent) : QWidget(parent), currentLevel(0)
 {
+
+
     for(int i = 0; i < 5;i++)
         levels[i] = new Map(i);
     QPalette pal = palette();
@@ -9,6 +11,8 @@ MasterGameBoard::MasterGameBoard(QWidget *parent) : QWidget(parent), currentLeve
     setAutoFillBackground(true);
     setPalette(pal);
     setFocus();
+
+
 }
 void MasterGameBoard::keyPressEvent(QKeyEvent *event) {
     switch (event->key()) {
@@ -48,9 +52,15 @@ void MasterGameBoard::paintEvent(QPaintEvent *event) {
                 painter.drawText(QRect(x, y, blockSize, blockSize), Qt::AlignCenter, levels[currentLevel]->map[i][j]->getName());
         }
     }
+
 }
 
 bool MasterGameBoard::getMapWin(int level)
 {
     return levels[level]->win;
 }
+
+
+
+
+

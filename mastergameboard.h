@@ -1,5 +1,6 @@
 #ifndef MASTERGAMEBOARD_H
 #define MASTERGAMEBOARD_H
+#include "world.h"
 #include "map.h"
 #include <QVector>
 #include <QWidget>
@@ -17,9 +18,15 @@ public:
     Map* levels[5];
     bool getMapWin(int level);
 
+public slots:
 protected:
     void paintEvent(QPaintEvent *event) override;
     void keyPressEvent(QKeyEvent *event) override;
+
+
+private:
+
+
 
 };
 #endif // MASTERGAMEBOARD_H

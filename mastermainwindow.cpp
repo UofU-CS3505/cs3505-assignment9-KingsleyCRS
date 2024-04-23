@@ -1,40 +1,19 @@
 #include "mastermainwindow.h"
 #include "qtimer.h"
 #include "ui_mastermainwindow.h"
-
+#include "iostream"
 MasterMainWindow::MasterMainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MasterMainWindow)
-    //, world(parent)
+
 {
     ui->setupUi(this);
     setFixedSize(800, 800);
-
-
-    // b2BodyDef bodyDef;
-    // bodyDef.type = b2_dynamicBody;
-    // bodyDef.position.Set(7.0f, 8.0f);
-    // b2Body* circleBody = world.Box2Dworld->CreateBody(&bodyDef);
-    // b2CircleShape circleShape;
-    // circleShape.m_radius = 1.0f;
-    // b2FixtureDef fixtureDef;
-    // fixtureDef.shape = &circleShape;
-    // fixtureDef.density = 1.0f;
-    // fixtureDef.friction = 0.3f;
-    // fixtureDef.restitution = 0.8f;
-    // circleBody->CreateFixture(&fixtureDef);
-    // circleBody->SetUserData(new std::string("Circle"));
-    // circleBody->SetLinearVelocity(b2Vec2(2.0f,25.0f));
-
-
-
     QTimer* timer = new QTimer(this);
     connect(timer,&QTimer::timeout,this,&MasterMainWindow::levelWin);
     timer->start(1000/60);
 
-    // QTimer *timer2 = new QTimer(this);
-    // connect(timer2, &QTimer::timeout, this, &MasterMainWindow::updatePhysics);
-    // timer2->start(1000 / 60);
+
 }
 
 MasterMainWindow::~MasterMainWindow()
@@ -111,12 +90,10 @@ void MasterMainWindow::levelWin()
         if(i == 0){
             if(win && !ui->gameMap->levels[i]->passed)
             {
-
                 ui->gameMap->levels[i]->passed = 1;
-                on_Level2Button_clicked();
+                //on_Level2Button_clicked();
                 ui->Level2Button->setEnabled(true);
-
-
+                gamewin(i);
             }
             else if(ui->gameMap->levels[i]->playerDied)
             {
@@ -129,6 +106,7 @@ void MasterMainWindow::levelWin()
                 ui->gameMap->levels[i]->passed = 1;
                 on_Level3Button_clicked();
                 ui->Level3Button->setEnabled(true);
+                gamewin(i);
             }
             else if(ui->gameMap->levels[i]->playerDied)
             {
@@ -141,6 +119,7 @@ void MasterMainWindow::levelWin()
                 ui->gameMap->levels[i]->passed = 1;
                 on_Level4Button_clicked();
                 ui->Level4Button->setEnabled(true);
+                gamewin(i);
             }
             else if(ui->gameMap->levels[i]->playerDied)
             {
@@ -153,6 +132,7 @@ void MasterMainWindow::levelWin()
                 ui->gameMap->levels[i]->passed = 1;
                 on_Level5Button_clicked();
                 ui->Level5Button->setEnabled(true);
+
             }
             else if(ui->gameMap->levels[i]->playerDied)
             {
@@ -189,37 +169,10 @@ void MasterMainWindow::gameLost(int i){
     on_resetButton_clicked();
     ui->gameMap->levels[i]->playerDied = 0;
 }
+void MasterMainWindow::gamewin(int i){
+    gameWin.show();
+}
 
-// void MasterMainWindow::updatePhysics() {
-//     if (!world.body) return;  // Skip physics update if the body has been destroyed
 
-//     float32 timeStep = 1.0f / 60.0f;
-//     int32 velocityIterations = 6;
-//     int32 positionIterations = 2;
-//     world.Box2Dworld->Step(timeStep, velocityIterations, positionIterations);
-//     update();
-// }
 
-// void MasterMainWindow::paintEvent(QPaintEvent *event) {
-//     QPainter painter(this);
-//     const float scaleFactor = 50;  // 50 pixels per meter
-//     const float offsetX = 800 / 2;  // Centering in width
-//     const float offsetY = 800;  // Aligning from the bottom
-//     for (b2Body* body = world.Box2Dworld->GetBodyList(); body != nullptr; body = body->GetNext()) {
-//         float x = body->GetPosition().x * scaleFactor + offsetX;
-//         float y = offsetY - body->GetPosition().y * scaleFactor;  // Flipping Y coordinate for graphical display
-//         std::string* name = static_cast<std::string*>(body->GetUserData());
-//         if (name) {
-//             if (*name == "Circle") {
-//                 drawAnimation(painter, ":/nihao.png", x, y);
-//             }
-//         }
-//     }
 
-// }
-// void MasterMainWindow::drawAnimation(QPainter& painter, const QString& imagePath, int x, int y) {
-//     QPixmap pixmap(imagePath);
-//     if(!pixmap.isNull()) {
-//         painter.drawPixmap(x, y, pixmap);
-//     }
-// }

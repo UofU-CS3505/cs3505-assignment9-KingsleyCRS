@@ -67,6 +67,7 @@ SOURCES += \
     noobmainwindow.cpp \
     sentencerule.cpp \
     vocabdictionary.cpp \
+    windialog.cpp \
     world.cpp
 
 HEADERS += \
@@ -128,6 +129,7 @@ HEADERS += \
     noobmainwindow.h \
     sentencerule.h \
     vocabdictionary.h \
+    windialog.h \
     world.h
 
 FORMS += \
@@ -135,7 +137,8 @@ FORMS += \
     levelmainwindow.ui \
     mainwindow.ui \
     mastermainwindow.ui \
-    noobmainwindow.ui
+    noobmainwindow.ui \
+    windialog.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
