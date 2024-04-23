@@ -110,3 +110,9 @@ void MasterGameBoard::drawAnimation(QPainter& painter, const QString& imagePath,
         painter.drawPixmap(x, y, pixmap);
     }
 }
+
+void MasterGameBoard::updateLevel()
+{
+    if(currentLevel < 4)
+        currentLevel++;
+}

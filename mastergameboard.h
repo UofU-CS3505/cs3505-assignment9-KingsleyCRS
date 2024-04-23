@@ -14,7 +14,7 @@ class MasterGameBoard:public QWidget
 
 public:
     explicit MasterGameBoard(QWidget *parent);
-    void updateLevel(int level);
+    void updateLevel();
     int currentLevel;
     Map* levels[5];
     bool getMapWin(int level);
