@@ -242,6 +242,7 @@ void noobMainWindow::complete() {
     ui->congrat->setFont(font);
     if(life == 1) {
         ui->congrat->setText("             You ran out of heart!!! Try one more time!!!");
+        ui->lifeLabel->setText(" ");
     } else {
         ui->congrat->setText("Congratulation!!! You have learned "+ QString::number(correctCount) +" of ten words");
     }

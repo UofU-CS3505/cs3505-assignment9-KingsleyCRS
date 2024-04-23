@@ -30,7 +30,7 @@ public:
     QLabel *label;
     QLabel *lifeLabel;
     QLabel *label_2;
-    QPushButton *skipButton;
+    QPushButton *NextButton;
     QWidget *layoutWidget;
     QVBoxLayout *rightSide;
     QPushButton *pair_1_1;
@@ -43,6 +43,8 @@ public:
     QPushButton *pair_3;
     QLabel *CorrectLabel;
     QLabel *tryagain;
+    QPushButton *Restart;
+    QLabel *nolife;
     QMenuBar *menubar;
     QStatusBar *statusbar;
 
@@ -67,9 +69,9 @@ public:
         label_2 = new QLabel(centralwidget);
         label_2->setObjectName("label_2");
         label_2->setGeometry(QRect(170, 90, 291, 61));
-        skipButton = new QPushButton(centralwidget);
-        skipButton->setObjectName("skipButton");
-        skipButton->setGeometry(QRect(330, 490, 119, 32));
+        NextButton = new QPushButton(centralwidget);
+        NextButton->setObjectName("NextButton");
+        NextButton->setGeometry(QRect(330, 490, 119, 32));
         layoutWidget = new QWidget(centralwidget);
         layoutWidget->setObjectName("layoutWidget");
         layoutWidget->setGeometry(QRect(400, 210, 171, 241));
@@ -118,6 +120,13 @@ public:
         tryagain = new QLabel(centralwidget);
         tryagain->setObjectName("tryagain");
         tryagain->setGeometry(QRect(320, 300, 281, 61));
+        Restart = new QPushButton(centralwidget);
+        Restart->setObjectName("Restart");
+        Restart->setGeometry(QRect(330, 490, 119, 32));
+        nolife = new QLabel(centralwidget);
+        nolife->setObjectName("nolife");
+        nolife->setGeometry(QRect(200, 310, 471, 61));
+        nolife->setAutoFillBackground(true);
         Level2MainWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(Level2MainWindow);
         menubar->setObjectName("menubar");
@@ -138,7 +147,7 @@ public:
         label->setText(QString());
         lifeLabel->setText(QCoreApplication::translate("Level2MainWindow", "<html><head/><body><p><span style=\" font-size:18pt; font-weight:700; color:#ff2600;\">5</span></p></body></html>", nullptr));
         label_2->setText(QCoreApplication::translate("Level2MainWindow", "<html><head/><body><p><span style=\" font-size:24pt; font-weight:700;\">Select the matching pairs</span></p></body></html>", nullptr));
-        skipButton->setText(QCoreApplication::translate("Level2MainWindow", "SKIP", nullptr));
+        NextButton->setText(QCoreApplication::translate("Level2MainWindow", "Next", nullptr));
         pair_1_1->setText(QCoreApplication::translate("Level2MainWindow", "PushButton", nullptr));
         pair_2_2->setText(QCoreApplication::translate("Level2MainWindow", "PushButton", nullptr));
         pair_3_3->setText(QCoreApplication::translate("Level2MainWindow", "PushButton", nullptr));
@@ -147,6 +156,8 @@ public:
         pair_3->setText(QCoreApplication::translate("Level2MainWindow", "PushButton", nullptr));
         CorrectLabel->setText(QCoreApplication::translate("Level2MainWindow", "<html><head/><body><p><span style=\" font-size:24pt; font-weight:700;\">Nice Job! Keep it up</span></p></body></html>", nullptr));
         tryagain->setText(QCoreApplication::translate("Level2MainWindow", "<html><head/><body><p><span style=\" font-size:24pt; font-weight:700;\">Try again!</span></p></body></html>", nullptr));
+        Restart->setText(QCoreApplication::translate("Level2MainWindow", "Restart", nullptr));
+        nolife->setText(QCoreApplication::translate("Level2MainWindow", "<html><head/><body><p><span style=\" font-size:24pt; font-weight:700;\">You are run out of heart! Try again</span></p></body></html>", nullptr));
     } // retranslateUi
 
 };

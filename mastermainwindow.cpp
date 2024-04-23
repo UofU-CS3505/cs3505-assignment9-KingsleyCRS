@@ -68,6 +68,7 @@ void MasterMainWindow::on_Level4Button_clicked()
     ui->Hint->setText("Hint:");
     ui->gameMap->levels[ui->gameMap->currentLevel]->hintPressed = 0;
     ui->gameMap->levels[ui->gameMap->currentLevel]->roundCount = 0;
+    ui->gameMap->timer2->start(200);
     ui->gameMap->update();
     ui->gameMap->setFocus();
 }
