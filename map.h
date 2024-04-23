@@ -23,6 +23,7 @@ public:
     QString getHint();
     int hintPressed;
     int roundCount;
+    void updateMap();
 
 private:
     QVector<Block*> noun;

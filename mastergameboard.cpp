@@ -10,10 +10,12 @@ MasterGameBoard::MasterGameBoard(QWidget *parent) : QWidget(parent), currentLeve
     setAutoFillBackground(true);
     setPalette(pal);
     setFocus();
-    QTimer *timer = new QTimer(this);
-    connect(timer, SIGNAL(timeout()), this, SLOT(update()));
-    timer->start(1); // Updates the game board every 1000 milliseconds (1 second)
-
+    QTimer *timer1 = new QTimer(this);
+    QTimer *timer2 = new QTimer(this);
+    connect(timer1, SIGNAL(timeout()), this, SLOT(update()));
+    connect(timer2, &QTimer::timeout, this, &MasterGameBoard::triggerMapUpdate);
+    timer1->start(1);
+    timer2->start(150);
 }
 void MasterGameBoard::keyPressEvent(QKeyEvent *event) {
     switch (event->key()) {
@@ -57,4 +59,10 @@ void MasterGameBoard::paintEvent(QPaintEvent *event) {
 bool MasterGameBoard::getMapWin(int level)
 {
     return levels[level]->win;
+}
+
+void MasterGameBoard::triggerMapUpdate(){
+    if(!levels[currentLevel]->playerDied)
+        levels[currentLevel]->updateMap();
+    update();
 }

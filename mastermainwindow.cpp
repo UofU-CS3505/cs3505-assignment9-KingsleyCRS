@@ -10,6 +10,7 @@ MasterMainWindow::MasterMainWindow(QWidget *parent)
     setFixedSize(1050, 750);
     QTimer* timer = new QTimer(this);
     connect(timer,&QTimer::timeout,this,&MasterMainWindow::levelWin);
+    connect(&gamelose, &GameLoseDialog::accepted, this, &MasterMainWindow::handleDialog);
     timer->start(1000/60);
 }
 
@@ -22,7 +23,6 @@ void MasterMainWindow::on_quitButton_clicked()
 {
     this->close();
 }
-
 
 void MasterMainWindow::on_Level1Button_clicked()
 {
@@ -98,7 +98,7 @@ void MasterMainWindow::levelWin()
                 }
                 else if(ui->gameMap->levels[i]->playerDied)
                 {
-                    gameLost(i);
+                    gameLost();
                 }
             }
             else if(i == 1)
@@ -110,7 +110,7 @@ void MasterMainWindow::levelWin()
                 }
                 else if(ui->gameMap->levels[i]->playerDied)
                 {
-                    gameLost(i);
+                    gameLost();
                 }
             }
             else if(i == 2)
@@ -122,7 +122,7 @@ void MasterMainWindow::levelWin()
                 }
                 else if(ui->gameMap->levels[i]->playerDied)
                 {
-                    gameLost(i);
+                    gameLost();
                 }
             }
             else if(i == 3)
@@ -134,7 +134,7 @@ void MasterMainWindow::levelWin()
                 }
                 else if(ui->gameMap->levels[i]->playerDied)
                 {
-                    gameLost(i);
+                    gameLost();
                 }
             }
             else if(i == 4)
@@ -163,8 +163,12 @@ void MasterMainWindow::on_hintButton_clicked()
     ui->gameMap->setFocus();
 }
 
-void MasterMainWindow::gameLost(int i){
+void MasterMainWindow::gameLost(){
     gamelose.show();
     on_resetButton_clicked();
-    ui->gameMap->levels[i]->playerDied = 0;
+}
+
+void MasterMainWindow::handleDialog()
+{
+    ui->gameMap->levels[ui->gameMap->currentLevel]->playerDied = 0;
 }

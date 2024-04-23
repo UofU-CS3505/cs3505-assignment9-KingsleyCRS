@@ -1,6 +1,6 @@
 #include "map.h"
 
-Map::Map(int level):win(0),playerDied(0),passed(0),level(level),roundCount(0)
+Map::Map(int level):win(0),playerDied(0),passed(0),roundCount(0),level(level)
 {
     createWords();
     createMap();
@@ -14,6 +14,31 @@ void Map::createEmptyMap()
         }
     }
 }
+
+void Map::updateMap()
+{
+    for (int j = 0; j < 19; j++) {
+        for (int i = 0; i < 19; i++) {
+            if (map[i][j] == arrow) {
+                map[i][j]->hasMoved = 0;
+            }
+        }
+    }
+    for (int j = 0; j < 19; j++) {
+        for (int i = 0; i < 19; i++) {
+            if(map[i][j]==arrow && !map[i][j]->hasMoved){
+                if(map[i][j+1]==player)
+                    playerDied=1;
+                if(map[i][j+1]->isEmpty ){
+                    setBlock(i,j+1,map[i][j]);
+                    map[i][j+1]->hasMoved = 1;
+                    removeBlock(i,j);
+                }
+            }
+        }
+    }
+}
+
 void Map::setBlock(int i, int j, Block* block)
 {
     map[i][j] = block;
@@ -118,24 +143,7 @@ void Map::movePlayer(QString direction)
             }
 
         }
-    }
-    for (int j = 0; j < 19; j++) {
-        for (int i = 0; i < 19; i++) {
-            if(map[i][j]==arrow){
-                if(map[i][j+1]==player)
-                    playerDied=1;
-                if(map[i][j+1]->isEmpty){
-                    setBlock(i,j+1,map[i][j]);
-                    removeBlock(i,j);
-                    j++;
-                }else{
-                    removeBlock(i,j);
-                }
-
-            }
-
-        }
-    }
+    }    
     checkRules();
 }
 
@@ -170,9 +178,9 @@ void Map::checkRules(){
             }
 
             else if(level == 3){
-                if(roundCount%4 ==0){
-                    setBlock(6,3,arrow);
-                }
+                // if(roundCount%4 ==0){
+                //     setBlock(6,3,arrow);
+                // }
                 if((map[i][j]==player&&map[i+1][j]==find1&&map[i+2][j]==find2&&map[i+3][j]==treasure1&&map[i+4][j]==treasure2) || (map[i][j]==player&&map[i][j+1]==find1&&map[i][j+2]==find2&&map[i][j+3]==treasure1&&map[i][j+4]==treasure2))
                     win = 1;
             }
@@ -279,7 +287,7 @@ void Map::createMap(){
         }
         for(int i = 3; i < 17;i++){
             setBlock(3,i,wall);
-            setBlock(i,3,wall);
+            setBlock(i,3,arrow);
             setBlock(16,i,wall);
             setBlock(i,16,wall);
         }
@@ -337,6 +345,8 @@ void Map::checkCollision(int i,int j, int dir)
             removeBlock(i+1,j);
             removeBlock(i+2,j);
         }
+        if(map[i][j] == player && map[i+1][j]== fire)
+            playerDied = 1;
     }
     else if(dir == 2)
     {
@@ -345,6 +355,8 @@ void Map::checkCollision(int i,int j, int dir)
             removeBlock(i,j-1);
             removeBlock(i,j-2);
         }
+        if(map[i][j] == player && map[i][j-1]== fire)
+            playerDied = 1;
     }
     else
     {
@@ -353,5 +365,7 @@ void Map::checkCollision(int i,int j, int dir)
             removeBlock(i,j+1);
             removeBlock(i,j+2);
         }
+        if(map[i][j] == player && map[i][j+1]== fire)
+            playerDied = 1;
     }
 }
