@@ -1,4 +1,5 @@
  #include "mastergameboard.h"
+#include "qtimer.h"
 
 MasterGameBoard::MasterGameBoard(QWidget *parent) : QWidget(parent), currentLevel(0)
 {
@@ -9,6 +10,10 @@ MasterGameBoard::MasterGameBoard(QWidget *parent) : QWidget(parent), currentLeve
     setAutoFillBackground(true);
     setPalette(pal);
     setFocus();
+    QTimer *timer = new QTimer(this);
+    connect(timer, SIGNAL(timeout()), this, SLOT(update()));
+    timer->start(1); // Updates the game board every 1000 milliseconds (1 second)
+
 }
 void MasterGameBoard::keyPressEvent(QKeyEvent *event) {
     switch (event->key()) {
@@ -28,7 +33,6 @@ void MasterGameBoard::keyPressEvent(QKeyEvent *event) {
         QWidget::keyPressEvent(event);
         return;
     }
-    update();
 }
 
 void MasterGameBoard::paintEvent(QPaintEvent *event) {
@@ -36,10 +40,10 @@ void MasterGameBoard::paintEvent(QPaintEvent *event) {
     QPen textPen(Qt::white);
     painter.setPen(textPen);
     QFont font = painter.font();
-    font.setPointSize(18);
+    font.setPointSize(20);
     painter.setFont(font);
     Map *currentMap = levels[currentLevel];
-    int blockSize = 30;
+    int blockSize = 40;
     for (int i = 0; i < 20; ++i) {
         for (int j = 0; j < 20; ++j) {
             int x = i * blockSize;

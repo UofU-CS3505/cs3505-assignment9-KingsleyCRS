@@ -178,7 +178,6 @@ void Map::checkRules(){
             }
         }
     }
-
 }
 
 void Map::createWords()

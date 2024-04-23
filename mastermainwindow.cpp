@@ -7,7 +7,7 @@ MasterMainWindow::MasterMainWindow(QWidget *parent)
     , ui(new Ui::MasterMainWindow)
 {
     ui->setupUi(this);
-    setFixedSize(850, 700);
+    setFixedSize(1050, 750);
     QTimer* timer = new QTimer(this);
     connect(timer,&QTimer::timeout,this,&MasterMainWindow::levelWin);
     timer->start(1000/60);
