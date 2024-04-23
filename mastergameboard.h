@@ -16,6 +16,8 @@ public:
     int currentLevel;
     Map* levels[5];
     bool getMapWin(int level);
+    QTimer *timer1;
+    QTimer *timer2;
 
 public slots:
     void triggerMapUpdate();
@@ -23,11 +25,6 @@ public slots:
 protected:
     void paintEvent(QPaintEvent *event) override;
     void keyPressEvent(QKeyEvent *event) override;
-
-
-private:
-
-
 
 };
 #endif // MASTERGAMEBOARD_H

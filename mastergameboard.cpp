@@ -15,7 +15,6 @@ MasterGameBoard::MasterGameBoard(QWidget *parent) : QWidget(parent), currentLeve
     connect(timer1, SIGNAL(timeout()), this, SLOT(update()));
     connect(timer2, &QTimer::timeout, this, &MasterGameBoard::triggerMapUpdate);
     timer1->start(1);
-    timer2->start(150);
 }
 void MasterGameBoard::keyPressEvent(QKeyEvent *event) {
     switch (event->key()) {
