@@ -68,7 +68,7 @@ void MasterMainWindow::on_Level4Button_clicked()
     ui->Hint->setText("Hint:");
     ui->gameMap->levels[ui->gameMap->currentLevel]->hintPressed = 0;
     ui->gameMap->levels[ui->gameMap->currentLevel]->roundCount = 0;
-    ui->gameMap->timer2->start(200);
+    ui->gameMap->MapUpdateTimer->start(200);
     ui->gameMap->update();
     ui->gameMap->setFocus();
 }
@@ -94,7 +94,6 @@ void MasterMainWindow::levelWin()
             if(win && !ui->gameMap->levels[i]->passed)
             {
                 ui->gameMap->levels[i]->passed = 1;
-                on_Level2Button_clicked();
                 ui->Level2Button->setEnabled(true);
             }
             else if(ui->gameMap->levels[i]->playerDied)
@@ -106,7 +105,6 @@ void MasterMainWindow::levelWin()
         {
             if(win && !ui->gameMap->levels[i]->passed){
                 ui->gameMap->levels[i]->passed = 1;
-                on_Level3Button_clicked();
                 ui->Level3Button->setEnabled(true);
             }
             else if(ui->gameMap->levels[i]->playerDied)
@@ -118,7 +116,6 @@ void MasterMainWindow::levelWin()
         {
             if(win && !ui->gameMap->levels[i]->passed){
                 ui->gameMap->levels[i]->passed = 1;
-                on_Level4Button_clicked();
                 ui->Level4Button->setEnabled(true);
             }
             else if(ui->gameMap->levels[i]->playerDied)
@@ -130,7 +127,6 @@ void MasterMainWindow::levelWin()
         {
             if(win && !ui->gameMap->levels[i]->passed){
                 ui->gameMap->levels[i]->passed = 1;
-                on_Level5Button_clicked();
                 ui->Level5Button->setEnabled(true);
             }
             else if(ui->gameMap->levels[i]->playerDied)
@@ -172,4 +168,9 @@ void MasterMainWindow::gameLost(){
 void MasterMainWindow::handleDialog()
 {
     ui->gameMap->levels[ui->gameMap->currentLevel]->playerDied = 0;
+}
+
+void updateLeveL()
+{
+
 }

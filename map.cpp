@@ -221,9 +221,10 @@ void Map::createMap(){
     {
         createEmptyMap();
         setBlock(0,0,player);
-        setBlock(3,3,dog);
-        setBlock(7,8,get);
-        setBlock(1,8,help);
+        //reset back to 33 78 18
+        setBlock(0,3,dog);
+        setBlock(0,4,get);
+        setBlock(0,6,help);
         for(int i = 0; i< 11; i++)
             setBlock(i,10,wall);
         for(int i = 0; i < 10;i++)
