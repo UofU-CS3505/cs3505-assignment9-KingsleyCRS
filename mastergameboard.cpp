@@ -46,7 +46,7 @@ void MasterGameBoard::paintEvent(QPaintEvent *event) {
     font.setPointSize(20);
     painter.setFont(font);
     Map *currentMap = levels[currentLevel];
-    int blockSize = 40;
+    int blockSize = 30;
     for (int i = 0; i < 20; ++i) {
         for (int j = 0; j < 20; ++j) {
             int x = i * blockSize;
@@ -56,72 +56,14 @@ void MasterGameBoard::paintEvent(QPaintEvent *event) {
         }
     }
     if(currentMap->win){
-        if(!levelWinTimerStart && !currentMap->passed){
-            levelWinTimer->start();
-            levelWinTimerStart = 1;
-            animation();
-        }
-        if(levelWinTimer->elapsed() >= 5000){
-            levelWinTimerStart = 0;
-            world.destroyBody("Red");
-            world.destroyBody("Blue");
-            //赢时间结束后设置会原来的怎么设置
-             resetCurrentLevel();
-            currentMap->passed =1;
-        }
-        QPixmap pix(":/sky.jpg");//赢的时候设置背景
-        painter.fillRect(event->rect(), pix);
-        painter.setRenderHint(QPainter::Antialiasing);
-        const float scaleFactor = 50;  // 50 pixels per meter
-        const float offsetX = 800/2;  // Centering in width
-        const float offsetY = 800;  // Aligning from the bottom
-        painter.setRenderHint(QPainter::Antialiasing);
-        QPen wallPen(Qt::white);
-        wallPen.setWidth(2);
-        painter.setPen(wallPen);
-        painter.setBrush(Qt::darkGray);
-        for (b2Body* body = world.box2DWorld->GetBodyList(); body != nullptr; body = body->GetNext()) {
-            if (body->GetType() == b2_staticBody) { // 检查是否为静态体（墙）
-                b2Fixture* f = body->GetFixtureList();
-                while (f) {
-                    b2PolygonShape* poly = dynamic_cast<b2PolygonShape*>(f->GetShape());
-                    if (poly) {
-                        QPainterPath path;
-                        for (int i = 0; i < poly->GetVertexCount(); ++i) {
-                            b2Vec2 pt = body->GetWorldPoint(poly->GetVertex(i));
-                            float x = pt.x * scaleFactor + offsetX;
-                            float y = offsetY - pt.y * scaleFactor;  // Flipping Y coordinate for graphical display
-                            if (i == 0) {
-                                path.moveTo(x, y);
-                            } else {
-                                path.lineTo(x, y);
-                            }
-                        }
-                        path.closeSubpath();
-                        painter.drawPath(path);
-                    }
-                    f = f->GetNext();
-                }
-            } else {
-                std::string* name = static_cast<std::string*>(body->GetUserData());
-                if (name) {
-                    float x = body->GetPosition().x * scaleFactor + offsetX;
-                    float y = offsetY - body->GetPosition().y * scaleFactor;  // Flipping Y coordinate for graphical display
-                    if (*name == "Red") {
-                        drawAnimation(painter, ":/plane1.png", x, y);
-                    } else if (*name == "Blue") {
-                        drawAnimation(painter, ":/plane2.png", x, y);
-                    }
-                }
-            }
-        }
+        playWinEffect(painter, event, currentMap);
     }
 
 }
 void MasterGameBoard::animation(){
         world.createWall("top",b2Vec2(0.0f, 19.0f),b2Vec2(8.0f, 0.5f),0.5f,0.8f);
         world.createWall("bot",b2Vec2(0.0f, 0.0f),b2Vec2(8.0f, 0.5f),0.5f,0.8f);
-        world.createWall("left",b2Vec2(-8.0f, 8.0f),b2Vec2(0.5f, 8.0f),0.5f,0.8f);
+        world.createWall("left",b2Vec2(-10.0f, 8.0f),b2Vec2(0.5f, 8.0f),0.5f,0.8f);
         world.createWall("right",b2Vec2(8.0f, 8.0f),b2Vec2(0.5f, 8.0f),0.5f,0.8f);
         world.createBody("Red",b2Vec2(-2.0f,10.0f),b2Vec2(100.0f, -100.0f),b2Vec2(0.0f, -0.0f),1.0f,1.0f,1.0f,1.0f,true);
         world.createBody("Blue",b2Vec2(0.0f,8.0f),b2Vec2(-10.0f, -10.0f),b2Vec2(0.0f, -0.0f),1.0f,1.0f,1.0f,1.0f,true);
@@ -147,10 +89,73 @@ void MasterGameBoard::drawAnimation(QPainter& painter, const QString& imagePath,
 void MasterGameBoard::resetCurrentLevel() {
 
     levels[currentLevel] = new Map(currentLevel);
-
+}
 
 void MasterGameBoard::updateLevel()
 {
     if(currentLevel < 4)
         currentLevel++;
+}
+
+void MasterGameBoard::playWinEffect(QPainter& painter, QPaintEvent *event, Map *currentMap)
+{
+    if(!levelWinTimerStart && !currentMap->passed){
+        levelWinTimer->start();
+        levelWinTimerStart = 1;
+        animation();
+    }
+    if(levelWinTimer->elapsed() >= 5000){
+        levelWinTimerStart = 0;
+        world.destroyBody("Red");
+        world.destroyBody("Blue");
+        //赢时间结束后设置会原来的怎么设置
+        resetCurrentLevel();
+        currentMap->passed =1;
+    }
+    QPixmap pix(":/sky.jpg");//赢的时候设置背景
+    painter.fillRect(event->rect(), pix);
+    painter.setRenderHint(QPainter::Antialiasing);
+    const float scaleFactor = 50;  // 50 pixels per meter
+    const float offsetX = 800/2;  // Centering in width
+    const float offsetY = 800;  // Aligning from the bottom
+    painter.setRenderHint(QPainter::Antialiasing);
+    QPen wallPen(Qt::white);
+    wallPen.setWidth(0);
+    painter.setPen(wallPen);
+    painter.setBrush(Qt::darkGray);
+    for (b2Body* body = world.box2DWorld->GetBodyList(); body != nullptr; body = body->GetNext()) {
+        if (body->GetType() == b2_staticBody) { // 检查是否为静态体（墙）
+            b2Fixture* f = body->GetFixtureList();
+            while (f) {
+                b2PolygonShape* poly = dynamic_cast<b2PolygonShape*>(f->GetShape());
+                if (poly) {
+                    QPainterPath path;
+                    for (int i = 0; i < poly->GetVertexCount(); ++i) {
+                        b2Vec2 pt = body->GetWorldPoint(poly->GetVertex(i));
+                        float x = pt.x * scaleFactor + offsetX;
+                        float y = offsetY - pt.y * scaleFactor;  // Flipping Y coordinate for graphical display
+                        if (i == 0) {
+                            path.moveTo(x, y);
+                        } else {
+                            path.lineTo(x, y);
+                        }
+                    }
+                    path.closeSubpath();
+                    painter.drawPath(path);
+                }
+                f = f->GetNext();
+            }
+        } else {
+            std::string* name = static_cast<std::string*>(body->GetUserData());
+            if (name) {
+                float x = body->GetPosition().x * scaleFactor + offsetX;
+                float y = offsetY - body->GetPosition().y * scaleFactor;  // Flipping Y coordinate for graphical display
+                if (*name == "Red") {
+                    drawAnimation(painter, ":/plane1.png", x, y);
+                } else if (*name == "Blue") {
+                    drawAnimation(painter, ":/plane2.png", x, y);
+                }
+            }
+        }
+    }
 }

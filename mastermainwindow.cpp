@@ -9,7 +9,7 @@ MasterMainWindow::MasterMainWindow(QWidget *parent)
     , ui(new Ui::MasterMainWindow)
 {
     ui->setupUi(this);
-    setFixedSize(1050, 750);
+    setFixedSize(880,720);
     QTimer* timer = new QTimer(this);
     connect(timer,&QTimer::timeout,this,&MasterMainWindow::levelWin);
     connect(&gamelose, &GameLoseDialog::accepted, this, &MasterMainWindow::handleDialog);
