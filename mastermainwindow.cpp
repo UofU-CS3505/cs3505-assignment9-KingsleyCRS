@@ -7,7 +7,7 @@ MasterMainWindow::MasterMainWindow(QWidget *parent)
     , ui(new Ui::MasterMainWindow)
 {
     ui->setupUi(this);
-    //setFixedSize(1050, 750);
+    setFixedSize(1050, 750);
     QTimer* timer = new QTimer(this);
     connect(timer,&QTimer::timeout,this,&MasterMainWindow::levelWin);
     connect(&gamelose, &GameLoseDialog::accepted, this, &MasterMainWindow::handleDialog);
@@ -118,13 +118,14 @@ void MasterMainWindow::levelWin()
             {
                 /*todo, player win the game*/
             }
-            if(ui->gameMap->levels[i]->playerDied)
-            {
-                gameLost();
-            }
+        }
+        if(ui->gameMap->levels[i]->playerDied)
+        {
+            gameLost();
         }
     }
-    if(ui->gameMap->levels[ui->gameMap->currentLevel]->win);
+    if(ui->gameMap->levels[ui->gameMap->currentLevel]->win)
+        ui->nextLevelButton->setEnabled(true);
 }
 
 void MasterMainWindow::on_resetButton_clicked()
@@ -158,5 +159,8 @@ void MasterMainWindow::handleDialog()
 void MasterMainWindow::on_nextLevelButton_clicked()
 {
     ui->gameMap->updateLevel();
+    ui->nextLevelButton->setEnabled(false);
+    update();
+    ui->gameMap->setFocus();
 }
 

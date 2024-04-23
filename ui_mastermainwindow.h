@@ -37,45 +37,46 @@ public:
     QLabel *tutorial;
     QPushButton *resetButton;
     QLabel *Hint;
+    QPushButton *nextLevelButton;
     QStatusBar *statusbar;
 
     void setupUi(QMainWindow *MasterMainWindow)
     {
         if (MasterMainWindow->objectName().isEmpty())
             MasterMainWindow->setObjectName("MasterMainWindow");
-        MasterMainWindow->resize(820, 619);
+        MasterMainWindow->resize(850, 850);
         centralwidget = new QWidget(MasterMainWindow);
         centralwidget->setObjectName("centralwidget");
         gameMap = new MasterGameBoard(centralwidget);
         gameMap->setObjectName("gameMap");
-        gameMap->setGeometry(QRect(0, 0, 600, 600));
+        gameMap->setGeometry(QRect(0, 0, 800, 800));
         toolBar = new QWidget(centralwidget);
         toolBar->setObjectName("toolBar");
-        toolBar->setGeometry(QRect(620, 0, 250, 800));
+        toolBar->setGeometry(QRect(800, 0, 201, 800));
         hintButton = new QPushButton(toolBar);
         hintButton->setObjectName("hintButton");
         hintButton->setGeometry(QRect(90, 90, 111, 31));
         quitButton = new QPushButton(toolBar);
         quitButton->setObjectName("quitButton");
-        quitButton->setGeometry(QRect(0, 520, 201, 61));
+        quitButton->setGeometry(QRect(0, 600, 201, 61));
         Level1Button = new QPushButton(toolBar);
         Level1Button->setObjectName("Level1Button");
         Level1Button->setGeometry(QRect(0, 100, 80, 18));
         Level2Button = new QPushButton(toolBar);
         Level2Button->setObjectName("Level2Button");
-        Level2Button->setEnabled(true);
+        Level2Button->setEnabled(false);
         Level2Button->setGeometry(QRect(0, 120, 80, 18));
         Level3Button = new QPushButton(toolBar);
         Level3Button->setObjectName("Level3Button");
-        Level3Button->setEnabled(true);
+        Level3Button->setEnabled(false);
         Level3Button->setGeometry(QRect(0, 140, 80, 18));
         Level4Button = new QPushButton(toolBar);
         Level4Button->setObjectName("Level4Button");
-        Level4Button->setEnabled(true);
+        Level4Button->setEnabled(false);
         Level4Button->setGeometry(QRect(0, 160, 80, 18));
         Level5Button = new QPushButton(toolBar);
         Level5Button->setObjectName("Level5Button");
-        Level5Button->setEnabled(true);
+        Level5Button->setEnabled(false);
         Level5Button->setGeometry(QRect(0, 180, 80, 18));
         Goal = new QLabel(toolBar);
         Goal->setObjectName("Goal");
@@ -92,10 +93,21 @@ public:
         tutorial->setFont(font1);
         resetButton = new QPushButton(toolBar);
         resetButton->setObjectName("resetButton");
-        resetButton->setGeometry(QRect(0, 440, 111, 41));
+        resetButton->setGeometry(QRect(0, 350, 111, 41));
+        QFont font2;
+        font2.setPointSize(11);
+        font2.setBold(true);
+        font2.setItalic(false);
+        font2.setUnderline(false);
+        font2.setStrikeOut(false);
+        resetButton->setFont(font2);
         Hint = new QLabel(toolBar);
         Hint->setObjectName("Hint");
         Hint->setGeometry(QRect(0, 200, 191, 51));
+        nextLevelButton = new QPushButton(toolBar);
+        nextLevelButton->setObjectName("nextLevelButton");
+        nextLevelButton->setEnabled(false);
+        nextLevelButton->setGeometry(QRect(0, 410, 111, 41));
         MasterMainWindow->setCentralWidget(centralwidget);
         statusbar = new QStatusBar(MasterMainWindow);
         statusbar->setObjectName("statusbar");
@@ -120,6 +132,7 @@ public:
         tutorial->setText(QCoreApplication::translate("MasterMainWindow", "Use \"WASD\" to control the yourself: \"\346\210\221\"", nullptr));
         resetButton->setText(QCoreApplication::translate("MasterMainWindow", "Reset Current Level", nullptr));
         Hint->setText(QCoreApplication::translate("MasterMainWindow", "Hint:", nullptr));
+        nextLevelButton->setText(QCoreApplication::translate("MasterMainWindow", "Next Level", nullptr));
     } // retranslateUi
 
 };

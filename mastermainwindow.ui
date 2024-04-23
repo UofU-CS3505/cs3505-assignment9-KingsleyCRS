@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1000</width>
-    <height>1000</height>
+    <width>850</width>
+    <height>850</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -27,10 +27,10 @@
    <widget class="QWidget" name="toolBar" native="true">
     <property name="geometry">
      <rect>
-      <x>801</x>
+      <x>800</x>
       <y>0</y>
-      <width>200</width>
-      <height>1000</height>
+      <width>201</width>
+      <height>800</height>
      </rect>
     </property>
     <widget class="QPushButton" name="hintButton">
@@ -181,6 +181,15 @@
        <width>111</width>
        <height>41</height>
       </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>11</pointsize>
+       <italic>false</italic>
+       <bold>true</bold>
+       <underline>false</underline>
+       <strikeout>false</strikeout>
+      </font>
      </property>
      <property name="text">
       <string>Reset Current Level</string>
