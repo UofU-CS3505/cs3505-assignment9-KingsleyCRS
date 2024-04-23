@@ -3,8 +3,6 @@
 
 MasterGameBoard::MasterGameBoard(QWidget *parent) : QWidget(parent), currentLevel(0)
 {
-
-
     for(int i = 0; i < 5;i++)
         levels[i] = new Map(i);
     QPalette pal = palette();
@@ -12,8 +10,8 @@ MasterGameBoard::MasterGameBoard(QWidget *parent) : QWidget(parent), currentLeve
     setAutoFillBackground(true);
     setPalette(pal);
     setFocus();
-    QTimer *timer1 = new QTimer(this);
-    QTimer *timer2 = new QTimer(this);
+    timer1 = new QTimer(this);
+    timer2 = new QTimer(this);
     connect(timer1, SIGNAL(timeout()), this, SLOT(update()));
     connect(timer2, &QTimer::timeout, this, &MasterGameBoard::triggerMapUpdate);
     timer1->start(1);
@@ -56,7 +54,6 @@ void MasterGameBoard::paintEvent(QPaintEvent *event) {
                 painter.drawText(QRect(x, y, blockSize, blockSize), Qt::AlignCenter, levels[currentLevel]->map[i][j]->getName());
         }
     }
-
 }
 
 bool MasterGameBoard::getMapWin(int level)

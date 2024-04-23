@@ -65,7 +65,6 @@ SOURCES += \
     map.cpp \
     mastergameboard.cpp \
     mastermainwindow.cpp \
-    model.cpp \
     noobmainwindow.cpp \
     sentencerule.cpp \
     world.cpp
@@ -127,7 +126,6 @@ HEADERS += \
     map.h \
     mastergameboard.h \
     mastermainwindow.h \
-    model.h \
     noobmainwindow.h \
     sentencerule.h \
     world.h

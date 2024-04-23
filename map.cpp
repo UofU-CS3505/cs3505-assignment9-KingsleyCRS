@@ -143,7 +143,7 @@ void Map::movePlayer(QString direction)
             }
 
         }
-    }    
+    }
     checkRules();
 }
 
@@ -163,7 +163,7 @@ void Map::checkRules(){
                 }
             }
             if((map[i][j]==wall&&map[i+1][j]==can&&map[i+2][j]==push) || (map[i][j]==wall&&map[i][j+1]==can&&map[i][j+2]==push))
-                    noun[1]->canPush=true;
+                noun[1]->canPush=true;
             if(level == 0){
                 if((map[i][j]==dog&&map[i+1][j]==get&&map[i+2][j]==help) || (map[i][j]==dog&&map[i][j+1]==get&&map[i][j+2]==help))
                     win = 1;

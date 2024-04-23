@@ -1,6 +1,5 @@
 #ifndef MASTERGAMEBOARD_H
 #define MASTERGAMEBOARD_H
-#include "world.h"
 #include "map.h"
 #include <QVector>
 #include <QWidget>

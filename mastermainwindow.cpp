@@ -1,7 +1,7 @@
 #include "mastermainwindow.h"
 #include "qtimer.h"
 #include "ui_mastermainwindow.h"
-#include "iostream"
+
 MasterMainWindow::MasterMainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MasterMainWindow)
@@ -90,58 +90,58 @@ void MasterMainWindow::levelWin()
 {
     for(int i = 0;i < 5;i++){
         bool win = ui->gameMap->getMapWin(i);
-            if(i == 0){
-                if(win && !ui->gameMap->levels[i]->passed)
-                {
-                    ui->gameMap->levels[i]->passed = 1;
-                    on_Level2Button_clicked();
-                    ui->Level2Button->setEnabled(true);
-                }
-                else if(ui->gameMap->levels[i]->playerDied)
-                {
-                    gameLost();
-                }
-            }
-            else if(i == 1)
+        if(i == 0){
+            if(win && !ui->gameMap->levels[i]->passed)
             {
-                if(win && !ui->gameMap->levels[i]->passed){
-                    ui->gameMap->levels[i]->passed = 1;
-                    on_Level3Button_clicked();
-                    ui->Level3Button->setEnabled(true);
-                }
-                else if(ui->gameMap->levels[i]->playerDied)
-                {
-                    gameLost();
-                }
+                ui->gameMap->levels[i]->passed = 1;
+                on_Level2Button_clicked();
+                ui->Level2Button->setEnabled(true);
             }
-            else if(i == 2)
+            else if(ui->gameMap->levels[i]->playerDied)
             {
-                if(win && !ui->gameMap->levels[i]->passed){
-                    ui->gameMap->levels[i]->passed = 1;
-                    on_Level4Button_clicked();
-                    ui->Level4Button->setEnabled(true);
-                }
-                else if(ui->gameMap->levels[i]->playerDied)
-                {
-                    gameLost();
-                }
+                gameLost();
             }
-            else if(i == 3)
+        }
+        else if(i == 1)
+        {
+            if(win && !ui->gameMap->levels[i]->passed){
+                ui->gameMap->levels[i]->passed = 1;
+                on_Level3Button_clicked();
+                ui->Level3Button->setEnabled(true);
+            }
+            else if(ui->gameMap->levels[i]->playerDied)
             {
-                if(win && !ui->gameMap->levels[i]->passed){
-                    ui->gameMap->levels[i]->passed = 1;
-                    on_Level5Button_clicked();
-                    ui->Level5Button->setEnabled(true);
-                }
-                else if(ui->gameMap->levels[i]->playerDied)
-                {
-                    gameLost();
-                }
+                gameLost();
             }
-            else if(i == 4)
+        }
+        else if(i == 2)
+        {
+            if(win && !ui->gameMap->levels[i]->passed){
+                ui->gameMap->levels[i]->passed = 1;
+                on_Level4Button_clicked();
+                ui->Level4Button->setEnabled(true);
+            }
+            else if(ui->gameMap->levels[i]->playerDied)
             {
-                /*todo, player win the game*/
+                gameLost();
             }
+        }
+        else if(i == 3)
+        {
+            if(win && !ui->gameMap->levels[i]->passed){
+                ui->gameMap->levels[i]->passed = 1;
+                on_Level5Button_clicked();
+                ui->Level5Button->setEnabled(true);
+            }
+            else if(ui->gameMap->levels[i]->playerDied)
+            {
+                gameLost();
+            }
+        }
+        else if(i == 4)
+        {
+            /*todo, player win the game*/
+        }
     }
 }
 
@@ -167,9 +167,6 @@ void MasterMainWindow::on_hintButton_clicked()
 void MasterMainWindow::gameLost(){
     gamelose.show();
     on_resetButton_clicked();
-}
-void MasterMainWindow::gamewin(int i){
-    gameWin.show();
 }
 
 void MasterMainWindow::handleDialog()
