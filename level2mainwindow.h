@@ -23,6 +23,7 @@ public slots:
     void Pair11Clicked();
     void Pair22Clicked();
     void Pair33Clicked();
+    void NextClicked();
 private:
     Ui::Level2MainWindow *ui;
     Dictionary word;
