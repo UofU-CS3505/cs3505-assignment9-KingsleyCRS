@@ -10,15 +10,12 @@ Dictionary::Dictionary() {
         {"第三关","level three"},{"狗","dog"},{"人","human"},{"五","five"},{"六","six"}, {"第三关","level three"},{"狗","dog"},{"人","human"},{"五","five"},{"六","six"}, {"六","six"}
     };
     unKnow = allWords;
-    unKnow = allWords;
 
     // make sure all level have same words number
     AllWordsSize = allWords.count();
     unknowSize = AllWordsSize;
 }
 
-QPair<QString, QString> Dictionary::getPairAt(uint i){
-    return allWords[i];
 QPair<QString, QString> Dictionary::getPairAt(uint i){
     return allWords[i];
 }
@@ -53,4 +50,3 @@ void Dictionary::reset(){
     unKnow = allWords;
     unknowSize = unKnow.size();
 }
-
