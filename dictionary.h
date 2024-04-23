@@ -12,17 +12,14 @@ public:
     bool setLevel(uint l);
 
     // get word, meaning pair
-    QPair<QString, QString> getPairAt(uint i, uint level);
-    QVector<QPair<QString, QString>> getRandomPair(uint level);
-    QVector<QPair<QString, QString>> getAllRandomPair();
-
-    // make sure all level has same pair amount
-    uint numLevelWords;
+    QPair<QString, QString> getPairAt(uint i);
+    QVector<QPair<QString, QString>> getRandomPair();
     uint numAllWords;
 
 private:
     // level: words list: word meaning pair
     QVector<QPair<QString, QString>> allWords;
+    QVector<QPair<QString, QString>> unKnow;
 
     // form 0 to 2
     uint level;

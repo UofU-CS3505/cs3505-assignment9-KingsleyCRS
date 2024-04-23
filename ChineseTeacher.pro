@@ -58,6 +58,7 @@ SOURCES += \
     block.cpp \
     dictionary.cpp \
     gamelosedialog.cpp \
+    level2mainwindow.cpp \
     levelmainwindow.cpp \
     main.cpp \
     mainwindow.cpp \
@@ -120,6 +121,7 @@ HEADERS += \
     block.h \
     dictionary.h \
     gamelosedialog.h \
+    level2mainwindow.h \
     levelmainwindow.h \
     mainwindow.h \
     map.h \
@@ -132,6 +134,7 @@ HEADERS += \
 
 FORMS += \
     gamelosedialog.ui \
+    level2mainwindow.ui \
     levelmainwindow.ui \
     mainwindow.ui \
     mastermainwindow.ui \
