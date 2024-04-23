@@ -14,15 +14,16 @@ public:
     // get word, meaning pair
     QPair<QString, QString> getPairAt(uint i);
     QVector<QPair<QString, QString>> getRandomPair();
-    uint numAllWords;
+    QPair<QString, QString> getUnknowPairAt(uint i);
+    void deleteUnknowPairAt(uint i);
+    void reset();
+    uint AllWordsSize;
+    uint unknowSize;
 
 private:
     // level: words list: word meaning pair
     QVector<QPair<QString, QString>> allWords;
     QVector<QPair<QString, QString>> unKnow;
-
-    // form 0 to 2
-    uint level;
 };
 
 #endif // DICTIONARY_H

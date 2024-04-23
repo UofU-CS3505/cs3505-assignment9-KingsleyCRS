@@ -1,6 +1,7 @@
 #ifndef LEVELMAINWINDOW_H
 #define LEVELMAINWINDOW_H
 #include "noobmainwindow.h"
+#include "studymainwindow.h"
 #include <QMainWindow>
 #include "level2mainwindow.h"
 class noobMainWindow;
@@ -23,6 +24,7 @@ private:
     Ui::LevelMainWindow *ui;
     noobMainWindow *noob;
     Level2MainWindow *level2;
+    studyMainWindow *study;
 };
 
 #endif // LEVELMAINWINDOW_H

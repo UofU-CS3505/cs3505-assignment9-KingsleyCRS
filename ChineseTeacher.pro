@@ -67,6 +67,7 @@ SOURCES += \
     mastermainwindow.cpp \
     noobmainwindow.cpp \
     sentencerule.cpp \
+    studymainwindow.cpp \
     world.cpp
 
 HEADERS += \
@@ -128,6 +129,7 @@ HEADERS += \
     mastermainwindow.h \
     noobmainwindow.h \
     sentencerule.h \
+    studymainwindow.h \
     world.h
 
 FORMS += \
@@ -137,6 +139,7 @@ FORMS += \
     mainwindow.ui \
     mastermainwindow.ui \
     noobmainwindow.ui \
+    studymainwindow.ui \
     windialog.ui
 
 # Default rules for deployment.

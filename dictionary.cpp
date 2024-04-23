@@ -12,18 +12,28 @@ Dictionary::Dictionary() {
     unKnow = allWords;
 
     // make sure all level have same words number
-    numAllWords = allWords.count();
+    AllWordsSize = allWords.count();
+    unknowSize = AllWordsSize;
 }
 
 QPair<QString, QString> Dictionary::getPairAt(uint i){
     return allWords[i];
 }
 
+QPair<QString, QString> Dictionary::getUnknowPairAt(uint i){
+    return unKnow[i];
+}
+
+void Dictionary::deleteUnknowPairAt(uint i){
+    unKnow.removeAt(i);
+    unknowSize = unKnow.count();
+}
+
 QVector<QPair<QString, QString>> Dictionary::getRandomPair(){
     QVector<QPair<QString, QString>> a;
     std::random_device rd;
     std::mt19937 gen(rd());
-    std::uniform_int_distribution<> distrib(0, numAllWords-1);
+    std::uniform_int_distribution<> distrib(0, AllWordsSize-1);
 
     std::set<int> unique_numbers;
     while (unique_numbers.size() < 4) {
@@ -34,4 +44,9 @@ QVector<QPair<QString, QString>> Dictionary::getRandomPair(){
         a.push_back(allWords[t]);
     }
     return a;
+}
+
+void Dictionary::reset(){
+    unKnow = allWords;
+    unknowSize = unKnow.size();
 }
