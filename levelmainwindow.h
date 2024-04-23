@@ -1,6 +1,7 @@
 #ifndef LEVELMAINWINDOW_H
 #define LEVELMAINWINDOW_H
 #include "noobmainwindow.h"
+#include "studymainwindow.h"
 #include <QMainWindow>
 
 class noobMainWindow;
@@ -22,6 +23,7 @@ public slots:
 private:
     Ui::LevelMainWindow *ui;
     noobMainWindow *noob;
+    studyMainWindow *study;
 };
 
 #endif // LEVELMAINWINDOW_H

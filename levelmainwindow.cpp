@@ -20,6 +20,7 @@ LevelMainWindow::LevelMainWindow(QWidget *parent)
 
     ui->level_1->setStyleSheet(bronze);
     connect(ui->level_1,&QPushButton::clicked,this,&LevelMainWindow::level_1Clicked);
+    connect(ui->level_3,&QPushButton::clicked,this,&LevelMainWindow::level_3Clicked);
 
     QString silver = "QPushButton{"
                      "border-radius: 10px;"
@@ -58,7 +59,11 @@ void LevelMainWindow::level_2Clicked(){
 }
 
 void LevelMainWindow::level_3Clicked(){
-
+    qDebug()<<"haha";
+    study = new studyMainWindow;
+    study -> startClicked();
+    study -> show();
+    study -> setAttribute(Qt::WA_DeleteOnClose);
 }
 
 
