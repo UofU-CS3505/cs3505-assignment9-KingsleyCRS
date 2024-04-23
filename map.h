@@ -26,6 +26,7 @@ public:
 
 private:
     QVector<Block*> noun;
+    int round;
     int level;
     void checkRules();
     void checkCollision(int i, int j,int dir);
@@ -53,7 +54,6 @@ private:
     Block* goInTo;
     Block* door;
     Block* arrow;
-    bool monsterDied;
 };
 
 #endif // MAP_H

@@ -76,21 +76,10 @@ void MasterMainWindow::on_Level4Button_clicked()
 }
 
 
-void MasterMainWindow::on_Level5Button_clicked()
-{
-    ui->gameMap->currentLevel = 4;
-    ui->Goal->setText("Goal: Feed your dog");
-    ui->Hint->setText("Hint:");
-    ui->gameMap->levels[ui->gameMap->currentLevel]->hintPressed = 0;
-    ui->gameMap->update();
-    ui->gameMap->setFocus();
-
-}
-
 
 void MasterMainWindow::levelWin()
 {
-    for(int i = 0;i < 5;i++){
+    for(int i = 0;i < 4;i++){
         bool win = ui->gameMap->getMapWin(i);
         if(win){
             if(i == 0){
@@ -118,12 +107,7 @@ void MasterMainWindow::levelWin()
             {
                 if(!ui->gameMap->levels[i]->passed){
                     ui->gameMap->levels[i]->passed = 1;
-                    ui->Level5Button->setEnabled(true);
                 }
-            }
-            else if(i == 4)
-            {
-                /*todo, player win the game*/
             }
         }
         if(ui->gameMap->levels[i]->playerDied)

@@ -28,8 +28,6 @@ public slots:
 
     void on_Level4Button_clicked();
 
-    void on_Level5Button_clicked();
-
     void levelWin();
 signals:
 

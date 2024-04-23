@@ -17,22 +17,32 @@ void Map::createEmptyMap()
 
 void Map::updateMap()
 {
+    round++;
+    if(level==3 && round%10==0){
+        for(int i = 3; i < 17;i+=2){
+            setBlock(i,4,new Block("箭"));
+        }
+    }
     for (int j = 0; j < 19; j++) {
         for (int i = 0; i < 19; i++) {
-            if (map[i][j] == arrow) {
+            if (map[i][j]->getName() == "箭") {
                 map[i][j]->hasMoved = 0;
             }
         }
     }
     for (int j = 0; j < 19; j++) {
         for (int i = 0; i < 19; i++) {
-            if(map[i][j]==arrow && !map[i][j]->hasMoved){
+            if(map[i][j]->getName()=="箭" && !map[i][j]->hasMoved){
                 if(map[i][j+1]==player)
                     playerDied=1;
                 if(map[i][j+1]->isEmpty ){
                     setBlock(i,j+1,map[i][j]);
                     map[i][j+1]->hasMoved = 1;
                     removeBlock(i,j);
+                }else{
+                    Block *b = map[i][j];
+                    removeBlock(i,j);
+                    delete b;
                 }
             }
         }
@@ -47,7 +57,7 @@ void Map::setBlock(int i, int j, Block* block)
 
 void Map::removeBlock(int i, int j)
 {
-    map[i][j] = new Block();
+    map[i][j] = new Block();  //
 }
 Map::~Map() {
     for (int i = 0; i < 10; ++i) {
@@ -179,10 +189,6 @@ void Map::checkRules(){
                 if((map[i][j]==player&&map[i+1][j]==find1&&map[i+2][j]==find2&&map[i+3][j]==treasure1&&map[i+4][j]==treasure2) || (map[i][j]==player&&map[i][j+1]==find1&&map[i][j+2]==find2&&map[i][j+3]==treasure1&&map[i][j+4]==treasure2))
                     win = 1;
             }
-            else{
-                if(monsterDied)
-                    win = 1;
-            }
         }
     }
 }
@@ -213,8 +219,6 @@ void Map::createWords()
     goInTo = new Block("进", true);
     door = new Block("门", false);
     arrow = new Block("箭", false);
-    monster = new Block("怪", false);
-    sword = new Block("剑", false);
 }
 
 void Map::createMap(){
@@ -272,7 +276,7 @@ void Map::createMap(){
     else if(level == 3)
     {
         createEmptyMap();
-        setBlock(5,5,player);
+        setBlock(4,4,player);
 
         for(int i = 0; i < 20;i++){
             setBlock(0,i,fire);
@@ -290,7 +294,7 @@ void Map::createMap(){
         }
         for(int i = 3; i < 17;i++){
             setBlock(3,i,wall);
-            setBlock(i,3,arrow);
+            setBlock(i,3,wall);
             setBlock(16,i,wall);
             setBlock(i,16,wall);
         }
@@ -300,9 +304,8 @@ void Map::createMap(){
         setBlock(11,10,treasure2);
         setBlock(9,7,find1);
         setBlock(13,13,find2);
-
-
     }
+
 }
 
 
@@ -310,7 +313,7 @@ QString Map::getHint()
 {
     if(level == 0)
     {
-        return "狗:dog 得:get 救:save";
+        return "我:me/player 狗:dog 得:get 救:save";
     }
     else if(level == 1)
     {

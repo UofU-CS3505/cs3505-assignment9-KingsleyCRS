@@ -120,22 +120,6 @@
       <string>Level4</string>
      </property>
     </widget>
-    <widget class="QPushButton" name="Level5Button">
-     <property name="enabled">
-      <bool>false</bool>
-     </property>
-     <property name="geometry">
-      <rect>
-       <x>0</x>
-       <y>180</y>
-       <width>81</width>
-       <height>21</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Level5</string>
-     </property>
-    </widget>
     <widget class="QLabel" name="Goal">
      <property name="geometry">
       <rect>

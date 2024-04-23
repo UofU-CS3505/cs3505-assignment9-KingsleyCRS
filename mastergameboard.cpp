@@ -4,7 +4,7 @@
 
 MasterGameBoard::MasterGameBoard(QWidget *parent) : QWidget(parent), currentLevel(0),world(parent),levelWinTimerStart(0)
 {
-    for(int i = 0; i < 5;i++)
+    for(int i = 0; i < 4;i++)
         levels[i] = new Map(i);
     QPalette pal = palette();
     pal.setColor(QPalette::Window, Qt::black);
