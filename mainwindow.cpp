@@ -10,7 +10,7 @@
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
-    , world(b2Vec2 (0.0f, 3.0f))
+    , world(parent)
 
 {
     ui->setupUi(this);
@@ -19,7 +19,7 @@ MainWindow::MainWindow(QWidget *parent)
     // 创建顶部的墙
     b2BodyDef topWallBodyDef;
     topWallBodyDef.position.Set(0.0f, 16.0f);  // 位置调整为场景的顶部边缘
-    b2Body* topWall = world.CreateBody(&topWallBodyDef);
+    b2Body* topWall = world.Box2Dworld->CreateBody(&topWallBodyDef);
     b2PolygonShape topWallBox;
     topWallBox.SetAsBox(8.0f, 0.5f);
     b2FixtureDef wallFixtureDef;
@@ -30,7 +30,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     b2BodyDef bottomWallBodyDef;
     bottomWallBodyDef.position.Set(0.0f, 0.0f);
-    b2Body* bottomWall = world.CreateBody(&bottomWallBodyDef);
+    b2Body* bottomWall = world.Box2Dworld->CreateBody(&bottomWallBodyDef);
     b2PolygonShape bottomWallBox;
     bottomWallBox.SetAsBox(8.0f, 1.0f);
     b2FixtureDef wallFixtureDef1;
@@ -41,7 +41,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     b2BodyDef leftWallBodyDef;
     leftWallBodyDef.position.Set(-8.0f, 8.0f);
-    b2Body* leftWall = world.CreateBody(&leftWallBodyDef);
+    b2Body* leftWall = world.Box2Dworld->CreateBody(&leftWallBodyDef);
     b2PolygonShape leftWallBox;
     leftWallBox.SetAsBox(0.5f, 8.0f);
     b2FixtureDef wallFixtureDef2;
@@ -53,7 +53,7 @@ MainWindow::MainWindow(QWidget *parent)
     // 创建右侧的墙
     b2BodyDef rightWallBodyDef;
     rightWallBodyDef.position.Set(8.0f, 8.0f);  // 场景右侧中点
-    b2Body* rightWall = world.CreateBody(&rightWallBodyDef);
+    b2Body* rightWall = world.Box2Dworld->CreateBody(&rightWallBodyDef);
     b2PolygonShape rightWallBox;
     rightWallBox.SetAsBox(1.0f, 8.0f);
     b2FixtureDef wallFixtureDef3;
@@ -66,7 +66,7 @@ MainWindow::MainWindow(QWidget *parent)
     b2BodyDef bodyDef;
     bodyDef.type = b2_dynamicBody;
     bodyDef.position.Set(7.0f, 8.0f);
-    b2Body* circleBody = world.CreateBody(&bodyDef);
+    b2Body* circleBody = world.Box2Dworld->CreateBody(&bodyDef);
     b2CircleShape circleShape;
     circleShape.m_radius = 1.0f;
     b2FixtureDef fixtureDef;
@@ -81,7 +81,7 @@ MainWindow::MainWindow(QWidget *parent)
     b2BodyDef bodyDef2;
     bodyDef2.type = b2_dynamicBody;
     bodyDef2.position.Set(7.0f, 2.0f);
-    b2Body* boxBody = world.CreateBody(&bodyDef2);
+    b2Body* boxBody = world.Box2Dworld->CreateBody(&bodyDef2);
     b2PolygonShape polygonShape;
     polygonShape.SetAsBox(1.0f, 0.5f);
     b2FixtureDef fixtureDef2;
@@ -97,9 +97,9 @@ MainWindow::MainWindow(QWidget *parent)
     int32 velocityIterations = 6;
     int32 positionIterations = 2;
     for (int32 i = 0; i < 60; ++i) {
-        world.Step(timeStep, velocityIterations, positionIterations);
-        b2Vec2 position = body->GetPosition();
-        float32 angle = body->GetAngle();
+        world.Box2Dworld->Step(timeStep, velocityIterations, positionIterations);
+        b2Vec2 position = world.body->GetPosition();
+        float32 angle = world.body->GetAngle();
         std::cout << "Step " << i << ": x = " << position.x << ", y = " << position.y << ", angle = " << angle << std::endl;
     }
 
@@ -114,13 +114,14 @@ MainWindow::MainWindow(QWidget *parent)
 
     QTimer* timer2 = new QTimer(this);
     connect(timer2, &QTimer::timeout, [=]() {
-        scheduleForDestruction(body);
+        world.destroyScheduledBodies("Circle"); // 用正确的物体名称替换
     });
     timer2->setSingleShot(true);
     timer2->start(5000); // 5000毫秒后触发
 }
 MainWindow::~MainWindow()
 {
+
     delete ui;
 }
 void MainWindow::masterClicked(){
@@ -132,12 +133,12 @@ void MainWindow::noobClicked(){
     levelWindow->show();
 }
 void MainWindow::updatePhysics() {
-    if (!body) return;  // Skip physics update if the body has been destroyed
+    if (!world.body) return;  // Skip physics update if the body has been destroyed
 
     float32 timeStep = 1.0f / 60.0f;
     int32 velocityIterations = 6;
     int32 positionIterations = 2;
-    world.Step(timeStep, velocityIterations, positionIterations);
+    world.Box2Dworld->Step(timeStep, velocityIterations, positionIterations);
     update();
 }
 
@@ -148,62 +149,30 @@ void MainWindow::paintEvent(QPaintEvent *event) {
 
     QPixmap pix(":/BG.jpg");
     painter.setRenderHint(QPainter::Antialiasing);
-
     painter.fillRect(event->rect(), pix);
     const float scaleFactor = 50;  // 50 pixels per meter
     const float offsetX = 800 / 2;  // Centering in width
     const float offsetY = 800;  // Aligning from the bottom
-    for (b2Body* body = world.GetBodyList(); body != nullptr; body = body->GetNext()) {
+    for (b2Body* body = world.Box2Dworld->GetBodyList(); body != nullptr; body = body->GetNext()) {
         float x = body->GetPosition().x * scaleFactor + offsetX;
         float y = offsetY - body->GetPosition().y * scaleFactor;  // Flipping Y coordinate for graphical display
         std::string* name = static_cast<std::string*>(body->GetUserData());
         if (name) {
             if (*name == "Circle") {
-                drawHello(painter,x,y);
+                drawAnimation(painter, ":/nihao.png", x, y);
             } else if (*name == "Box") {
-                drawWelcome(painter,x,y);
+                drawAnimation(painter, ":/welcome.png",x, y);
             }
         }
     }
 
 }
-void MainWindow::scheduleForDestruction(b2Body* body) {
-    for (b2Body* body = world.GetBodyList(); body != nullptr; body = body->GetNext()) {
-        // std::string* name = static_cast<std::string*>(body->GetUserData());
-        // if (name) {
-        //     if (*name == "Circle") {
-        //        bodiesToDestroy.push_back(body);
-        //     } else if (*name == "Box") {
-        //         bodiesToDestroy.push_back(body);
 
-        //     }
-        // }
-        bodiesToDestroy.push_back(body);
+
+
+void MainWindow::drawAnimation(QPainter& painter, const QString& imagePath, int x, int y) {
+    QPixmap pixmap(imagePath);
+    if(!pixmap.isNull()) {
+        painter.drawPixmap(x, y, pixmap);
     }
-
-    // 添加到删除队列中
-    someGameLogicFunction();
-}
-void MainWindow::someGameLogicFunction() {
-    // When you want to schedule a body for destruction
-    QTimer* timer = new QTimer(this);
-    timer->setSingleShot(true);
-    connect(timer, &QTimer::timeout, this, &MainWindow::destroyScheduledBodies);
-    timer->start(5000); // 5 seconds
-}
-void MainWindow::destroyScheduledBodies() {
-    for (b2Body* body : bodiesToDestroy) {
-        world.DestroyBody(body);
-    }
-    bodiesToDestroy.clear(); // Clear the list after destruction
-}
-void MainWindow::drawHello(QPainter &painter, int x, int y){
-    QPixmap nihao(":/nihao.png");
-    painter.drawPixmap(x,y,nihao);
-}
-
-
-void MainWindow::drawWelcome(QPainter &painter, int x, int y){
-    QPixmap welCome(":/welcome.png");
-    painter.drawPixmap(x,y,welCome);
 }

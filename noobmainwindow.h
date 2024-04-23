@@ -1,9 +1,10 @@
 #ifndef NOOBMAINWINDOW_H
 #define NOOBMAINWINDOW_H
-#include <Box2D/Box2D.h>
-#include <stdio.h>
+
+
 #include <QMainWindow>
 #include <QTimer>
+#include "dictionary.h"
 
 namespace Ui {
 class noobMainWindow;
@@ -18,9 +19,24 @@ public:
     ~noobMainWindow();
 public slots:
     void startClicked();
+    void AClicked();
+    void BClicked();
+    void CClicked();
+    void DClicked();
+    void checkClicked();
+    void nextClicked();
+    void closeClicked();
 signals:
 private:
     Ui::noobMainWindow *ui;
+    Dictionary word;
+    QPair<QString, QString> questionWord;
+    int life;
+    int barValue;
+    QVector<QString> incorrectAnswers;
+    int levelCount;
+    void complete();
+    int correctCount;
 };
 
 #endif // NOOBMAINWINDOW_H

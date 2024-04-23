@@ -21,7 +21,7 @@ public slots:
     void level_3Clicked();
 private:
     Ui::LevelMainWindow *ui;
-    noobMainWindow noob;
+    noobMainWindow *noob;
 };
 
 #endif // LEVELMAINWINDOW_H
