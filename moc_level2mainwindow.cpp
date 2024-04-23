@@ -46,11 +46,12 @@ constexpr auto qt_meta_stringdata_CLASSLevel2MainWindowENDCLASS = QtMocHelpers::
     "Pair3Clicked",
     "Pair11Clicked",
     "Pair22Clicked",
-    "Pair33Clicked"
+    "Pair33Clicked",
+    "NextClicked"
 );
 #else  // !QT_MOC_HAS_STRING_DATA
 struct qt_meta_stringdata_CLASSLevel2MainWindowENDCLASS_t {
-    uint offsetsAndSizes[18];
+    uint offsetsAndSizes[20];
     char stringdata0[17];
     char stringdata1[13];
     char stringdata2[1];
@@ -60,6 +61,7 @@ struct qt_meta_stringdata_CLASSLevel2MainWindowENDCLASS_t {
     char stringdata6[14];
     char stringdata7[14];
     char stringdata8[14];
+    char stringdata9[12];
 };
 #define QT_MOC_LITERAL(ofs, len) \
     uint(sizeof(qt_meta_stringdata_CLASSLevel2MainWindowENDCLASS_t::offsetsAndSizes) + ofs), len 
@@ -73,7 +75,8 @@ Q_CONSTINIT static const qt_meta_stringdata_CLASSLevel2MainWindowENDCLASS_t qt_m
         QT_MOC_LITERAL(57, 12),  // "Pair3Clicked"
         QT_MOC_LITERAL(70, 13),  // "Pair11Clicked"
         QT_MOC_LITERAL(84, 13),  // "Pair22Clicked"
-        QT_MOC_LITERAL(98, 13)   // "Pair33Clicked"
+        QT_MOC_LITERAL(98, 13),  // "Pair33Clicked"
+        QT_MOC_LITERAL(112, 11)   // "NextClicked"
     },
     "Level2MainWindow",
     "startClicked",
@@ -83,7 +86,8 @@ Q_CONSTINIT static const qt_meta_stringdata_CLASSLevel2MainWindowENDCLASS_t qt_m
     "Pair3Clicked",
     "Pair11Clicked",
     "Pair22Clicked",
-    "Pair33Clicked"
+    "Pair33Clicked",
+    "NextClicked"
 };
 #undef QT_MOC_LITERAL
 #endif // !QT_MOC_HAS_STRING_DATA
@@ -95,7 +99,7 @@ Q_CONSTINIT static const uint qt_meta_data_CLASSLevel2MainWindowENDCLASS[] = {
       12,       // revision
        0,       // classname
        0,    0, // classinfo
-       7,   14, // methods
+       8,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -103,15 +107,17 @@ Q_CONSTINIT static const uint qt_meta_data_CLASSLevel2MainWindowENDCLASS[] = {
        0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags, initial metatype offsets
-       1,    0,   56,    2, 0x0a,    1 /* Public */,
-       3,    0,   57,    2, 0x0a,    2 /* Public */,
-       4,    0,   58,    2, 0x0a,    3 /* Public */,
-       5,    0,   59,    2, 0x0a,    4 /* Public */,
-       6,    0,   60,    2, 0x0a,    5 /* Public */,
-       7,    0,   61,    2, 0x0a,    6 /* Public */,
-       8,    0,   62,    2, 0x0a,    7 /* Public */,
+       1,    0,   62,    2, 0x0a,    1 /* Public */,
+       3,    0,   63,    2, 0x0a,    2 /* Public */,
+       4,    0,   64,    2, 0x0a,    3 /* Public */,
+       5,    0,   65,    2, 0x0a,    4 /* Public */,
+       6,    0,   66,    2, 0x0a,    5 /* Public */,
+       7,    0,   67,    2, 0x0a,    6 /* Public */,
+       8,    0,   68,    2, 0x0a,    7 /* Public */,
+       9,    0,   69,    2, 0x0a,    8 /* Public */,
 
  // slots: parameters
+    QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
@@ -145,6 +151,8 @@ Q_CONSTINIT const QMetaObject Level2MainWindow::staticMetaObject = { {
         // method 'Pair22Clicked'
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
         // method 'Pair33Clicked'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        // method 'NextClicked'
         QtPrivate::TypeAndForceComplete<void, std::false_type>
     >,
     nullptr
@@ -163,6 +171,7 @@ void Level2MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int
         case 4: _t->Pair11Clicked(); break;
         case 5: _t->Pair22Clicked(); break;
         case 6: _t->Pair33Clicked(); break;
+        case 7: _t->NextClicked(); break;
         default: ;
         }
     }
@@ -188,13 +197,13 @@ int Level2MainWindow::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 7)
+        if (_id < 8)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 7;
+        _id -= 8;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 7)
+        if (_id < 8)
             *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType();
-        _id -= 7;
+        _id -= 8;
     }
     return _id;
 }
