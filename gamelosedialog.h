@@ -15,6 +15,9 @@ public:
     explicit GameLoseDialog(QWidget *parent = nullptr);
     ~GameLoseDialog();
 
+private slots:
+    void on_buttonBox_accepted();
+
 private:
     Ui::GameLoseDialog *ui;
 };

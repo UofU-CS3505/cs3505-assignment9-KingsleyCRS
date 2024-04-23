@@ -12,3 +12,9 @@ GameLoseDialog::~GameLoseDialog()
 {
     delete ui;
 }
+
+void GameLoseDialog::on_buttonBox_accepted()
+{
+
+}
+
