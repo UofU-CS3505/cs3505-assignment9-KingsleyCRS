@@ -22,17 +22,18 @@ public:
     void createWords();
     QString getHint();
     int hintPressed;
+    int roundCount;
+    void updateMap();
 
 private:
     QVector<Block*> noun;
-    QVector<Block*> adv;
-    QVector<Block*> adj;
     int level;
     void checkRules();
     void checkCollision(int i, int j,int dir);
     Block* player;
     Block* wall;
     Block* dog;
+    Block* dog2;
     Block* get;
     Block* help;
     Block* eat;
@@ -51,6 +52,9 @@ private:
     Block* monster1;
     Block* monster2;
     Block* sword;
+    Block* goInTo;
+    Block* door;
+    Block* arrow;
 };
 
 #endif // MAP_H

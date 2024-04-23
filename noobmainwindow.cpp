@@ -37,6 +37,7 @@ noobMainWindow::~noobMainWindow()
 }
 void noobMainWindow::startClicked(){
     // Ensure all widgets are properly initialized in the UI setup before being used.
+    life = 5;
     ui->end->setVisible(false);
     ui->Close->setVisible(false);
     ui->Restart->setVisible(false);
@@ -71,11 +72,8 @@ void noobMainWindow::startClicked(){
     // Shuffle the vector to randomize order
     std::shuffle(numbers.begin(), numbers.end(), gen);
 
-    // Extract the first three numbers for non-repeating random indices
-    int randomIndex = numbers[0];
-
     // Get the word pair; ensure getPairAt is safe to use
-    questionWord = word.getPairAt(0, 0); // Assuming getPairAt is valid
+    questionWord = word.getPairAt(0); // Assuming getPairAt is valid
 
     // Set font properties
     QFont font = ui->question->font();
@@ -95,7 +93,7 @@ void noobMainWindow::startClicked(){
         if (i == answer) {
             buttons[i]->setText(questionWord.first);
         } else {
-            buttons[i]->setText(incorrectAnswers[randomIndex++]);
+            buttons[i]->setText(incorrectAnswers[numbers[i]]);
         }
     }
 }
@@ -202,11 +200,8 @@ void noobMainWindow::nextClicked(){
         // Shuffle the vector to randomize order
         std::shuffle(numbers.begin(), numbers.end(), gen);
 
-        // Extract the first three numbers for non-repeating random indices
-        int randomIndex = numbers[0];
-
         // Get the word pair; ensure getPairAt is safe to use
-        questionWord = word.getPairAt(levelCount, 0); // Assuming getPairAt is valid
+        questionWord = word.getPairAt(levelCount); // Assuming getPairAt is valid
 
         // Set font properties
         QFont font = ui->question->font();
@@ -225,7 +220,7 @@ void noobMainWindow::nextClicked(){
             if (i == answer) {
                 buttons[i]->setText(questionWord.first);
             } else {
-                buttons[i]->setText(incorrectAnswers[randomIndex++]);
+                buttons[i]->setText(incorrectAnswers[numbers[i]]);
             }
         }
     } else {
@@ -247,6 +242,7 @@ void noobMainWindow::complete() {
     ui->congrat->setFont(font);
     if(life == 1) {
         ui->congrat->setText("             You ran out of heart!!! Try one more time!!!");
+        ui->lifeLabel->setText(" ");
     } else {
         ui->congrat->setText("Congratulation!!! You have learned "+ QString::number(correctCount) +" of ten words");
     }

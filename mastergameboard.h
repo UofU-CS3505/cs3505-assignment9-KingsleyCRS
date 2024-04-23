@@ -16,6 +16,11 @@ public:
     int currentLevel;
     Map* levels[5];
     bool getMapWin(int level);
+    QTimer *timer1;
+    QTimer *timer2;
+
+public slots:
+    void triggerMapUpdate();
 
 protected:
     void paintEvent(QPaintEvent *event) override;

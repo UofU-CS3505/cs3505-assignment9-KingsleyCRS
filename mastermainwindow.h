@@ -40,15 +40,17 @@ private slots:
 
     void on_hintButton_clicked();
 
+    void handleDialog();
+
 private:
     Ui::MasterMainWindow *ui;
     GameLoseDialog gamelose;
-    void gameLost(int i);
+    void gameLost();
     // void drawAnimation(QPainter& painter, const QString& imagePath, int x, int y);
     // world world;
 
-// protected:
-//     void paintEvent(QPaintEvent *event) override;
+    // protected:
+    //     void paintEvent(QPaintEvent *event) override;
 };
 
 #endif // MASTERMAINWINDOW_H

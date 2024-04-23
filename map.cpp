@@ -1,6 +1,6 @@
 #include "map.h"
 
-Map::Map(int level):win(0),playerDied(0),passed(0),level(level)
+Map::Map(int level):win(0),playerDied(0),passed(0),roundCount(0),level(level)
 {
     createWords();
     createMap();
@@ -14,6 +14,31 @@ void Map::createEmptyMap()
         }
     }
 }
+
+void Map::updateMap()
+{
+    for (int j = 0; j < 19; j++) {
+        for (int i = 0; i < 19; i++) {
+            if (map[i][j] == arrow) {
+                map[i][j]->hasMoved = 0;
+            }
+        }
+    }
+    for (int j = 0; j < 19; j++) {
+        for (int i = 0; i < 19; i++) {
+            if(map[i][j]==arrow && !map[i][j]->hasMoved){
+                if(map[i][j+1]==player)
+                    playerDied=1;
+                if(map[i][j+1]->isEmpty ){
+                    setBlock(i,j+1,map[i][j]);
+                    map[i][j+1]->hasMoved = 1;
+                    removeBlock(i,j);
+                }
+            }
+        }
+    }
+}
+
 void Map::setBlock(int i, int j, Block* block)
 {
     map[i][j] = block;
@@ -43,6 +68,7 @@ Direction getDirection(const QString& direction) {
 }
 void Map::movePlayer(QString direction)
 {
+    roundCount++;
     Direction dir = getDirection(direction);
     for(int i=0;i<noun.size();i++){
         noun[i]->hasMoved=false;
@@ -115,6 +141,7 @@ void Map::movePlayer(QString direction)
                     break;
                 }
             }
+
         }
     }
     checkRules();
@@ -128,21 +155,33 @@ void Map::checkRules(){
         for (int j = 0; j < 19; j++) {
             if(map[i][j]->isEmpty || !noun.contains(map[i][j]))continue;
             if(noun.contains(map[i][j])){
-                if((map[i+1][j]->getName()=="能"&&map[i+2][j]->getName()=="动") || (map[i][j+1]->getName()=="能"&&map[i][j+2]->getName()=="动"))
-                    map[i][j]->canMove=true;
+                if((map[i+1][j]==can&&map[i+2][j]==move) || (map[i][j+1]==can&&map[i][j+2]==move)){
+                    for(int k=1;k<noun.size();k++){
+                        if(noun[k]->getName()==map[i][j]->getName())
+                            noun[k]->canMove=true;
+                    }
+                }
             }
-            if((map[i][j]->getName()=="墙"&&map[i+1][j]->getName()=="能"&&map[i+2][j]->getName()=="推") || (map[i][j]->getName()=="墙"&&map[i][j+1]->getName()=="能"&&map[i][j+2]->getName()=="推"))
-                    noun[1]->canPush=true;
+            if((map[i][j]==wall&&map[i+1][j]==can&&map[i+2][j]==push) || (map[i][j]==wall&&map[i][j+1]==can&&map[i][j+2]==push))
+                noun[1]->canPush=true;
             if(level == 0){
-                if((map[i][j]->getName()=="狗"&&map[i+1][j]->getName()=="得"&&map[i+2][j]->getName()=="救") || (map[i][j]->getName()=="狗"&&map[i][j+1]->getName()=="得"&&map[i][j+2]->getName()=="救"))
+                if((map[i][j]==dog&&map[i+1][j]==get&&map[i+2][j]==help) || (map[i][j]==dog&&map[i][j+1]==get&&map[i][j+2]==help))
                     win = 1;
             }
             else if(level == 1){
-                if((map[i][j]->getName()=="狗"&&map[i+1][j]->getName()=="吃"&&map[i+2][j]->getName()=="肉") || (map[i][j]->getName()=="狗"&&map[i][j+1]->getName()=="吃"&&map[i][j+2]->getName()=="肉"))
+                if((map[i][j]==dog&&map[i+1][j]==eat&&map[i+2][j]==meat) || (map[i][j]==dog&&map[i][j+1]==eat&&map[i][j+2]==meat))
                     win = 1;
             }
             else if(level == 2){
-                if((map[i][j]->getName()=="我"&&map[i+1][j]->getName()=="找"&&map[i+2][j]->getName()=="到"&&map[i+3][j]->getName()=="宝"&&map[i+4][j]->getName()=="藏") || (map[i][j]->getName()=="我"&&map[i][j+1]->getName()=="找"&&map[i][j+2]->getName()=="到"&&map[i][j+3]->getName()=="宝"&&map[i][j+4]->getName()=="藏"))
+                if((map[i][j]==player&&map[i+1][j]==goInTo&&map[i+2][j]==door) || (map[i][j]==player&&map[i][j+1]==eat&&map[i][j+2]==meat))
+                    win = 1;
+            }
+
+            else if(level == 3){
+                // if(roundCount%4 ==0){
+                //     setBlock(6,3,arrow);
+                // }
+                if((map[i][j]==player&&map[i+1][j]==find1&&map[i+2][j]==find2&&map[i+3][j]==treasure1&&map[i+4][j]==treasure2) || (map[i][j]==player&&map[i][j+1]==find1&&map[i][j+2]==find2&&map[i][j+3]==treasure1&&map[i][j+4]==treasure2))
                     win = 1;
             }
         }
@@ -157,6 +196,8 @@ void Map::createWords()
     noun.push_back(wall);
     dog = new Block("狗",true);
     noun.push_back(dog);
+    dog2 = new Block("狗",true);
+    noun.push_back(dog2);
     get = new Block("得",true);
     help = new Block("救",true);
     eat = new Block("吃",true);
@@ -170,6 +211,9 @@ void Map::createWords()
     treasure2 = new Block("藏",false);
     water = new Block("水", true);
     fire = new Block("火", false);
+    goInTo = new Block("进", true);
+    door = new Block("门", false);
+    arrow = new Block("箭", false);
 }
 void Map::createMap(){
 
@@ -209,30 +253,52 @@ void Map::createMap(){
 
         createEmptyMap();
         setBlock(0,0,player);
-        for(int i = 9;i<13;i++)
-            setBlock(i,17,fire);
-        for(int i = 17;i<20;i++){
-            setBlock(12,i,fire);
-            setBlock(9,i,fire);
+        for(int i = 0;i<20;i++){
+            setBlock(i,10,fire);
+            setBlock(i,11,fire);
         }
-        //set to 10,18, 11,18
-        setBlock(3,0,treasure1);
-        setBlock(4,0,treasure2);
-        setBlock(8,7,find1);
-        setBlock(18,18,find2);
-        setBlock(16,1,water);
-        setBlock(18,2,water);
-        setBlock(3,6,water);
-        setBlock(3,7,water);
+        setBlock(4,16,water);
+        setBlock(2,18,water);
+        setBlock(4,5,dog);
+        setBlock(10,5,door);
+        setBlock(15,18,dog2);
+        setBlock(7,7,can);
+        setBlock(5,1,move);
+        setBlock(18,18,goInTo);
     }
     else if(level == 3)
     {
         createEmptyMap();
-        setBlock(0,0,player);
-        for(int i = 0; i< 20; i++){
-            setBlock(10,i,wall);
-            setBlock(9,i,wall);
+        setBlock(5,5,player);
+
+        for(int i = 0; i < 20;i++){
+            setBlock(0,i,fire);
+            setBlock(1,i,fire);
+            setBlock(2,i,fire);
+            setBlock(i,0,fire);
+            setBlock(i,1,fire);
+            setBlock(i,2,fire);
+            setBlock(17,i,fire);
+            setBlock(18,i,fire);
+            setBlock(19,i,fire);
+            setBlock(i,17,fire);
+            setBlock(i,18,fire);
+            setBlock(i,19,fire);
         }
+        for(int i = 3; i < 17;i++){
+            setBlock(3,i,wall);
+            setBlock(i,3,arrow);
+            setBlock(16,i,wall);
+            setBlock(i,16,wall);
+        }
+
+        //set to 10,18, 11,18
+        setBlock(10,10,treasure1);
+        setBlock(11,10,treasure2);
+        setBlock(9,7,find1);
+        setBlock(13,13,find2);
+
+
     }
 }
 
@@ -264,36 +330,42 @@ QString Map::getHint()
 void Map::checkCollision(int i,int j, int dir)
 {
     if(dir == 0){
-        if(map[i-1][j]->getName() == "水" && map[i-2][j]->getName() == "火")
+        if(map[i-1][j] == water && map[i-2][j] == fire)
         {
             removeBlock(i-1,j);
             removeBlock(i-2,j);
         }
-        if(map[i][j]->getName() == "我" && map[i-1][j] -> getName() == "火")
+        if(map[i][j] == player && map[i-1][j]== fire)
             playerDied = 1;
     }
     else if(dir == 1)
     {
-        if(map[i+1][j]->getName() == "水" && map[i+2][j]->getName() == "火")
+        if(map[i+1][j] == water && map[i+2][j] == fire)
         {
             removeBlock(i+1,j);
             removeBlock(i+2,j);
         }
+        if(map[i][j] == player && map[i+1][j]== fire)
+            playerDied = 1;
     }
     else if(dir == 2)
     {
-        if(map[i][j-1]->getName() == "水" && map[i][j-2]->getName() == "火")
+        if(map[i][j-1] == water && map[i][j-2] == fire)
         {
             removeBlock(i,j-1);
             removeBlock(i,j-2);
         }
+        if(map[i][j] == player && map[i][j-1]== fire)
+            playerDied = 1;
     }
     else
     {
-        if(map[i][j+1]->getName() == "水" && map[i][j+2]->getName() == "火")
+        if(map[i][j+1] == water && map[i][j+2] == fire)
         {
             removeBlock(i,j+1);
             removeBlock(i,j+2);
         }
+        if(map[i][j] == player && map[i][j+1]== fire)
+            playerDied = 1;
     }
 }

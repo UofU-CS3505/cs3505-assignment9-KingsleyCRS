@@ -58,13 +58,13 @@ SOURCES += \
     block.cpp \
     dictionary.cpp \
     gamelosedialog.cpp \
+    level2mainwindow.cpp \
     levelmainwindow.cpp \
     main.cpp \
     mainwindow.cpp \
     map.cpp \
     mastergameboard.cpp \
     mastermainwindow.cpp \
-    model.cpp \
     noobmainwindow.cpp \
     sentencerule.cpp \
     world.cpp
@@ -120,22 +120,24 @@ HEADERS += \
     block.h \
     dictionary.h \
     gamelosedialog.h \
+    level2mainwindow.h \
     levelmainwindow.h \
     mainwindow.h \
     map.h \
     mastergameboard.h \
     mastermainwindow.h \
-    model.h \
     noobmainwindow.h \
     sentencerule.h \
     world.h
 
 FORMS += \
     gamelosedialog.ui \
+    level2mainwindow.ui \
     levelmainwindow.ui \
     mainwindow.ui \
     mastermainwindow.ui \
-    noobmainwindow.ui
+    noobmainwindow.ui \
+    windialog.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

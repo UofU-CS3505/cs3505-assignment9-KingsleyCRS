@@ -3,7 +3,7 @@
 #include "noobmainwindow.h"
 #include "studymainwindow.h"
 #include <QMainWindow>
-
+#include "level2mainwindow.h"
 class noobMainWindow;
 namespace Ui {
 class LevelMainWindow;
@@ -23,6 +23,7 @@ public slots:
 private:
     Ui::LevelMainWindow *ui;
     noobMainWindow *noob;
+    Level2MainWindow *level2;
     studyMainWindow *study;
 };
 
