@@ -1,6 +1,6 @@
 #include "map.h"
 
-Map::Map(int level):win(0),playerDied(0),passed(0),roundCount(0),level(level)
+Map::Map(int level):win(0),playerDied(0),passed(0),level(level)
 {
     createWords();
     createMap();
@@ -68,7 +68,6 @@ Direction getDirection(const QString& direction) {
 }
 void Map::movePlayer(QString direction)
 {
-    roundCount++;
     Direction dir = getDirection(direction);
     for(int i=0;i<noun.size();i++){
         noun[i]->hasMoved=false;
@@ -176,12 +175,12 @@ void Map::checkRules(){
                 if((map[i][j]==player&&map[i+1][j]==goInTo&&map[i+2][j]==door) || (map[i][j]==player&&map[i][j+1]==eat&&map[i][j+2]==meat))
                     win = 1;
             }
-
             else if(level == 3){
-                // if(roundCount%4 ==0){
-                //     setBlock(6,3,arrow);
-                // }
                 if((map[i][j]==player&&map[i+1][j]==find1&&map[i+2][j]==find2&&map[i+3][j]==treasure1&&map[i+4][j]==treasure2) || (map[i][j]==player&&map[i][j+1]==find1&&map[i][j+2]==find2&&map[i][j+3]==treasure1&&map[i][j+4]==treasure2))
+                    win = 1;
+            }
+            else{
+                if(monsterDied)
                     win = 1;
             }
         }
@@ -214,7 +213,10 @@ void Map::createWords()
     goInTo = new Block("进", true);
     door = new Block("门", false);
     arrow = new Block("箭", false);
+    monster = new Block("怪", false);
+    sword = new Block("剑", false);
 }
+
 void Map::createMap(){
 
     if(level == 0)
@@ -262,7 +264,7 @@ void Map::createMap(){
         setBlock(2,18,water);
         setBlock(4,5,dog);
         setBlock(10,5,door);
-        setBlock(15,18,dog2);
+        setBlock(15,12,dog2);
         setBlock(7,7,can);
         setBlock(5,1,move);
         setBlock(18,18,goInTo);
@@ -303,6 +305,7 @@ void Map::createMap(){
     }
 }
 
+
 QString Map::getHint()
 {
     if(level == 0)
@@ -324,8 +327,9 @@ QString Map::getHint()
     }
     else if(level == 3)
     {
-
+        return "宝藏:Treasure, 找:Find";
     }
+
 }
 
 void Map::checkCollision(int i,int j, int dir)
@@ -336,7 +340,7 @@ void Map::checkCollision(int i,int j, int dir)
             removeBlock(i-1,j);
             removeBlock(i-2,j);
         }
-        if(map[i][j] == player && map[i-1][j]== fire)
+        if(map[i][j] == player && (map[i-1][j]== fire || map[i-1][j]== monster))
             playerDied = 1;
     }
     else if(dir == 1)
@@ -346,7 +350,7 @@ void Map::checkCollision(int i,int j, int dir)
             removeBlock(i+1,j);
             removeBlock(i+2,j);
         }
-        if(map[i][j] == player && map[i+1][j]== fire)
+        if(map[i][j] == player && (map[i+1][j]== fire || map[i+1][j]== monster))
             playerDied = 1;
     }
     else if(dir == 2)
@@ -356,7 +360,7 @@ void Map::checkCollision(int i,int j, int dir)
             removeBlock(i,j-1);
             removeBlock(i,j-2);
         }
-        if(map[i][j] == player && map[i][j-1]== fire)
+        if(map[i][j] == player && (map[i][j-1]== fire || map[i+1][j]== monster))
             playerDied = 1;
     }
     else
@@ -366,7 +370,7 @@ void Map::checkCollision(int i,int j, int dir)
             removeBlock(i,j+1);
             removeBlock(i,j+2);
         }
-        if(map[i][j] == player && map[i][j+1]== fire)
+        if(map[i][j] == player && (map[i][j+1]== fire || map[i+1][j]== monster))
             playerDied = 1;
     }
 }

@@ -148,4 +148,9 @@ void MasterGameBoard::resetCurrentLevel() {
 
     levels[currentLevel] = new Map(currentLevel);
 
+
+void MasterGameBoard::updateLevel()
+{
+    if(currentLevel < 4)
+        currentLevel++;
 }

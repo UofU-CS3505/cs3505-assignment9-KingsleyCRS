@@ -22,7 +22,6 @@ public:
     void createWords();
     QString getHint();
     int hintPressed;
-    int roundCount;
     void updateMap();
 
 private:
@@ -49,12 +48,12 @@ private:
     Block* fire;
     Block* princess1;
     Block* princess2;
-    Block* monster1;
-    Block* monster2;
+    Block* monster;
     Block* sword;
     Block* goInTo;
     Block* door;
     Block* arrow;
+    bool monsterDied;
 };
 
 #endif // MAP_H

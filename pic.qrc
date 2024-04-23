@@ -13,5 +13,6 @@
         <file>plane1.png</file>
         <file>sky.jpg</file>
         <file>dog1.png</file>
+        <file>unnamed.jpg</file>
     </qresource>
 </RCC>

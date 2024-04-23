@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include "world.h"
 #include <Qpixmap>
+
 namespace Ui {
 class MasterMainWindow;
 }
@@ -29,11 +30,8 @@ public slots:
 
     void on_Level5Button_clicked();
 
-    //void updatePhysics();
-
     void levelWin();
 signals:
-         //void sendWin();
 
 private slots:
     void on_resetButton_clicked();
@@ -41,6 +39,8 @@ private slots:
     void on_hintButton_clicked();
 
     void handleDialog();
+
+    void on_nextLevelButton_clicked();
 
 private:
     Ui::MasterMainWindow *ui;
