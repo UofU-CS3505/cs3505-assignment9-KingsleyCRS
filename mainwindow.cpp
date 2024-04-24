@@ -14,7 +14,7 @@ MainWindow::MainWindow(QWidget *parent)
 
 {
     ui->setupUi(this);
-    this->resize(800, 800);  // 设置窗口大小为800x800
+    this->resize(800, 800);
     this->setFixedSize(800, 800);
 
 
@@ -23,39 +23,9 @@ MainWindow::MainWindow(QWidget *parent)
     world.createWall("left",b2Vec2(-8.0f, 8.0f),b2Vec2(0.5f, 8.0f),0.5f,0.8f);
     world.createWall("right",b2Vec2(8.0f, 8.0f),b2Vec2(0.5f, 8.0f),0.5f,0.8f);
 
-    // // 创建动态的球体
-    // b2BodyDef bodyDef;
-    // bodyDef.type = b2_dynamicBody;
-    // bodyDef.position.Set(2.0f, 2.0f);
-    // b2Body* circleBody = world.Box2Dworld->CreateBody(&bodyDef);
-    // b2CircleShape circleShape;
-    // circleShape.m_radius = 1.0f;
-    // b2FixtureDef fixtureDef;
-    // fixtureDef.shape = &circleShape;
-    // fixtureDef.density = 1.0f;
-    // fixtureDef.friction = 0.3f;
-    // fixtureDef.restitution = 0.8f;
-    // circleBody->CreateFixture(&fixtureDef);
-    // circleBody->SetUserData(new std::string("Circle"));
-    // circleBody->SetLinearVelocity(b2Vec2(2.0f,25.0f));
 
-    // b2BodyDef bodyDef2;
-    // bodyDef2.type = b2_dynamicBody;
-    // bodyDef2.position.Set(2.0f, 2.0f);
-    // b2Body* boxBody = world.Box2Dworld->CreateBody(&bodyDef2);
-    // b2PolygonShape polygonShape;
-    // polygonShape.SetAsBox(1.0f, 0.5f);
-    // b2FixtureDef fixtureDef2;
-    // fixtureDef2.shape = &polygonShape;
-    // fixtureDef2.density = 1.0f;
-    // fixtureDef2.friction = 0.3f;
-    // fixtureDef2.restitution = 0.8f;
-    // boxBody->CreateFixture(&fixtureDef2);
-    // boxBody->SetUserData(new std::string("Box"));
-    // boxBody->SetLinearVelocity(b2Vec2(2.0f,25.0f));
-
-    world.createBody("Box",b2Vec2(0.0f, 8.0f),b2Vec2(-10.0f, -10.0f),b2Vec2(0.0f, -0.0f),1.0f,1.0f,1.0f,1.0f,true);
-    world.createBody("Circle",b2Vec2(2.0f, 2.0f),b2Vec2(-10.0f, -10.0f),b2Vec2(0.0f, -0.0f),1.0f,1.0f,1.0f,1.0f,true);
+    world.createBody("Box",b2Vec2(1.0f, 8.0f),b2Vec2(-30.0f, -20.0f),b2Vec2(10.0f, -10.0f),1.0f,1.0f,1.0f,1.0f,true);
+    world.createBody("Circle",b2Vec2(2.0f, 3.0f),b2Vec2(-30.0f, -10.0f),b2Vec2(10.0f, -0.0f),1.0f,1.0f,1.0f,1.0f,true);
 
     connect(ui->noobButton,&QPushButton::clicked,this,&MainWindow::noobClicked);
     connect(ui->masterButton,&QPushButton::clicked,this,&MainWindow::masterClicked);
@@ -63,12 +33,6 @@ MainWindow::MainWindow(QWidget *parent)
     connect(timer, &QTimer::timeout, this, &MainWindow::updatePhysics);
     timer->start(1000 / 60);
 
-    // QTimer* timer2 = new QTimer(this);
-    // connect(timer2, &QTimer::timeout, [=]() {
-    //     world.destroyScheduledBodies("Circle"); // 用正确的物体名称替换
-    // });
-    // timer2->setSingleShot(true);
-    // timer2->start(5000); // 5000毫秒后触发
 }
 MainWindow::~MainWindow()
 {
@@ -109,9 +73,7 @@ void MainWindow::paintEvent(QPaintEvent *event) {
             }
         }
     }
-
 }
-
 
 
 void MainWindow::drawAnimation(QPainter& painter, const QString& imagePath, int x, int y) {

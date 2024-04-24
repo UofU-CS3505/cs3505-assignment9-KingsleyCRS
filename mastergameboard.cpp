@@ -57,7 +57,7 @@ void MasterGameBoard::paintEvent(QPaintEvent *event) {
     }
     if(currentMap->win)
         playWinEffect(painter, displayingEffect);
-    if(levelWinTimer->elapsed() >= 5000 || !currentMap->win){
+    if(levelWinTimer->elapsed() >= 3000 || !currentMap->win){
         world.destroyBody("Red");
         world.destroyBody("Blue");
         displayingEffect = 0;
@@ -68,8 +68,8 @@ void MasterGameBoard::animation(){
         world.createWall("bot",b2Vec2(0.0f, 0.0f),b2Vec2(8.0f, 0.5f),0.5f,0.8f);
         world.createWall("left",b2Vec2(-10.0f, 8.0f),b2Vec2(0.5f, 8.0f),0.5f,0.8f);
         world.createWall("right",b2Vec2(8.0f, 8.0f),b2Vec2(0.5f, 8.0f),0.5f,0.8f);
-        world.createBody("Red",b2Vec2(-2.0f,10.0f),b2Vec2(100.0f, -100.0f),b2Vec2(0.0f, -0.0f),1.0f,1.0f,1.0f,1.0f,true);
-        world.createBody("Blue",b2Vec2(0.0f,8.0f),b2Vec2(-10.0f, -10.0f),b2Vec2(0.0f, -0.0f),1.0f,1.0f,1.0f,1.0f,true);
+        world.createBody("Red",b2Vec2(-7.0f,6.0f),b2Vec2(500.0f, 500.0f),b2Vec2(0.0f, -0.0f),1.0f,1.0f,1.0f,1.0f,true);
+        world.createBody("Blue",b2Vec2(7.0f,16.0f),b2Vec2(-500.0f, -500.0f),b2Vec2(0.0f, -0.0f),1.0f,1.0f,1.0f,1.0f,true);
 }
 
 void MasterGameBoard::triggerMapUpdate(){
@@ -136,7 +136,7 @@ void MasterGameBoard::playWinEffect(QPainter& painter, bool displaying)
                 if (*name == "Red") {
                     drawAnimation(painter, ":/plane1.png", x, y);
                 } else if (*name == "Blue") {
-                    drawAnimation(painter, ":/plane2.png", x, y);
+                    drawAnimation(painter, ":/plane.png", x, y);
                 }
             }
         }

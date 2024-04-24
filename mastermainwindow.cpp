@@ -17,7 +17,7 @@ MasterMainWindow::MasterMainWindow(QWidget *parent)
     animation();
     flipTimer = new QTimer(this);
     connect(flipTimer, &QTimer::timeout, this, &MasterMainWindow::flipDog);
-    flipTimer->start(1200);  // 设置为50毫秒触发一次
+    flipTimer->start(3500);  // 设置为50毫秒触发一次
 }
 
 MasterMainWindow::~MasterMainWindow()
@@ -132,16 +132,18 @@ void MasterMainWindow::on_nextLevelButton_clicked()
     ui->gameMap->setFocus();
 }
 void MasterMainWindow::animation(){
-    world.createWall("left",b2Vec2(-8.0f, 1.0f),b2Vec2(0.5f, 8.0),0.5f,0.8f);
-    world.createWall("bot",b2Vec2(8.0f, 1.0f),b2Vec2(0.5f, 8.0),0.5f,0.8f);
-    world.createWall("right",b2Vec2(0.0f, 1.0f),b2Vec2(8.0f, 0.5f),0.5f,0.8f);
-    world.createBody("dog1",b2Vec2(-7.5f,2.0f),b2Vec2(100.0f, 0.0f),b2Vec2(0.0f, -0.0f),1.0f,0.0f,0.0f,1.0f,true);
+    world.createWall("left",b2Vec2(-8.0f, 1.0f),b2Vec2(0.5f, 8.0),0.0f,0.0f);
+    world.createWall("bot",b2Vec2(8.0f, 1.0f),b2Vec2(0.5f, 8.0),0.0f,0.0f);
+    world.createWall("right",b2Vec2(0.0f, 1.0f),b2Vec2(8.0f, 0.5f),0.0f,0.0f);
+    world.createBody("dog1",b2Vec2(-7.5f,2.0f),b2Vec2(0.0f, 1.0f),b2Vec2(2.0f, -0.0f),1.0f,1.0f,0.0f,1.0f,true);
 
 }
 void MasterMainWindow::paintEvent(QPaintEvent *event) {
         QPainter painter(this);
         world.step();
         update();
+        QPixmap pix(":/importBG.png");
+        painter.fillRect(event->rect(), pix);
         painter.setRenderHint(QPainter::Antialiasing);
         const float scaleFactor = 50;  // 50 pixels per meter
         const float offsetX = 1050/2;  // Centering in width
@@ -151,44 +153,20 @@ void MasterMainWindow::paintEvent(QPaintEvent *event) {
         painter.setPen(wallPen);
         painter.setBrush(Qt::darkGray);
 
-
         for (b2Body* body = world.box2DWorld->GetBodyList(); body != nullptr; body = body->GetNext()) {
-            qDebug()<<"s";
-            if (body->GetType() == b2_staticBody) { // 检查是否为静态体（墙）
-                b2Fixture* f = body->GetFixtureList();
-                while (f) {
-                    b2PolygonShape* poly = dynamic_cast<b2PolygonShape*>(f->GetShape());
-                    if (poly) {
-                        QPainterPath path;
-                        for (int i = 0; i < poly->GetVertexCount(); ++i) {
-                            b2Vec2 pt = body->GetWorldPoint(poly->GetVertex(i));
-                            float x = pt.x * scaleFactor + offsetX;
-                            float y = offsetY - pt.y * scaleFactor;  // Flipping Y coordinate for graphical display
-                            if (i == 0) {
-                                path.moveTo(x, y);
-                            } else {
-                                path.lineTo(x, y);
-                            }
-                        }
-                        path.closeSubpath();
-                        painter.drawPath(path);
-                    }
-                    f = f->GetNext();
-                }
-            } else {
                 std::string* name = static_cast<std::string*>(body->GetUserData());
                 if (name) {
                     float x = body->GetPosition().x * scaleFactor + offsetX;
                     float y = offsetY - body->GetPosition().y * scaleFactor;  // Flipping Y coordinate for graphical display
                     if (dogFlipped) {
-                        drawFlippedAnimation(painter, ":/dog1.png", x, y);
-                    } else {
                         drawAnimation(painter, ":/dog1.png", x, y);
+                    } else {
+                        drawFlippedAnimation(painter,":/dog1.png", x, y);
                     }
                 }
             }
         }
-    }
+
 void MasterMainWindow::drawAnimation(QPainter& painter, const QString& imagePath, int x, int y) {
     QPixmap pixmap(imagePath);
     if(!pixmap.isNull()) {

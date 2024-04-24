@@ -14,5 +14,6 @@
         <file>sky.jpg</file>
         <file>dog1.png</file>
         <file>unnamed.jpg</file>
+        <file>importBG.png</file>
     </qresource>
 </RCC>
