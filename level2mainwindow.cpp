@@ -40,6 +40,7 @@ void Level2MainWindow::startClicked(){
     QPushButton* buttons[] = {ui->pair_1, ui->pair_2, ui->pair_3, ui->pair_1_1, ui->pair_2_2, ui->pair_3_3};
     for(int i = 0; i < 6; i++) {
         buttons[i]->setCheckable(true);
+        buttons[i]->setEnabled(true);
     }
     std::random_device rd;
     std::mt19937 gen(rd());

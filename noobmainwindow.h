@@ -32,7 +32,7 @@ private:
     QPair<QString, QString> questionWord;
     int life;
     int barValue;
-    QVector<QString> incorrectAnswers;
+    QVector<QPair<QString, QString>> incorrectAnswers;
     int levelCount;
     void complete();
     int correctCount;
