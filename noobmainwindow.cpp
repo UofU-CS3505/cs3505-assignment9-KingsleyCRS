@@ -13,12 +13,6 @@ noobMainWindow::noobMainWindow(QWidget *parent)
     ,levelCount(2)
     ,correctCount(0)
 {
-    incorrectAnswers = {"天气", "朋友", "学校", "工作", "家庭",
-                          "城市", "国家", "音乐", "电影", "食物",
-                          "运动", "文化", "节日", "花园", "旅游",
-                          "图书", "咖啡", "茶叶", "购物", "空气",
-                          "河流", "山脉", "城堡", "银行", "医院",
-                          "教室", "老师", "学生", "办公", "钢笔"};
     ui->setupUi(this);
     connect(ui->A, &QPushButton::clicked,this, &noobMainWindow::AClicked);
     connect(ui->B, &QPushButton::clicked,this, &noobMainWindow::BClicked);
@@ -72,8 +66,12 @@ void noobMainWindow::startClicked(){
     // Shuffle the vector to randomize order
     std::shuffle(numbers.begin(), numbers.end(), gen);
 
+    // Randomly decide the correct button for the answer
+    int answer = dist(gen);
+
     // Get the word pair; ensure getPairAt is safe to use
-    questionWord = word.getPairAt(0); // Assuming getPairAt is valid
+    incorrectAnswers = word.getRandomPair();
+    questionWord = incorrectAnswers[answer];
 
     // Set font properties
     QFont font = ui->question->font();
@@ -82,20 +80,21 @@ void noobMainWindow::startClicked(){
     ui->question->setFont(font);
     ui->question->setText("\""+questionWord.second+"\"");
 
-    // Randomly decide the correct button for the answer
-    int answer = dist(gen);
+
 
     // Safe text assignment to buttons
+    qDebug() << "debug 1";
     QPushButton* buttons[] = {ui->A, ui->B, ui->C, ui->D};
-
     for (int i = 0; i < 4; ++i) {
+        qDebug() << "debug loop";
         buttons[i]->setCheckable(true);
         if (i == answer) {
             buttons[i]->setText(questionWord.first);
         } else {
-            buttons[i]->setText(incorrectAnswers[numbers[i]]);
+            buttons[i]->setText(incorrectAnswers[i].first);
         }
     }
+    qDebug() << "debug 2";
 }
 
 void noobMainWindow::AClicked(){
@@ -200,8 +199,12 @@ void noobMainWindow::nextClicked(){
         // Shuffle the vector to randomize order
         std::shuffle(numbers.begin(), numbers.end(), gen);
 
+        // Randomly decide the correct button for the answer
+        int answer = dist(gen);
+
         // Get the word pair; ensure getPairAt is safe to use
-        questionWord = word.getPairAt(levelCount); // Assuming getPairAt is valid
+        incorrectAnswers = word.getRandomPair();
+        questionWord = incorrectAnswers[answer];
 
         // Set font properties
         QFont font = ui->question->font();
@@ -210,17 +213,17 @@ void noobMainWindow::nextClicked(){
         ui->question->setFont(font);
         ui->question->setText("\""+questionWord.second+"\"");
 
-        // Randomly decide the correct button for the answer
-        int answer = dist(gen);
 
         // Safe text assignment to buttons
         QPushButton* buttons[] = {ui->A, ui->B, ui->C, ui->D};
 
+        qDebug() << "debug !!";
         for (int i = 0; i < 4; ++i) {
+            qDebug() << "debug loop";
             if (i == answer) {
                 buttons[i]->setText(questionWord.first);
             } else {
-                buttons[i]->setText(incorrectAnswers[numbers[i]]);
+                buttons[i]->setText(incorrectAnswers[i].first);
             }
         }
     } else {
