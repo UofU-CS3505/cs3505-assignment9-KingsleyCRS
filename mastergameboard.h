@@ -17,16 +17,14 @@ public:
     void updateLevel();
     int currentLevel;
     Map* levels[5];
-    bool getMapWin(int level);
     QTimer *updateTimer;
     QTimer *MapUpdateTimer;
     QElapsedTimer *levelWinTimer;
     world world;
     void animation();
     void drawAnimation(QPainter& painter, const QString& imagePath, int x, int y);
-    bool levelWinTimerStart;
-    void resetCurrentLevel();
-    void playWinEffect(QPainter& painter, QPaintEvent *event, Map *currentMap);
+    void playWinEffect(QPainter& painter, bool displayingEffect);
+    bool displayingEffect;
 public slots:
     void triggerMapUpdate();
 

@@ -56,7 +56,7 @@ void MasterMainWindow::on_Level2Button_clicked()
 void MasterMainWindow::on_Level3Button_clicked()
 {
     ui->gameMap->currentLevel = 2;
-    ui->Goal->setText("Goal: Find the Treasure");
+    ui->Goal->setText("Goal: Enter the Gate");
     ui->Hint->setText("Hint:");
     ui->gameMap->levels[ui->gameMap->currentLevel]->hintPressed = 0;
     ui->gameMap->update();
@@ -67,7 +67,7 @@ void MasterMainWindow::on_Level3Button_clicked()
 void MasterMainWindow::on_Level4Button_clicked()
 {
     ui->gameMap->currentLevel = 3;
-    ui->Goal->setText("Goal: Kill the Monster");
+    ui->Goal->setText("Goal: Find the Treasure");
     ui->Hint->setText("Hint:");
     ui->gameMap->levels[ui->gameMap->currentLevel]->hintPressed = 0;
     ui->gameMap->MapUpdateTimer->start(200);
@@ -80,40 +80,16 @@ void MasterMainWindow::on_Level4Button_clicked()
 void MasterMainWindow::levelWin()
 {
     for(int i = 0;i < 4;i++){
-        bool win = ui->gameMap->getMapWin(i);
-        if(win){
-            if(i == 0){
-                if(!ui->gameMap->levels[i]->passed)
-                {
-                    ui->gameMap->levels[i]->passed = 1;
-                    ui->Level2Button->setEnabled(true);
-                }
-            }
+        if(ui->gameMap->levels[i]->win){
+            if(i == 0)
+                ui->Level2Button->setEnabled(true);
             else if(i == 1)
-            {
-                if(!ui->gameMap->levels[i]->passed){
-                    ui->gameMap->levels[i]->passed = 1;
-                    ui->Level3Button->setEnabled(true);
-                }
-            }
+                ui->Level3Button->setEnabled(true);
             else if(i == 2)
-            {
-                if(!ui->gameMap->levels[i]->passed){
-                    ui->gameMap->levels[i]->passed = 1;
-                    ui->Level4Button->setEnabled(true);
-                }
-            }
-            else if(i == 3)
-            {
-                if(!ui->gameMap->levels[i]->passed){
-                    ui->gameMap->levels[i]->passed = 1;
-                }
-            }
+                ui->Level4Button->setEnabled(true);
         }
         if(ui->gameMap->levels[i]->playerDied)
-        {
             gameLost();
-        }
     }
     if(ui->gameMap->levels[ui->gameMap->currentLevel]->win)
         ui->nextLevelButton->setEnabled(true);
@@ -138,19 +114,20 @@ void MasterMainWindow::on_hintButton_clicked()
 }
 
 void MasterMainWindow::gameLost(){
-    gamelose.show();
-    on_resetButton_clicked();
+    gamelose.show();   
 }
 
 void MasterMainWindow::handleDialog()
 {
     ui->gameMap->levels[ui->gameMap->currentLevel]->playerDied = 0;
+    on_resetButton_clicked();
 }
 
 void MasterMainWindow::on_nextLevelButton_clicked()
 {
     ui->gameMap->updateLevel();
     ui->nextLevelButton->setEnabled(false);
+    ui->Hint->setText("Hint:");
     update();
     ui->gameMap->setFocus();
 }
@@ -219,15 +196,15 @@ void MasterMainWindow::drawAnimation(QPainter& painter, const QString& imagePath
     }
 }
 void MasterMainWindow::flipDog() {
-    dogFlipped = !dogFlipped;  // 改变狗的反转状态
-    update();  // 请求重绘界面以显示最新状态
+    dogFlipped = !dogFlipped;
+    update();
 }
 void MasterMainWindow::drawFlippedAnimation(QPainter& painter, const QString& imagePath, int x, int y) {
     QPixmap pixmap(imagePath);
     if (!pixmap.isNull()) {
         QTransform transform;
         transform.translate(x, y);
-        transform.scale(-1, 1);  // 水平翻转图像
+        transform.scale(-1, 1);
         pixmap = pixmap.transformed(transform);
         painter.drawPixmap(x - pixmap.width() / 2, y - pixmap.height() / 2, pixmap);
     }

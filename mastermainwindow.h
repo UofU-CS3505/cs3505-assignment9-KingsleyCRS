@@ -45,18 +45,13 @@ private:
     GameLoseDialog gamelose;
     void gameLost();
     void resetCurrentLevel();
-    // void drawAnimation(QPainter& painter, const QString& imagePath, int x, int y);
-    // world world;
     void paintEvent(QPaintEvent *event);
     void animation();
-    // protected:
-    //     void paintEvent(QPaintEvent *event) override;
     world world;
     void drawAnimation(QPainter& painter, const QString& imagePath, int x, int y);
-
-    QTimer *flipTimer;  // 用于触发狗的反转
-    bool dogFlipped = false;  // 跟踪狗是否已反转
-    void flipDog();  // 狗的反转函数
+    QTimer *flipTimer;
+    bool dogFlipped = false;
+    void flipDog();
     void drawFlippedAnimation(QPainter& painter, const QString& imagePath, int x, int y);
 };
 

@@ -227,10 +227,9 @@ void Map::createMap(){
     {
         createEmptyMap();
         setBlock(0,0,player);
-        //reset back to 33 78 18
-        setBlock(0,3,dog);
-        setBlock(0,4,get);
-        setBlock(0,6,help);
+        setBlock(3,3,dog);
+        setBlock(7,8,get);
+        setBlock(1,8,help);
         for(int i = 0; i< 11; i++)
             setBlock(i,10,wall);
         for(int i = 0; i < 10;i++)
@@ -242,8 +241,7 @@ void Map::createMap(){
         setBlock(0,0,player);
         setBlock(3,3,dog);
         setBlock(7,2,eat);
-        //meat set to 8,8
-        setBlock(1,3,meat);
+        setBlock(8,8,meat);
         setBlock(11,11,can);
         setBlock(15,12,push);
         for(int i = 5; i< 10; i++)
@@ -298,10 +296,8 @@ void Map::createMap(){
             setBlock(16,i,wall);
             setBlock(i,16,wall);
         }
-
-        //set to 10,18, 11,18
-        setBlock(10,10,treasure1);
-        setBlock(11,10,treasure2);
+        setBlock(10,14,treasure1);
+        setBlock(11,14,treasure2);
         setBlock(9,7,find1);
         setBlock(13,13,find2);
     }
@@ -326,13 +322,17 @@ QString Map::getHint()
     }
     else if(level == 2)
     {
-
+        if(hintPressed == 0){
+            hintPressed++;
+            return "墙:wall 能:can 推:push";
+        }
+        else
+            return "Make wall pushable, then get the meat";
     }
     else if(level == 3)
     {
         return "宝藏:Treasure, 找:Find";
     }
-
 }
 
 void Map::checkCollision(int i,int j, int dir)
