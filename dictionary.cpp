@@ -10,7 +10,7 @@ Dictionary::Dictionary() {
         {"人","Human"},{"他们","They"},{"我们","We"},
         {"老师","Teacher"},{"能","Can"},{"墙","Wall"},
         {"推","Push"},{"动","Move"},{"找","Find"},
-        {"找到","Found"},{"宝藏","Precious deposits"},{"水","Water"},
+        {"找到","Found"},{"宝藏","Treasure"},{"水","Water"},
         {"火","Fire"},{"进","Enter"}, {"门","Door"},
         {"箭","Arrow"}
     };

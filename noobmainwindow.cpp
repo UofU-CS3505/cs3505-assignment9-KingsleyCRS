@@ -58,6 +58,8 @@ void noobMainWindow::startClicked(){
     std::mt19937 gen(rd()); // Seed the generator
     std::uniform_int_distribution<> dist(0, 3); // Range 0 to 3
     levelCount = 1;
+    correctCount = 0;
+
 
     // Create a list of numbers from 0 to 29
     std::vector<int> numbers(30);
