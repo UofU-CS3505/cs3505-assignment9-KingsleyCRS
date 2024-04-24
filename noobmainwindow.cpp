@@ -32,6 +32,7 @@ noobMainWindow::~noobMainWindow()
 void noobMainWindow::startClicked(){
     // Ensure all widgets are properly initialized in the UI setup before being used.
     life = 5;
+    ui->lifeLabel->setText(QString::number(life));
     ui->end->setVisible(false);
     ui->Close->setVisible(false);
     ui->Restart->setVisible(false);
