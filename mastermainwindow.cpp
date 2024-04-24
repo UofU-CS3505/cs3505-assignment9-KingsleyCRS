@@ -17,7 +17,7 @@ MasterMainWindow::MasterMainWindow(QWidget *parent)
     animation();
     flipTimer = new QTimer(this);
     connect(flipTimer, &QTimer::timeout, this, &MasterMainWindow::flipDog);
-    flipTimer->start(3500);  // 设置为50毫秒触发一次
+    flipTimer->start(2500);
 }
 
 MasterMainWindow::~MasterMainWindow()
@@ -135,7 +135,9 @@ void MasterMainWindow::animation(){
     world.createWall("left",b2Vec2(-8.0f, 1.0f),b2Vec2(0.5f, 8.0),0.0f,0.0f);
     world.createWall("bot",b2Vec2(8.0f, 1.0f),b2Vec2(0.5f, 8.0),0.0f,0.0f);
     world.createWall("right",b2Vec2(0.0f, 1.0f),b2Vec2(8.0f, 0.5f),0.0f,0.0f);
-    world.createBody("dog1",b2Vec2(-7.5f,2.0f),b2Vec2(0.0f, 1.0f),b2Vec2(2.0f, -0.0f),1.0f,1.0f,0.0f,1.0f,true);
+    world.createBody("dog1",b2Vec2(-7.5f,2.0f),b2Vec2(0.0f, 0.0f),b2Vec2(1.5f, -0.0f),1.0f,1.0f,0.0f,1.0f,true);
+    world.createBody("dog2",b2Vec2(+7.5f,2.0f),b2Vec2(0.0f, 0.0f),b2Vec2(-1.5f, -0.0f),1.0f,1.0f,0.0f,1.0f,true);
+
 
 }
 void MasterMainWindow::paintEvent(QPaintEvent *event) {
@@ -145,9 +147,9 @@ void MasterMainWindow::paintEvent(QPaintEvent *event) {
         QPixmap pix(":/importBG.png");
         painter.fillRect(event->rect(), pix);
         painter.setRenderHint(QPainter::Antialiasing);
-        const float scaleFactor = 50;  // 50 pixels per meter
-        const float offsetX = 1050/2;  // Centering in width
-        const float offsetY = 800;  // Aligning from the bottom
+        const float scaleFactor = 50;
+        const float offsetX = 1050/2;
+        const float offsetY = 800;
         QPen wallPen(Qt::white);
         wallPen.setWidth(2);
         painter.setPen(wallPen);
@@ -158,10 +160,19 @@ void MasterMainWindow::paintEvent(QPaintEvent *event) {
                 if (name) {
                     float x = body->GetPosition().x * scaleFactor + offsetX;
                     float y = offsetY - body->GetPosition().y * scaleFactor;  // Flipping Y coordinate for graphical display
-                    if (dogFlipped) {
+                    if (*name=="dog1") {
+                        if(dogFlipped)
                         drawAnimation(painter, ":/dog1.png", x, y);
-                    } else {
-                        drawFlippedAnimation(painter,":/dog1.png", x, y);
+                        else {
+                            drawFlippedAnimation(painter,":/dog1.png", x, y);
+                    }
+                    }
+                    if (*name=="dog2") {
+                        if(dogFlipped)
+                            drawAnimation(painter, ":/dog12.png", x, y);
+                        else {
+                            drawFlippedAnimation(painter,":/dog12.png", x, y);
+                        }
                     }
                 }
             }
