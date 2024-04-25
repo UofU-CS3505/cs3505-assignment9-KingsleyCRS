@@ -1,6 +1,9 @@
 #ifndef STUDYMAINWINDOW_H
 #define STUDYMAINWINDOW_H
-
+/*
+Studymainwindow header for Studymainwindow class
+By Kai-Chen Chiang,jinchao liang, Rishen Cao, Zelin Yi, Shuangji Li,Yuang sun
+*/
 #include <QMainWindow>
 #include "dictionary.h"
 

@@ -17,7 +17,7 @@ MasterMainWindow::MasterMainWindow(QWidget *parent)
     animation();
     flipTimer = new QTimer(this);
     connect(flipTimer, &QTimer::timeout, this, &MasterMainWindow::flipDog);
-    flipTimer->start(2500);
+    flipTimer->start(1700);
 }
 
 MasterMainWindow::~MasterMainWindow()
@@ -126,6 +126,8 @@ void MasterMainWindow::handleDialog()
 void MasterMainWindow::on_nextLevelButton_clicked()
 {
     ui->gameMap->updateLevel();
+    if(ui->gameMap->currentLevel == 3)
+        ui->gameMap->MapUpdateTimer->start(200);
     ui->nextLevelButton->setEnabled(false);
     ui->Hint->setText("Hint:");
     update();
@@ -133,10 +135,10 @@ void MasterMainWindow::on_nextLevelButton_clicked()
 }
 void MasterMainWindow::animation(){
     world.createWall("left",b2Vec2(-8.0f, 1.0f),b2Vec2(0.5f, 8.0),0.0f,0.0f);
-    world.createWall("bot",b2Vec2(8.0f, 1.0f),b2Vec2(0.5f, 8.0),0.0f,0.0f);
+    world.createWall("bot",b2Vec2(8.0f, 5.0f),b2Vec2(0.5f, 8.0),0.0f,0.0f);
     world.createWall("right",b2Vec2(0.0f, 1.0f),b2Vec2(8.0f, 0.5f),0.0f,0.0f);
-    world.createBody("dog1",b2Vec2(-7.5f,2.0f),b2Vec2(0.0f, 0.0f),b2Vec2(1.5f, -0.0f),1.0f,1.0f,0.0f,1.0f,true);
-    world.createBody("dog2",b2Vec2(+7.5f,2.0f),b2Vec2(0.0f, 0.0f),b2Vec2(-1.5f, -0.0f),1.0f,1.0f,0.0f,1.0f,true);
+    world.createBody("dog1",b2Vec2(-7.5f,3.0f),b2Vec2(1000.0f, 0.0f),b2Vec2(1000.5f, -0.0f),0.5f,1.0f,0.0f,5.5f,true);
+    // world.createBody("dog2",b2Vec2(+7.5f,2.0f),b2Vec2(0.0f, 0.0f),b2Vec2(-1.5f, -0.0f),1.0f,1.0f,0.0f,1.5f,true);
 
 
 }
@@ -164,14 +166,14 @@ void MasterMainWindow::paintEvent(QPaintEvent *event) {
                         if(dogFlipped)
                         drawAnimation(painter, ":/dog1.png", x, y);
                         else {
-                            drawFlippedAnimation(painter,":/dog1.png", x, y);
+                            drawAnimation(painter,":/dog1.png", x, y);
                     }
                     }
-                    if (*name=="dog2") {
+                    if (*name=="dog1") {
                         if(dogFlipped)
-                            drawAnimation(painter, ":/dog12.png", x, y);
+                            drawAnimation(painter, ":/dog1.png", x, y);
                         else {
-                            drawFlippedAnimation(painter,":/dog12.png", x, y);
+                            drawAnimation(painter,":/dog1.png", x, y);
                         }
                     }
                 }

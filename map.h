@@ -3,7 +3,10 @@
 #include "block.h"
 #include <QVector>
 #include <QObject>
-
+/*
+Map header for map class
+By Kai-Chen Chiang,jinchao liang, Rishen Cao, Zelin Yi, Shuangji Li,Yuang sun
+*/
 class Map
 {
 public:
@@ -47,10 +50,6 @@ private:
     Block* treasure2;
     Block* water;
     Block* fire;
-    Block* princess1;
-    Block* princess2;
-    Block* monster;
-    Block* sword;
     Block* goInTo;
     Block* door;
     Block* arrow;

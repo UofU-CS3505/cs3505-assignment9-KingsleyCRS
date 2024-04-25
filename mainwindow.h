@@ -1,6 +1,9 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
-
+/*
+Mainwindow header for mainwindow class
+By Kai-Chen Chiang,jinchao liang, Rishen Cao, Zelin Yi, Shuangji Li,Yuang sun
+*/
 #include <QMainWindow>
 #include <QTimer>
 #include "mastermainwindow.h"

@@ -1,7 +1,10 @@
 #ifndef BLOCK_H
 #define BLOCK_H
 #include <QString>
-
+/*
+block header for block class
+By Kai-Chen Chiang,jinchao liang, Rishen Cao, Zelin Yi, Shuangji Li,Yuang sun
+*/
 class Block
 {
 public:

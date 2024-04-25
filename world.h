@@ -1,6 +1,9 @@
 #ifndef WORLD_H
 #define WORLD_H
-
+/*
+World header for World class
+By Kai-Chen Chiang,jinchao liang, Rishen Cao, Zelin Yi, Shuangji Li,Yuang sun
+*/
 #include <QObject>
 #include <Box2D/Box2D.h>
 #include <QTimer>

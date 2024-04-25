@@ -18,7 +18,7 @@ void Map::createEmptyMap()
 void Map::updateMap()
 {
     round++;
-    if(level==3 && round%10==0){
+    if(level==3 && round %10==0){
         for(int i = 3; i < 17;i+=2){
             setBlock(i,4,new Block("箭"));
         }
@@ -324,10 +324,10 @@ QString Map::getHint()
     {
         if(hintPressed == 0){
             hintPressed++;
-            return "墙:wall 能:can 推:push";
+            return "火：fire , 水:water , 能: can , 动 : push";
         }
         else
-            return "Make wall pushable, then get the meat";
+            return "Make dog operateable, then push the fire onto waters";
     }
     else if(level == 3)
     {
@@ -343,7 +343,7 @@ void Map::checkCollision(int i,int j, int dir)
             removeBlock(i-1,j);
             removeBlock(i-2,j);
         }
-        if(map[i][j] == player && (map[i-1][j]== fire || map[i-1][j]== monster))
+        if(map[i][j] == player && map[i-1][j]== fire)
             playerDied = 1;
     }
     else if(dir == 1)
@@ -353,7 +353,7 @@ void Map::checkCollision(int i,int j, int dir)
             removeBlock(i+1,j);
             removeBlock(i+2,j);
         }
-        if(map[i][j] == player && (map[i+1][j]== fire || map[i+1][j]== monster))
+        if(map[i][j] == player && map[i+1][j]== fire)
             playerDied = 1;
     }
     else if(dir == 2)
@@ -363,7 +363,7 @@ void Map::checkCollision(int i,int j, int dir)
             removeBlock(i,j-1);
             removeBlock(i,j-2);
         }
-        if(map[i][j] == player && (map[i][j-1]== fire || map[i+1][j]== monster))
+        if(map[i][j] == player && map[i][j-1]== fire)
             playerDied = 1;
     }
     else
@@ -373,7 +373,7 @@ void Map::checkCollision(int i,int j, int dir)
             removeBlock(i,j+1);
             removeBlock(i,j+2);
         }
-        if(map[i][j] == player && (map[i][j+1]== fire || map[i+1][j]== monster))
+        if(map[i][j] == player && map[i][j+1]== fire)
             playerDied = 1;
     }
 }

@@ -4,6 +4,10 @@
 #include "studymainwindow.h"
 #include <QMainWindow>
 #include "level2mainwindow.h"
+/*
+LevelMainWindow header for LevelMainWindow class
+By Kai-Chen Chiang,jinchao liang, Rishen Cao, Zelin Yi, Shuangji Li,Yuang sun
+*/
 class noobMainWindow;
 namespace Ui {
 class LevelMainWindow;

@@ -1,7 +1,9 @@
 #ifndef NOOBMAINWINDOW_H
 #define NOOBMAINWINDOW_H
-
-
+/*
+Noobmainwindow header for Noobmainwindow class
+By Kai-Chen Chiang,jinchao liang, Rishen Cao, Zelin Yi, Shuangji Li,Yuang sun
+*/
 #include <QMainWindow>
 #include "dictionary.h"
 

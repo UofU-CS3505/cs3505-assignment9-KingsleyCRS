@@ -4,7 +4,10 @@
 #include <QMainWindow>
 #include "world.h"
 #include <Qpixmap>
-
+/*
+MasterMainWindow header for MasterMainwindow class
+By Kai-Chen Chiang,jinchao liang, Rishen Cao, Zelin Yi, Shuangji Li,Yuang sun
+*/
 namespace Ui {
 class MasterMainWindow;
 }

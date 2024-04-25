@@ -1,6 +1,9 @@
 #ifndef LEVEL2MAINWINDOW_H
 #define LEVEL2MAINWINDOW_H
-
+/*
+Level2MainWindow header for Level2MainWindow class
+By Kai-Chen Chiang,jinchao liang, Rishen Cao, Zelin Yi, Shuangji Li,Yuang sun
+*/
 #include <QMainWindow>
 #include "dictionary.h"
 

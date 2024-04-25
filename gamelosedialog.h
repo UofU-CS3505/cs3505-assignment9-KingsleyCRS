@@ -1,6 +1,9 @@
 #ifndef GAMELOSEDIALOG_H
 #define GAMELOSEDIALOG_H
-
+/*
+Gamelosedialog header for Gamelosedialog class
+By Kai-Chen Chiang,jinchao liang, Rishen Cao, Zelin Yi, Shuangji Li,Yuang sun
+*/
 #include <QDialog>
 
 namespace Ui {

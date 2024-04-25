@@ -2,6 +2,7 @@
 #include "ui_level2mainwindow.h"
 #include <random>
 #include <QTimer>
+
 Level2MainWindow::Level2MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::Level2MainWindow)
