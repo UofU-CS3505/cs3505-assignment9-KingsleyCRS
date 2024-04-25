@@ -17,7 +17,7 @@ MasterMainWindow::MasterMainWindow(QWidget *parent)
     animation();
     flipTimer = new QTimer(this);
     connect(flipTimer, &QTimer::timeout, this, &MasterMainWindow::flipDog);
-    flipTimer->start(1700);
+    flipTimer->start(4400);
 }
 
 MasterMainWindow::~MasterMainWindow()
@@ -137,10 +137,7 @@ void MasterMainWindow::animation(){
     world.createWall("left",b2Vec2(-8.0f, 1.0f),b2Vec2(0.5f, 8.0),0.0f,0.0f);
     world.createWall("bot",b2Vec2(8.0f, 5.0f),b2Vec2(0.5f, 8.0),0.0f,0.0f);
     world.createWall("right",b2Vec2(0.0f, 1.0f),b2Vec2(8.0f, 0.5f),0.0f,0.0f);
-    world.createBody("dog1",b2Vec2(-7.5f,3.0f),b2Vec2(1000.0f, 0.0f),b2Vec2(1000.5f, -0.0f),0.5f,1.0f,0.0f,5.5f,true);
-    // world.createBody("dog2",b2Vec2(+7.5f,2.0f),b2Vec2(0.0f, 0.0f),b2Vec2(-1.5f, -0.0f),1.0f,1.0f,0.0f,1.5f,true);
-
-
+    world.createBody("dog1",b2Vec2(-7.5f,3.0f),b2Vec2(10.0f, 0.0f),b2Vec2(1.5f, -0.0f),0.5f,1.0f,0.0f,1.0f,true);
 }
 void MasterMainWindow::paintEvent(QPaintEvent *event) {
         QPainter painter(this);
@@ -164,21 +161,13 @@ void MasterMainWindow::paintEvent(QPaintEvent *event) {
                     float y = offsetY - body->GetPosition().y * scaleFactor;  // Flipping Y coordinate for graphical display
                     if (*name=="dog1") {
                         if(dogFlipped)
-                        drawAnimation(painter, ":/dog1.png", x, y);
-                        else {
+                            drawFlippedAnimation(painter, ":/dog1.png", x, y);
+                        else
                             drawAnimation(painter,":/dog1.png", x, y);
-                    }
-                    }
-                    if (*name=="dog1") {
-                        if(dogFlipped)
-                            drawAnimation(painter, ":/dog1.png", x, y);
-                        else {
-                            drawAnimation(painter,":/dog1.png", x, y);
-                        }
                     }
                 }
-            }
         }
+}
 
 void MasterMainWindow::drawAnimation(QPainter& painter, const QString& imagePath, int x, int y) {
     QPixmap pixmap(imagePath);
